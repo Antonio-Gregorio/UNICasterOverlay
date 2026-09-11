@@ -1,3 +1,4 @@
+import { assetUrl } from './assetUrl'
 import type { Character, ColorRole } from './types'
 
 /**
@@ -8,13 +9,27 @@ import type { Character, ColorRole } from './types'
 let cache: Promise<Character[]> | null = null
 
 export function loadCharacters(): Promise<Character[]> {
-  cache ??= fetch('/characters/all.json')
+  cache ??= fetch(assetUrl('/characters/all.json'))
     .then((res) => {
       if (!res.ok) throw new Error(`characters/all.json: HTTP ${res.status}`)
       return res.json() as Promise<Character[]>
     })
-    .then((list) => list.sort((a, b) => a.rosterOrder - b.rosterOrder))
+    .then((list) => list.map(rebaseAssets).sort((a, b) => a.rosterOrder - b.rosterOrder))
   return cache
+}
+
+/** As artes vêm do manifesto com caminho de raiz; ver src/assetUrl.ts. */
+function rebaseAssets(character: Character): Character {
+  const { art, artPortrait, catchphrase, sd } = character.assets
+  return {
+    ...character,
+    assets: {
+      art: assetUrl(art),
+      artPortrait: assetUrl(artPortrait),
+      catchphrase: assetUrl(catchphrase),
+      sd: assetUrl(sd),
+    },
+  }
 }
 
 export function colorOf(character: Character, role: ColorRole): string {

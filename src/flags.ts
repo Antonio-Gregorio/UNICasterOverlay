@@ -1,13 +1,30 @@
+import { assetUrl } from './assetUrl'
 import type { FlagManifest, FlagSpec } from './types'
 
 let cache: Promise<FlagManifest> | null = null
 
 export function loadFlags(): Promise<FlagManifest> {
-  cache ??= fetch('/flags/index.json').then((res) => {
-    if (!res.ok) throw new Error(`flags/index.json: HTTP ${res.status}`)
-    return res.json() as Promise<FlagManifest>
-  })
+  cache ??= fetch(assetUrl('/flags/index.json'))
+    .then((res) => {
+      if (!res.ok) throw new Error(`flags/index.json: HTTP ${res.status}`)
+      return res.json() as Promise<FlagManifest>
+    })
+    .then(rebaseSheets)
   return cache
+}
+
+/** Os sprites vêm do manifesto com caminho de raiz; ver src/assetUrl.ts. */
+function rebaseSheets(manifest: FlagManifest): FlagManifest {
+  return {
+    ...manifest,
+    countries: { ...manifest.countries, sheet: assetUrl(manifest.countries.sheet) },
+    regions: Object.fromEntries(
+      Object.entries(manifest.regions).map(([code, sheet]) => [
+        code,
+        { ...sheet, sheet: assetUrl(sheet.sheet) },
+      ])
+    ),
+  }
 }
 
 export function countryFlag(manifest: FlagManifest, code: string | null): FlagSpec | null {

@@ -5,6 +5,8 @@
  * 18 de uma vez, e puxar os arquivos grandes só para desenhar quadradinhos de
  * 140px custaria alguns MB à toa.
  */
+import { assetUrl } from '../assetUrl'
+
 export interface BackgroundPreset {
   id: string
   label: string
@@ -15,9 +17,11 @@ export interface BackgroundPreset {
 let cache: Promise<BackgroundPreset[]> | null = null
 
 export function loadBackgrounds(): Promise<BackgroundPreset[]> {
-  cache ??= fetch('/backgrounds/index.json')
+  cache ??= fetch(assetUrl('/backgrounds/index.json'))
     .then((res) => (res.ok ? res.json() : { backgrounds: [] }))
     .then((json: { backgrounds?: BackgroundPreset[] }) => json.backgrounds ?? [])
+    // Caminhos de raiz no manifesto; ver src/assetUrl.ts.
+    .then((list) => list.map((bg) => ({ ...bg, url: assetUrl(bg.url), thumb: assetUrl(bg.thumb) })))
     .catch(() => [])
   return cache
 }

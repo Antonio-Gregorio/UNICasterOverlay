@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { assetUrl } from '../assetUrl'
 import type { TopbarData } from './types'
 
 /**
@@ -20,7 +21,7 @@ export interface MockPlayer {
 let cache: Promise<MockPlayer[]> | null = null
 
 export function loadMockPlayers(): Promise<MockPlayer[]> {
-  cache ??= fetch('/mock-players.json')
+  cache ??= fetch(assetUrl('/mock-players.json'))
     .then((res) => (res.ok ? res.json() : { players: [] }))
     .then((json: { players?: MockPlayer[] }) => json.players ?? [])
     .catch(() => [])

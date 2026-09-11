@@ -56,7 +56,8 @@ const router = createBrowserRouter([
   },
   // Fora da casca do sistema: o OBS carrega só as barras, sem menu nem fundo.
   { path: '/overlay/live', element: <OverlayLive /> },
-])
+  // No GitHub Pages o site mora em /UNICasterOverlay/; em dev, na raiz.
+], { basename: import.meta.env.BASE_URL })
 
 /** O OBS carrega só as barras: sem menu e sem fundo, mas com os dados. */
 function OverlayLive() {
