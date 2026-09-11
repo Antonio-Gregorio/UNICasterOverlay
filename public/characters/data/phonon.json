@@ -1,0 +1,114 @@
+{
+  "slug": "phonon",
+  "name": "Phonon",
+  "voiceActor": "Saori Onishi",
+  "profile": {
+    "height": "157cm",
+    "weight": "45kg",
+    "birthday": "8/5",
+    "bloodType": "AB",
+    "ability": "Baroque Noise",
+    "weapon": "Meuniel"
+  },
+  "bio": [
+    "Drunk on visions of comic book superheroics after acquiring a powerful EXS, Phonon frolicked along in the Night.",
+    "Her high spirits gave her the momentum she needed to defeat the evil boss--in turn boosting her confidence and pushing her even further.",
+    "That's when the foul Re-Birth appeared, plotting his Immortalize--his plan to bring the world to an end by flooding it with Voids.",
+    "But Phonon greeted the catastrophe with a smile: \"\"Now THAT'S what I'm talking about!\"\"",
+    "Ignoring her orders from the EFG, Phonon throws herself into the Night.",
+    "\"I never played well with others anyway!\""
+  ],
+  "assets": {
+    "art": "/characters/images/phonon.png",
+    "artPortrait": "/characters/images/phonon_sp.png",
+    "catchphrase": "/characters/images/phonon_catch.svg",
+    "sd": "/characters/sd/phonon.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#a3da9f",
+      "rgb": [
+        163,
+        218,
+        159
+      ],
+      "oklab": [
+        0.8352,
+        -0.0789,
+        0.0596
+      ],
+      "coverage": 0.0516
+    },
+    {
+      "role": "secondary",
+      "hex": "#e66d9f",
+      "rgb": [
+        230,
+        109,
+        159
+      ],
+      "oklab": [
+        0.693,
+        0.1584,
+        -0.0101
+      ],
+      "coverage": 0.0717
+    },
+    {
+      "role": "tertiary",
+      "hex": "#231e22",
+      "rgb": [
+        35,
+        30,
+        34
+      ],
+      "oklab": [
+        0.242,
+        0.0096,
+        -0.0041
+      ],
+      "coverage": 0.1662
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/phonon.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 15,
+  "imageSize": {
+    "width": 1920,
+    "height": 2446
+  },
+  "face": {
+    "x": 0.365,
+    "y": 0.1337,
+    "width": 0.22,
+    "height": 0.1727
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 183,
+    "height": 302
+  },
+  "anchor": {
+    "x": 0.475,
+    "y": 0.22
+  },
+  "sdAnchor": {
+    "x": 0.489,
+    "y": 0.299
+  },
+  "colorsLocked": true,
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.2024,
+    "below": 0.76
+  },
+  "sdBody": {
+    "above": 0.299,
+    "below": 0.6944
+  },
+  "animScale": 1,
+  "artSolid": 0.1567,
+  "sdSolid": 0.4747
+}

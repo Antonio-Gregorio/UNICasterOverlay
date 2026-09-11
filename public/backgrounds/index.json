@@ -1,0 +1,112 @@
+{
+  "backgrounds": [
+    {
+      "id": "bg01",
+      "label": "Fundo 1",
+      "url": "/backgrounds/bg01.webp",
+      "thumb": "/backgrounds/bg01_thumb.webp"
+    },
+    {
+      "id": "bg02",
+      "label": "Fundo 2",
+      "url": "/backgrounds/bg02.webp",
+      "thumb": "/backgrounds/bg02_thumb.webp"
+    },
+    {
+      "id": "bg03",
+      "label": "Fundo 3",
+      "url": "/backgrounds/bg03.webp",
+      "thumb": "/backgrounds/bg03_thumb.webp"
+    },
+    {
+      "id": "bg04",
+      "label": "Fundo 4",
+      "url": "/backgrounds/bg04.webp",
+      "thumb": "/backgrounds/bg04_thumb.webp"
+    },
+    {
+      "id": "bg05",
+      "label": "Fundo 5",
+      "url": "/backgrounds/bg05.webp",
+      "thumb": "/backgrounds/bg05_thumb.webp"
+    },
+    {
+      "id": "bg06",
+      "label": "Fundo 6",
+      "url": "/backgrounds/bg06.webp",
+      "thumb": "/backgrounds/bg06_thumb.webp"
+    },
+    {
+      "id": "bg07",
+      "label": "Fundo 7",
+      "url": "/backgrounds/bg07.webp",
+      "thumb": "/backgrounds/bg07_thumb.webp"
+    },
+    {
+      "id": "bg08",
+      "label": "Fundo 8",
+      "url": "/backgrounds/bg08.webp",
+      "thumb": "/backgrounds/bg08_thumb.webp"
+    },
+    {
+      "id": "bg09",
+      "label": "Fundo 9",
+      "url": "/backgrounds/bg09.webp",
+      "thumb": "/backgrounds/bg09_thumb.webp"
+    },
+    {
+      "id": "bg10",
+      "label": "Fundo 10",
+      "url": "/backgrounds/bg10.webp",
+      "thumb": "/backgrounds/bg10_thumb.webp"
+    },
+    {
+      "id": "bg11",
+      "label": "Fundo 11",
+      "url": "/backgrounds/bg11.webp",
+      "thumb": "/backgrounds/bg11_thumb.webp"
+    },
+    {
+      "id": "bg12",
+      "label": "Fundo 12",
+      "url": "/backgrounds/bg12.webp",
+      "thumb": "/backgrounds/bg12_thumb.webp"
+    },
+    {
+      "id": "bg13",
+      "label": "Fundo 13",
+      "url": "/backgrounds/bg13.webp",
+      "thumb": "/backgrounds/bg13_thumb.webp"
+    },
+    {
+      "id": "bg14",
+      "label": "Fundo 14",
+      "url": "/backgrounds/bg14.webp",
+      "thumb": "/backgrounds/bg14_thumb.webp"
+    },
+    {
+      "id": "bg15",
+      "label": "Fundo 15",
+      "url": "/backgrounds/bg15.webp",
+      "thumb": "/backgrounds/bg15_thumb.webp"
+    },
+    {
+      "id": "bg16",
+      "label": "Fundo 16",
+      "url": "/backgrounds/bg16.webp",
+      "thumb": "/backgrounds/bg16_thumb.webp"
+    },
+    {
+      "id": "bg17",
+      "label": "Fundo 17",
+      "url": "/backgrounds/bg17.webp",
+      "thumb": "/backgrounds/bg17_thumb.webp"
+    },
+    {
+      "id": "bg18",
+      "label": "Fundo 18",
+      "url": "/backgrounds/bg18.webp",
+      "thumb": "/backgrounds/bg18_thumb.webp"
+    }
+  ]
+}

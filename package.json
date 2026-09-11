@@ -1,0 +1,37 @@
+{
+  "name": "unicompslide",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UNI2 Sys:Celes character showcase & tournament promo generator",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "data:scrape": "node scripts/scrape-characters.mjs",
+    "data:colors": "node scripts/extract-colors.mjs",
+    "data:all": "npm run data:scrape && npm run data:colors && npm run data:faces && npm run data:sd && npm run data:anchors && npm run data:scale && npm run data:flags && npm run data:backgrounds",
+    "data:flags": "node scripts/fetch-flags.mjs",
+    "data:faces": "node scripts/detect-faces.mjs",
+    "data:backgrounds": "node scripts/fetch-backgrounds.mjs",
+    "data:sd": "node scripts/fetch-sd.mjs",
+    "data:anchors": "node scripts/set-anchors.mjs",
+    "data:scale": "node scripts/detect-scale.mjs"
+  },
+  "dependencies": {
+    "pixi.js": "^8.6.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.3"
+  },
+  "devDependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sharp": "^0.33.5",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}

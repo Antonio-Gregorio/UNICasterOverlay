@@ -1,0 +1,113 @@
+{
+  "slug": "enkidu",
+  "name": "Enkidu",
+  "voiceActor": "Shunsuke Takeuchi",
+  "profile": {
+    "height": "214cm",
+    "weight": "94kg",
+    "birthday": "8/24",
+    "bloodType": "A",
+    "ability": "Maelstrom",
+    "weapon": "―――"
+  },
+  "bio": [
+    "Enkidu's tireless pursuit of martial arts perfection leads him to combat with ever-stronger opponents.",
+    "After tiring of fighting mere humans, he began challenging In-Births.",
+    "Even given their supernatural prowess, only a handful of In-Births stood a chance against Enkidu; he even managed to defeat Paradox, who was considered the strongest of them all.",
+    "Just when it seemed Enkidu had lost sight of his purpose, his gaze fell on a single target: the Re-Birth Kuon the Aeon.",
+    "Then a man appeared before Enkidu and told him, \"\"If you join me, I can introduce you to the Aeon...\"\"",
+    "Thus begins Enkidu's final battle."
+  ],
+  "assets": {
+    "art": "/characters/images/enkidu.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/enkidu_catch.svg",
+    "sd": "/characters/sd/enkidu.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#4e4b7a",
+      "rgb": [
+        78,
+        75,
+        122
+      ],
+      "oklab": [
+        0.437,
+        0.0209,
+        -0.0728
+      ],
+      "coverage": 0.21
+    },
+    {
+      "role": "secondary",
+      "hex": "#9483a7",
+      "rgb": [
+        148,
+        131,
+        167
+      ],
+      "oklab": [
+        0.6375,
+        0.0328,
+        -0.0456
+      ],
+      "coverage": 0.1084
+    },
+    {
+      "role": "tertiary",
+      "hex": "#1f1e30",
+      "rgb": [
+        31,
+        30,
+        48
+      ],
+      "oklab": [
+        0.2449,
+        0.0104,
+        -0.0336
+      ],
+      "coverage": 0.1525
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/enkidu.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 18,
+  "imageSize": {
+    "width": 1920,
+    "height": 2480
+  },
+  "face": {
+    "x": 0.4678,
+    "y": 0.0167,
+    "width": 0.2196,
+    "height": 0.17
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 210,
+    "height": 327
+  },
+  "anchor": {
+    "x": 0.5776,
+    "y": 0.1017
+  },
+  "sdAnchor": {
+    "x": 0.533,
+    "y": 0.406
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.0848,
+    "below": 0.8951
+  },
+  "sdBody": {
+    "above": 0.3999,
+    "below": 0.5909
+  },
+  "animScale": 1.35,
+  "artSolid": 0.5573,
+  "sdSolid": 0.5427
+}

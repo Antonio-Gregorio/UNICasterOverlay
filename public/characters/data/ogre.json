@@ -1,0 +1,114 @@
+{
+  "slug": "ogre",
+  "name": "Ogre",
+  "voiceActor": "Hinata Tadokoro",
+  "profile": {
+    "height": "198cm",
+    "weight": "81kg",
+    "birthday": "5/31",
+    "bloodType": "O",
+    "ability": "Oblivion Bane",
+    "weapon": "―"
+  },
+  "bio": [
+    "The former leader of a faction of wielders called the Bankikai, Ogre once challenged Amnesia--the largest faction--to a duel.",
+    "He came very close to defeating the all-powerful Paradox; however, he met with misfortune when a certain newly-transformed Void ran rampant.",
+    "Alone, Ogre fought to stop the Void, but ended up falling into the Abyss of the Night along with it.",
+    "He has been missing ever since.",
+    "...Until now.",
+    "How has Ogre returned to this world? And for what purpose?",
+    "Ogre himself doesn't know the answers."
+  ],
+  "assets": {
+    "art": "/characters/images/ogre.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/ogre_catch.svg",
+    "sd": "/characters/sd/ogre.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#80265f",
+      "rgb": [
+        128,
+        38,
+        95
+      ],
+      "oklab": [
+        0.4256,
+        0.1339,
+        -0.0349
+      ],
+      "coverage": 0.0479
+    },
+    {
+      "role": "secondary",
+      "hex": "#a7978e",
+      "rgb": [
+        167,
+        151,
+        142
+      ],
+      "oklab": [
+        0.6883,
+        0.0141,
+        0.0181
+      ],
+      "coverage": 0.0735
+    },
+    {
+      "role": "tertiary",
+      "hex": "#1d1318",
+      "rgb": [
+        29,
+        19,
+        24
+      ],
+      "oklab": [
+        0.2023,
+        0.0177,
+        -0.0035
+      ],
+      "coverage": 0.0941
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/ogre.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 24,
+  "imageSize": {
+    "width": 962,
+    "height": 1422
+  },
+  "face": {
+    "x": 0.31,
+    "y": 0.0956,
+    "width": 0.22,
+    "height": 0.1488
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 217,
+    "height": 281
+  },
+  "anchor": {
+    "x": 0.42,
+    "y": 0.195
+  },
+  "sdAnchor": {
+    "x": 0.48,
+    "y": 0.25
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.1936,
+    "below": 0.8036
+  },
+  "sdBody": {
+    "above": 0.25,
+    "below": 0.7464
+  },
+  "animScale": 1,
+  "artSolid": 0.3173,
+  "sdSolid": 0.4039
+}

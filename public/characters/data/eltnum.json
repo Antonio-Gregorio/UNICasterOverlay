@@ -1,0 +1,113 @@
+{
+  "slug": "eltnum",
+  "name": "Eltnum",
+  "voiceActor": "Satomi Akesaka",
+  "profile": {
+    "height": "161cm",
+    "weight": "48kg",
+    "birthday": "6/1",
+    "bloodType": "O",
+    "ability": "Analysis",
+    "weapon": "Etherite"
+  },
+  "bio": [
+    "Eltnum is a guest character who wandered into this world and set herself to teach its rookie characters a lesson.",
+    "Her efforts have been fruitful, and the successful release of the second installment of this series marks ten years of Eltnum surviving in this strange world.",
+    "Eltnum never thought she'd find a place to go back to.",
+    "But now, one has appeared; a glorious, bright, some might say luminous place.",
+    "She deeply regrets her decisions, but all the regrets in the world won't send her back.",
+    "She must find her own way home--but not before giving the rookies of this world one last lesson, of course..."
+  ],
+  "assets": {
+    "art": "/characters/images/eltnum.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/eltnum_catch.svg",
+    "sd": "/characters/sd/eltnum.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#6a4780",
+      "rgb": [
+        106,
+        71,
+        128
+      ],
+      "oklab": [
+        0.4614,
+        0.0648,
+        -0.0724
+      ],
+      "coverage": 0.2777
+    },
+    {
+      "role": "secondary",
+      "hex": "#ce80e3",
+      "rgb": [
+        206,
+        128,
+        227
+      ],
+      "oklab": [
+        0.7177,
+        0.1209,
+        -0.1058
+      ],
+      "coverage": 0.0445
+    },
+    {
+      "role": "tertiary",
+      "hex": "#30203c",
+      "rgb": [
+        48,
+        32,
+        60
+      ],
+      "oklab": [
+        0.2772,
+        0.0334,
+        -0.0409
+      ],
+      "coverage": 0.1662
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/eltnum.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 27,
+  "imageSize": {
+    "width": 1920,
+    "height": 2635
+  },
+  "face": {
+    "x": 0.2888,
+    "y": 0.1967,
+    "width": 0.16,
+    "height": 0.1166
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 261,
+    "height": 392
+  },
+  "anchor": {
+    "x": 0.3688,
+    "y": 0.255
+  },
+  "sdAnchor": {
+    "x": 0.692,
+    "y": 0.454
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.2531,
+    "below": 0.742
+  },
+  "sdBody": {
+    "above": 0.454,
+    "below": 0.5383
+  },
+  "animScale": 0.82,
+  "artSolid": 0.1931,
+  "sdSolid": 0.4514
+}

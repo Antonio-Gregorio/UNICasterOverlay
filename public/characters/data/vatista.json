@@ -1,0 +1,112 @@
+{
+  "slug": "vatista",
+  "name": "Vatista",
+  "voiceActor": "Nao Toyama",
+  "profile": {
+    "height": "140cm",
+    "weight": "32kg",
+    "birthday": "??/??",
+    "bloodType": "?",
+    "ability": "Restriction",
+    "weapon": "Aegis-Attributer"
+  },
+  "bio": [
+    "Vatista is an Autonomic Nerve--a non-sentient biological weapon in the form of a young girl.",
+    "She awakened upon detection of anomalies within the Hollow Night and successfully eradicated Paradox, as instructed by her commander.",
+    "With peace restored, Vatista was about to return to slumber.",
+    "But then a new threat revealed itself: Kuon the Aeon, who threatened great tragedy to the world of humankind if left unchecked.",
+    "However, Vatista never received orders to act. And so, she sets out to do battle to save the world once again--this time of her own volition."
+  ],
+  "assets": {
+    "art": "/characters/images/vatista.png",
+    "artPortrait": "/characters/images/vatista_sp.png",
+    "catchphrase": "/characters/images/vatista_catch.svg",
+    "sd": "/characters/sd/vatista.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#e71622",
+      "rgb": [
+        231,
+        22,
+        34
+      ],
+      "oklab": [
+        0.5891,
+        0.207,
+        0.1045
+      ],
+      "coverage": 0.1611
+    },
+    {
+      "role": "secondary",
+      "hex": "#501a1e",
+      "rgb": [
+        80,
+        26,
+        30
+      ],
+      "oklab": [
+        0.3037,
+        0.0773,
+        0.0257
+      ],
+      "coverage": 0.2409
+    },
+    {
+      "role": "tertiary",
+      "hex": "#bb8ba4",
+      "rgb": [
+        187,
+        139,
+        164
+      ],
+      "oklab": [
+        0.6917,
+        0.0648,
+        -0.0158
+      ],
+      "coverage": 0.0719
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/vatista.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 8,
+  "imageSize": {
+    "width": 1920,
+    "height": 2554
+  },
+  "face": {
+    "x": 0.11,
+    "y": 0.3269,
+    "width": 0.13,
+    "height": 0.0977
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 330,
+    "height": 357
+  },
+  "anchor": {
+    "x": 0.175,
+    "y": 0.3758
+  },
+  "sdAnchor": {
+    "x": 0.462,
+    "y": 0.479
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3738,
+    "below": 0.6132
+  },
+  "sdBody": {
+    "above": 0.479,
+    "below": 0.5182
+  },
+  "animScale": 1,
+  "artSolid": 0.3029,
+  "sdSolid": 0.4797
+}

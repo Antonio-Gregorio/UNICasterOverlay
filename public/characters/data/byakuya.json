@@ -1,0 +1,115 @@
+{
+  "slug": "byakuya",
+  "name": "Byakuya",
+  "voiceActor": "Mutsumi Tamura",
+  "profile": {
+    "height": "166cm",
+    "weight": "50kg",
+    "birthday": "12/24",
+    "bloodType": "A",
+    "ability": "Chelicerata",
+    "weapon": "Predator"
+  },
+  "bio": [
+    "The young Byakuya wandered the Night in despair...",
+    "until he came across a young girl with a striking resemblance to the beloved sister he was mourning.",
+    "Attributing this meeting to destiny, Byakuya decided to address the girl as \"Sis\" and agreed to help her with her search for someone.",
+    "Byakuya then learned of his sister's cruel past... but his love for her didn't waver one bit. In fact, if anything, it grew stronger...",
+    "As the pair search through the Night, they hear rumors that the world will soon meet its end...",
+    "\"Oh, how I'd love to see the end of days together with you, sister...\"",
+    "\"But we must continue our search.\"",
+    "Their decision made, the two of them set out for the Abyss of the Night in order to save the world."
+  ],
+  "assets": {
+    "art": "/characters/images/byakuya.png",
+    "artPortrait": "/characters/images/byakuya_sp.png",
+    "catchphrase": "/characters/images/byakuya_catch.svg",
+    "sd": "/characters/sd/byakuya.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#322a47",
+      "rgb": [
+        50,
+        42,
+        71
+      ],
+      "oklab": [
+        0.3065,
+        0.023,
+        -0.0484
+      ],
+      "coverage": 0.3633
+    },
+    {
+      "role": "secondary",
+      "hex": "#ddd4f6",
+      "rgb": [
+        221,
+        212,
+        246
+      ],
+      "oklab": [
+        0.888,
+        0.0218,
+        -0.0414
+      ],
+      "coverage": 0.1177
+    },
+    {
+      "role": "tertiary",
+      "hex": "#8b76a7",
+      "rgb": [
+        139,
+        118,
+        167
+      ],
+      "oklab": [
+        0.6041,
+        0.0423,
+        -0.0642
+      ],
+      "coverage": 0.0337
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/byakuya.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 14,
+  "imageSize": {
+    "width": 1920,
+    "height": 2484
+  },
+  "face": {
+    "x": 0.4116,
+    "y": 0.1904,
+    "width": 0.18,
+    "height": 0.1391
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 363,
+    "height": 373
+  },
+  "anchor": {
+    "x": 0.5016,
+    "y": 0.26
+  },
+  "sdAnchor": {
+    "x": 0.447,
+    "y": 0.428
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.2503,
+    "below": 0.7344
+  },
+  "sdBody": {
+    "above": 0.428,
+    "below": 0.564
+  },
+  "animScale": 1,
+  "artSolid": 0.1967,
+  "sdSolid": 0.286
+}

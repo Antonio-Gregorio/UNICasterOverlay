@@ -1,0 +1,113 @@
+{
+  "slug": "merkava",
+  "name": "Merkava",
+  "voiceActor": "Hidenobu Kiuchi",
+  "profile": {
+    "height": "210cm",
+    "weight": "71kg",
+    "birthday": "??/??",
+    "bloodType": "?",
+    "ability": "Jormungandr",
+    "weapon": "―――"
+  },
+  "bio": [
+    "A mysterious figure, Merkava has a Void's shape but a human's heart.",
+    "He can speak and understand human language.",
+    "His two distinct consciousnesses stand at opposition to one another; the Void wishes to devour humans, while the human tries to suppress such urges.",
+    "As the Void grows stronger by the day, Merkava searches for its cause.",
+    "His search leads him to learn of Kuon's efforts to open the pit that will lead him into the Night--efforts that stir the Void within Merkava.",
+    "In hopes of attaining inner peace, and to show Kuon who the real Lord of the Void is, Merkava sets out to devour his soul."
+  ],
+  "assets": {
+    "art": "/characters/images/merkava.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/merkava_catch.svg",
+    "sd": "/characters/sd/merkava.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#d4c1f6",
+      "rgb": [
+        212,
+        193,
+        246
+      ],
+      "oklab": [
+        0.844,
+        0.0385,
+        -0.0649
+      ],
+      "coverage": 0.2809
+    },
+    {
+      "role": "secondary",
+      "hex": "#3c3359",
+      "rgb": [
+        60,
+        51,
+        89
+      ],
+      "oklab": [
+        0.3481,
+        0.0262,
+        -0.06
+      ],
+      "coverage": 0.1793
+    },
+    {
+      "role": "tertiary",
+      "hex": "#706797",
+      "rgb": [
+        112,
+        103,
+        151
+      ],
+      "oklab": [
+        0.5413,
+        0.0286,
+        -0.0681
+      ],
+      "coverage": 0.1255
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/merkava.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 7,
+  "imageSize": {
+    "width": 1920,
+    "height": 2786
+  },
+  "face": {
+    "x": 0.29,
+    "y": 0.2935,
+    "width": 0.28,
+    "height": 0.193
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 157,
+    "height": 179
+  },
+  "anchor": {
+    "x": 0.43,
+    "y": 0.39
+  },
+  "sdAnchor": {
+    "x": 0.533,
+    "y": 0.147
+  },
+  "artScale": 1.15,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3871,
+    "below": 0.6078
+  },
+  "sdBody": {
+    "above": 0.147,
+    "below": 0.8362
+  },
+  "animScale": 1.25,
+  "artSolid": 0.2918,
+  "sdSolid": 0.6091
+}

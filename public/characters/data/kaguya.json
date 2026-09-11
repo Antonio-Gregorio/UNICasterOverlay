@@ -1,0 +1,110 @@
+{
+  "slug": "kaguya",
+  "name": "Kaguya",
+  "voiceActor": "Mami Ozaki",
+  "profile": {
+    "height": "172cm",
+    "weight": "58kg",
+    "birthday": "10/10",
+    "bloodType": "O",
+    "ability": "Banisher",
+    "weapon": "Garibaldi=right/Garibaldi=left"
+  },
+  "bio": [
+    "Due to her exceptional combat prowess, Licht Kreis sends Kaguya on various missions all over the world.",
+    "Her next destination? Japan, where her best friend Orie is currently stationed.",
+    "Kaguya discovers that many other Licht Kreis commanding officers are gathered there, too, and becomes even more determined to protect her friends and the world."
+  ],
+  "assets": {
+    "art": "/characters/images/kaguya.png",
+    "artPortrait": "/characters/images/kaguya_sp.png",
+    "catchphrase": "/characters/images/kaguya_catch.svg",
+    "sd": "/characters/sd/kaguya.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#797c93",
+      "rgb": [
+        121,
+        124,
+        147
+      ],
+      "oklab": [
+        0.5916,
+        0.0051,
+        -0.0346
+      ],
+      "coverage": 0.2194
+    },
+    {
+      "role": "secondary",
+      "hex": "#a9adca",
+      "rgb": [
+        169,
+        173,
+        202
+      ],
+      "oklab": [
+        0.753,
+        0.0072,
+        -0.041
+      ],
+      "coverage": 0.1235
+    },
+    {
+      "role": "tertiary",
+      "hex": "#34373f",
+      "rgb": [
+        52,
+        55,
+        63
+      ],
+      "oklab": [
+        0.3366,
+        0.0002,
+        -0.0156
+      ],
+      "coverage": 0.2055
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/kaguya.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 21,
+  "imageSize": {
+    "width": 1920,
+    "height": 2209
+  },
+  "face": {
+    "x": 0.54,
+    "y": 0.2455,
+    "width": 0.16,
+    "height": 0.1391
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 305,
+    "height": 312
+  },
+  "anchor": {
+    "x": 0.62,
+    "y": 0.315
+  },
+  "sdAnchor": {
+    "x": 0.422,
+    "y": 0.308
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3091,
+    "below": 0.6714
+  },
+  "sdBody": {
+    "above": 0.308,
+    "below": 0.6728
+  },
+  "animScale": 1.2,
+  "artSolid": 0.3819,
+  "sdSolid": 0.4917
+}

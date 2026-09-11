@@ -1,0 +1,3343 @@
+:root {
+  color-scheme: dark;
+  --bg: #0e0e14;
+  --surface: #171720;
+  --surface-2: #1e1e2a;
+  --border: #2c2c3a;
+  --text: #e8e8f0;
+  --muted: #9b9bb0;
+  --accent: #e66d9f;
+  --danger: #e05260;
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.muted {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.empty {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.page-head {
+  margin-bottom: 20px;
+}
+.page-head h1 {
+  font-size: 20px;
+}
+.page-head p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------------------------------------------------------------- box/abas */
+
+.box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  padding: 0 8px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  padding: 12px 18px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tab.is-active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.box__body {
+  padding: 16px;
+}
+
+/* ---------------------------------------------------------------- toolbar */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+  max-width: 340px;
+}
+
+input,
+select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.count {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.view-toggle {
+  display: flex;
+  margin-left: auto;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.view-toggle button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+}
+.view-toggle button:hover {
+  color: var(--text);
+}
+.view-toggle button.active {
+  background: var(--surface-2);
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- botões */
+
+.btn {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.btn:hover {
+  border-color: var(--muted);
+}
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #1a0a12;
+  font-weight: 600;
+}
+.btn--primary:hover {
+  filter: brightness(1.08);
+}
+.btn--add {
+  white-space: nowrap;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+.icon-btn--danger:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* ---------------------------------------------------------------- listagens */
+
+.grid {
+  display: grid;
+  gap: 14px;
+}
+.grid--characters {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+.grid--players {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+.grid--teams {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  position: relative;
+  padding: 12px;
+  background: var(--surface-2);
+  border: 1px solid color-mix(in oklab, var(--primary) 30%, var(--border));
+  border-radius: var(--radius);
+  text-align: center;
+  transition:
+    box-shadow 160ms,
+    transform 160ms;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px -8px var(--primary);
+}
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  object-position: top center;
+}
+.card h3 {
+  margin: 8px 0 2px;
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Sem padding à esquerda: o recorte do rosto encosta na borda e o fade faz a
+     transição para o fundo do cartão. */
+  padding: 0 12px 0 0;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 8px;
+}
+.row--team {
+  padding: 8px 12px;
+  gap: 12px;
+}
+/* Recorte do rosto no modo lista — ver src/FaceCrop.tsx. */
+.face {
+  flex: none;
+  background-repeat: no-repeat;
+  border-radius: 6px 0 0 6px;
+}
+.face--empty {
+  background: var(--surface);
+}
+/* Esmaece a borda direita, para o recorte se dissolver no cartão. */
+.face--fade {
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 58%, transparent 100%);
+}
+.row__main {
+  flex: 1;
+  min-width: 0;
+}
+.row__main h3 {
+  font-size: 14px;
+}
+
+.swatches {
+  display: flex;
+  height: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  flex: none;
+}
+.grid .swatches {
+  margin-top: 8px;
+}
+.list .swatches {
+  width: 84px;
+}
+.swatches span {
+  flex: 1;
+}
+
+/* ---------------------------------------------------------------- players */
+
+.team {
+  margin-right: 6px;
+  color: var(--secondary, var(--muted));
+  font-weight: 700;
+}
+
+.player__flags {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+.grid .player__flags {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.flag {
+  display: inline-block;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  flex: none;
+}
+
+.player__actions {
+  display: flex;
+  gap: 2px;
+}
+.card--player .player__actions {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+.card--player:hover .player__actions,
+.card--player:focus-within .player__actions {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- times */
+
+/* As dimensões vêm inline de TeamLogo.tsx — a mesma caixa de uma bandeira. */
+.team-logo {
+  flex: none;
+  object-fit: contain;
+  border-radius: 2px;
+}
+.team-logo--empty {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--border);
+  border-radius: 3px;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.card--team .team-logo {
+  margin: 0 auto 8px;
+  display: block;
+}
+
+.card--team {
+  position: relative;
+}
+.card--team h3 {
+  font-size: 15px;
+}
+
+.team-form {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+}
+.team-form__fields .field:last-child {
+  margin-bottom: 0;
+}
+.team-form__logo {
+  text-align: center;
+}
+.team-form__logo .field__hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.logo-drop {
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  padding: 8px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.logo-drop:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.logo-drop img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.btn--small {
+  margin-top: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------------- picker */
+
+.picker {
+  position: relative;
+}
+
+.picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.picker__trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.picker__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.picker__label--empty {
+  color: var(--muted);
+}
+.picker__caret {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* Posição vem inline do FlagPicker: o painel mora num portal no <body>. */
+.picker__panel {
+  position: fixed;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px -10px #000;
+}
+.picker__search {
+  width: 100%;
+  margin-bottom: 6px;
+  flex: none;
+}
+.picker__list {
+  overflow-y: auto;
+  min-height: 0; /* sem isto o flex item não encolhe e o scroll não aparece */
+}
+.picker__list,
+.picker__list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.picker__group {
+  margin: 8px 0 3px;
+  padding-left: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.picker__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.picker__option:hover {
+  background: var(--surface);
+}
+.picker__option.is-selected {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+}
+.picker__none {
+  padding: 10px 8px;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- topbar */
+
+/* O par de barras precisa caber lado a lado: a coluna acompanha. */
+.grid--topbars {
+  grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+}
+
+.topbar-card {
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.topbar-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.topbar-card h3 {
+  font-size: 14px;
+}
+/* Xadrez discreto: mostra o que na barra é transparente. */
+.topbar-card__stage,
+.topbar-editor__stage {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #0b0b12;
+  background-image:
+    linear-gradient(45deg, #14141d 25%, transparent 25%),
+    linear-gradient(-45deg, #14141d 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #14141d 75%),
+    linear-gradient(-45deg, transparent 75%, #14141d 75%);
+  background-size: 16px 16px;
+  background-position:
+    0 0,
+    0 8px,
+    8px -8px,
+    -8px 0;
+  overflow-x: auto;
+}
+.topbar-svg {
+  display: block;
+  flex: none;
+}
+
+/* Preview no topo, largura toda: a peça é larga e comparar os dois lados é o
+   ponto do editor. Os controles vêm abaixo, em colunas, para caber sem rolar. */
+.topbar-editor__preview {
+  padding: 0;
+}
+.topbar-pair {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.topbar-editor__source {
+  margin-top: 12px;
+}
+.topbar-editor__sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.side-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0 12px;
+  margin: 0;
+  padding: 10px 12px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.side-fields legend {
+  padding: 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.side-fields .field {
+  margin-bottom: 8px;
+}
+
+/* Multi-column em vez de grid: o navegador equilibra as alturas sozinho, e o
+   conteúdo muda de tamanho a cada opção que se abre ou fecha. Colunas fixas
+   deixavam uma delas muito mais alta que as outras, forçando rolagem. */
+.modal__title-input {
+  flex: 1;
+  max-width: 320px;
+  margin-left: 8px;
+}
+
+.tabs--inline {
+  padding: 0;
+  margin-bottom: 12px;
+  background: none;
+  border-bottom: 1px solid var(--border);
+}
+.tabs--inline .tab {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.editor-section {
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.editor-section:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.editor-section h3 {
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---------------------------------------------------------------- controles */
+
+.segmented {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.segmented--icons button {
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 4px;
+  font-size: 10.5px;
+  line-height: 1.2;
+}
+.segmented--icons svg {
+  opacity: 0.85;
+}
+.segmented button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 7px 8px;
+  border: 0;
+  background: var(--bg);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.segmented button + button {
+  border-left: 1px solid var(--border);
+}
+.segmented button:hover {
+  color: var(--text);
+}
+.segmented button.is-active {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.color-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.color-input input[type='color'] {
+  width: 40px;
+  height: 32px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  cursor: pointer;
+}
+.color-input__hex {
+  width: 92px;
+  padding: 6px 8px;
+  font-family: ui-monospace, "Consolas", monospace;
+  font-size: 12px;
+}
+
+.range {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.range input[type='range'] {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent);
+}
+.range__value {
+  width: 52px;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.checkbox input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.stops {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+.stops__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.icon-btn:disabled,
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.picker__hint {
+  margin-left: auto;
+  padding-left: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* ---------------------------------------------------------------- modal */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #000a;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px -20px #000;
+}
+
+.modal__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.modal__head h2 {
+  flex: none;
+}
+.modal__head .icon-btn {
+  margin-left: auto;
+}
+.modal__head h2 {
+  font-size: 17px;
+}
+
+.modal__body {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 26px;
+  padding: 22px;
+  overflow-y: auto;
+}
+
+/* Modal de time: sem prévia, então mais estreito e coluna única. */
+.modal--narrow {
+  width: min(560px, 100%);
+}
+/* Editor de topbar: preview largo de um lado, pilha de controles do outro. */
+.modal--wide {
+  width: min(1560px, 97vw);
+  max-height: 94vh;
+}
+.modal--wide .topbar-editor {
+  flex: 1;
+  min-height: 0;
+}
+.modal__body--single {
+  grid-template-columns: 1fr;
+}
+
+.modal__fields {
+  min-width: 0;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--border);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+.field > label {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.field__hint {
+  color: var(--muted);
+  font-weight: 400;
+}
+.field > input,
+.field > select {
+  width: 100%;
+}
+.field > input,
+.field > select,
+.picker__trigger {
+  padding: 10px 12px;
+}
+.field__error {
+  margin: 6px 0 0;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------------- prévia */
+
+.preview {
+  min-width: 0;
+}
+.preview__title {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.preview__card {
+  padding: 14px;
+  background: var(--surface-2);
+  border: 1px solid color-mix(in oklab, var(--primary) 30%, var(--border));
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 6px 22px -10px var(--primary);
+}
+.preview__card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  object-position: top center;
+}
+.preview__placeholder {
+  display: grid;
+  place-items: center;
+  height: 160px;
+  padding: 0 10px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.preview__card h3 {
+  margin: 10px 0 2px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.preview .player__flags {
+  justify-content: center;
+  min-height: 20px;
+  margin-top: 10px;
+}
+
+/* Opção "Nenhum" do seletor: mantém o alinhamento das linhas com bandeira. */
+.flag--none {
+  display: inline-block;
+  width: calc(16px * 4 / 3);
+  height: 16px;
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+}
+.picker__option--empty span:last-child {
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .modal__body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .preview {
+    order: -1;
+  }
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* ---------------------------------------------------------------- logos */
+
+.grid--logos {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.card--logo {
+  position: relative;
+}
+
+/* Xadrez discreto atrás da logo: mostra o que nela é transparente, que é o
+   caso da maioria das logos de evento. */
+.logo-thumb {
+  display: grid;
+  place-items: center;
+  height: 120px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #0b0b12;
+  background-image:
+    linear-gradient(45deg, #14141d 25%, transparent 25%),
+    linear-gradient(-45deg, #14141d 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #14141d 75%),
+    linear-gradient(-45deg, transparent 75%, #14141d 75%);
+  background-size: 14px 14px;
+  background-position:
+    0 0,
+    0 7px,
+    7px -7px,
+    -7px 0;
+}
+/* Ocupa a caixa e deixa o object-fit cuidar da proporção. Com max-height a
+   imagem transbordava: item de grid tem min-height auto, e o mínimo vence o
+   máximo. */
+/* min-* zerados de propósito: item de grid nasce com `min-height: auto`, e o
+   mínimo vence o máximo — sem isso a logo estoura a caixa. Os width/height auto
+   anulam o `.card img` das outras listagens, que fixa 150px de altura. */
+.logo-thumb img {
+  min-width: 0;
+  min-height: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.logo-thumb--small {
+  flex: none;
+  width: 84px;
+  height: 48px;
+  padding: 5px;
+}
+.card--logo h3 {
+  margin-top: 10px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.row--logo {
+  padding: 8px 12px;
+  border-left-color: var(--border);
+}
+
+/* Logo de evento é larga: o seletor do formulário acompanha. */
+.logo-drop--wide {
+  width: 100%;
+  height: 170px;
+}
+
+/* ---------------------------------------------------------------- winners */
+
+.preset-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: -6px 0 16px;
+}
+
+.grid--winners {
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+}
+
+.winners-card__stage,
+.winners-editor__stage {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #0b0b12;
+  overflow-x: auto;
+}
+.winners-svg {
+  display: block;
+  flex: none;
+  border-radius: 4px;
+}
+
+/* Mesmo desenho do editor de topbar: preview em cima ocupando a largura toda,
+   controles embaixo em colunas que o navegador equilibra. */
+
+.winners-editor__stage {
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.stops__row input[type='text'],
+.stops__row input:not([type]) {
+  width: 150px;
+}
+
+/* Seletor de cenário: 18 miniaturas, então grade compacta com rolagem. */
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 6px;
+  max-height: 190px;
+  overflow-y: auto;
+  padding: 2px;
+}
+.preset-thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background: var(--bg);
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 0;
+}
+.preset-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  opacity: 0.75;
+}
+.preset-thumb:hover img {
+  opacity: 1;
+}
+.preset-thumb.is-active {
+  border-color: var(--accent);
+}
+.preset-thumb.is-active img {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- casca */
+
+.shell {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px 12px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+.sidebar__brand {
+  padding: 0 10px 18px;
+}
+.sidebar__brand strong {
+  display: block;
+  font-size: 16px;
+}
+.sidebar__brand span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+.sidebar__group {
+  margin-bottom: 18px;
+}
+.sidebar__title {
+  margin: 0 0 6px 10px;
+  color: var(--muted);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.sidebar__link:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.sidebar__link.is-active {
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+  color: var(--text);
+  font-weight: 600;
+}
+/* O ícone herda a cor do link, então acompanha o estado ativo. */
+.sidebar__icon {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  opacity: 0.85;
+}
+.sidebar__link.is-active .sidebar__icon {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.content {
+  min-width: 0;
+  padding: 24px 28px 60px;
+}
+
+.screen-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.screen-head h1 {
+  font-size: 22px;
+}
+.screen-head p {
+  margin: 3px 0 0;
+  font-size: 13px;
+}
+.screen-head__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+/* ------------------------------------------------------ telas de editor */
+
+/* Preview à direita, colado no topo enquanto se rola os controles: o efeito de
+   cada ajuste continua à vista sem precisar voltar. */
+.editor-screen__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 720px);
+  gap: 28px;
+  align-items: start;
+}
+/**
+ * A coluna da direita: a prévia em cima, fixa, e embaixo dela o que é do
+ * trabalho inteiro — nome, evento, salvar.
+ *
+ * Fixa porque é a resposta de cada ajuste: rolando os controles, a prévia sai de
+ * cena justamente enquanto se mexe nela. E o que fica embaixo é o que se toca
+ * uma vez, no fim — misturado aos controles, o campo de nome ficava perdido no
+ * meio de trinta sliders.
+ */
+.editor-screen__preview {
+  position: sticky;
+  top: 24px;
+}
+.editor-screen__general {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.editor-screen__general .field:last-of-type {
+  margin-bottom: 0;
+}
+.editor-screen__general .editor-section {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+.editor-screen__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+/* Conectar ao OBS fica à esquerda: é ação do campo acima dele, não do formulário. */
+.editor-screen__actions--left {
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+/* Abas do painel do overlay: uma frente da cena por vez. */
+.overlay-tabs__body {
+  columns: 250px;
+  column-gap: 22px;
+}
+.overlay-tabs__body .editor-section {
+  break-inside: avoid;
+}
+.overlay-tabs__body .field {
+  margin-bottom: 10px;
+}
+
+/**
+ * Numa tela estreita a prévia deixa de ser coluna e vira a primeira faixa: em
+ * duas colunas de 300px não sobra largura nem para a cena nem para os campos.
+ */
+@media (max-width: 1080px) {
+  .editor-screen__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .editor-screen__preview {
+    position: static;
+    order: -1;
+  }
+}
+.editor-screen__preview .muted {
+  margin-top: 8px;
+  text-align: center;
+}
+/**
+ * Colunas por largura, não por número: numa tela larga o painel abre em três e
+ * fica curto, numa estreita cai para uma. Com número fixo, ou sobrava coluna
+ * vazia ou o painel virava uma tira de rolagem sem fim.
+ */
+.editor-screen__controls {
+  columns: 250px;
+  column-gap: 22px;
+}
+.editor-screen__controls .editor-section {
+  break-inside: avoid;
+}
+.editor-screen__name {
+  margin-top: 6px;
+  width: min(360px, 100%);
+}
+.editor-screen__head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 12px 0;
+  margin: -12px 0 16px;
+  background: var(--bg);
+}
+
+/**
+ * Colocação, jogador e personagem. Nas duplas entra mais um campo de jogador,
+ * então a linha passa a ter quatro colunas.
+ */
+.slot-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.slot-row:has(.picker + .picker + .picker) {
+  grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+.slot-row__rank {
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Denso de propósito: quanto menos rolagem, mais o preview fica à vista. */
+.editor-screen__controls .field {
+  margin-bottom: 10px;
+}
+.editor-screen__controls .editor-section {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.editor-screen__controls .editor-section h3 {
+  margin-bottom: 8px;
+}
+
+/* Botão de sortear: ícone e texto na mesma linha. */
+.btn--small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.preview-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+/**
+ * Cada líder é um grupo à parte na tela de geração: são cinco controles por
+ * lado, e sem a linha divisória vira uma lista de dez que não diz de quem é o
+ * quê.
+ */
+.leader-block + .leader-block {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/**
+ * Fonte: seletor com as setas de passar ao lado, e um "Aa" na fonte atual.
+ * Comparar fontes é clicar, não abrir a lista de 26 a cada tentativa.
+ */
+.font-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.font-picker .picker {
+  flex: 1;
+  min-width: 0;
+}
+.font-picker__sample {
+  min-width: 34px;
+  padding: 0 6px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/** "Usar «fulano»" — texto que não está na lista. */
+.picker__option--custom .picker__label {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ overlay */
+
+/**
+ * A página que o OBS carrega não tem fundo: o navegador dele compõe sobre a
+ * cena, e qualquer cor aqui viraria um retângulo por cima da transmissão.
+ */
+body.is-overlay {
+  background: transparent;
+}
+/**
+ * A fonte do OBS é o quadro: as barras se posicionam dentro dele, e não numa
+ * folga fixa no canto.
+ *
+ * Antes elas caíam no canto superior esquerdo com 24px de respiro, e acertar o
+ * lugar exigia arrastar a fonte dentro do OBS — o que muda a escala junto e
+ * desalinha a apresentação, que continua mirando o quadro inteiro.
+ */
+.overlay-live {
+  position: fixed;
+  inset: 0;
+}
+.overlay-live__bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.overlay-live--empty {
+  padding: 24px;
+  font: 500 14px/1.4 system-ui, sans-serif;
+  color: #ffffff;
+  text-shadow: 0 1px 3px #000;
+}
+.overlay-stage {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* --- painel de controle --- */
+
+.overlay-url code,
+.overlay-urls code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+}
+.overlay-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+/** Bolinha de estado: verde no ar, apagada parado. */
+.overlay-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.5;
+}
+.overlay-dot.is-on {
+  background: #4ade80;
+  opacity: 1;
+}
+.overlay-urls {
+  display: grid;
+  gap: 6px;
+}
+.overlay-url {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.score-row__value {
+  min-width: 28px;
+  text-align: center;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+/**
+ * A prévia é o **quadro da transmissão inteiro**, sobre um xadrez que finge
+ * transparência — o mesmo desenho que vai ao ar, e não uma aproximação.
+ *
+ * Enquadrar só as barras deixava a posição vertical sem resposta na tela: o
+ * controle existiria e o efeito dele só apareceria no OBS. A largura é limitada
+ * para o quadro 16:9 não empurrar os controles para fora da tela — quanto menos
+ * rolagem, mais a prévia continua à vista.
+ */
+.overlay-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background-color: #14141c;
+  background-image:
+    linear-gradient(45deg, #1c1c26 25%, transparent 25%),
+    linear-gradient(-45deg, #1c1c26 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1c1c26 75%),
+    linear-gradient(-45deg, transparent 75%, #1c1c26 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  overflow: hidden;
+}
+/**
+ * O mesmo arranjo da página que o OBS carrega — ver .overlay-live__bars.
+ *
+ * Sem pegar mouse: as barras cobrem o quadro inteiro e ficariam na frente da
+ * chave, que embaixo delas é onde se clica para somar ponto e arrastar gente.
+ * Elas não têm gesto nenhum, então não perdem nada com isso.
+ */
+.overlay-preview__scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+/** Os dois botões de segurar, com o valor no meio — ver HoldNudge. */
+.nudge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nudge .btn {
+  flex: none;
+  width: 34px;
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 1;
+  /* Segurar não pode virar seleção de texto nem menu de toque. */
+  user-select: none;
+  touch-action: none;
+}
+.nudge__value {
+  flex: 1;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  cursor: pointer;
+}
+.nudge__value:hover {
+  color: var(--text);
+}
+
+/** Fileira de botões de um mesmo assunto — criar, sortear, excluir. */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+/** Nota curta abaixo de um campo do overlay. */
+.overlay-note {
+  margin: -2px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+/* Legenda da prévia, que não pertence a campo nenhum. */
+.overlay-note--center {
+  margin: 8px auto 14px;
+  width: min(100%, 960px);
+  text-align: center;
+}
+.overlay-note code,
+.overlay-note strong {
+  color: var(--text);
+}
+
+/* ------------------------------------------- painel do overlay */
+
+/**
+ * A tela do overlay não usa `.editor-screen__body`.
+ *
+ * Lá o preview mora numa coluna estreita à direita, o que serve para peças altas
+ * — um card de player, um gráfico de winners. A cena do overlay é o contrário:
+ * quase dois mil pixels de largura por uma faixa de altura. Espremida numa
+ * coluna de 720px ela sai ilegível, e os controles ao lado viram uma tira de
+ * rolagem. Aqui a prévia pega a faixa de cima inteira e os controles se abrem
+ * numa grade embaixo.
+ */
+.overlay-screen {
+  display: grid;
+  gap: 14px;
+}
+
+/* Carregar de um lado, gravar do outro: numa linha só, o clique errado deixa de
+   ser vizinho do certo. */
+.preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.preset-bar__label {
+  flex: none;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.preset-bar__pick {
+  width: 220px;
+}
+.preset-bar__name {
+  width: 200px;
+  margin-left: auto;
+}
+
+/**
+ * Colunas por largura, não por número: numa tela larga os cinco blocos entram
+ * lado a lado e a tela inteira cabe sem rolar; numa estreita caem para dois ou
+ * um, sem sobrar coluna vazia.
+ */
+.overlay-screen__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 22px;
+  align-items: start;
+}
+/* Denso de propósito: a prévia acima só continua à vista enquanto os controles
+   couberem embaixo dela. */
+.overlay-screen__controls .field {
+  margin-bottom: 8px;
+}
+.overlay-screen__controls .editor-section {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.overlay-screen__controls .editor-section h3 {
+  margin-bottom: 8px;
+}
+/* Endereço e porta são um dado só partido em dois campos — ficam na mesma linha. */
+.obs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 84px;
+  gap: 8px;
+}
+
+/* O estado da conexão subiu para o cabeçalho, onde a margem de campo atrapalha. */
+.screen-head__actions .overlay-status {
+  margin: 0;
+}
+
+/** A logo do meio: a altura manda, a largura sai da proporção da imagem. */
+.overlay-stage__logo {
+  flex: none;
+  width: auto;
+  object-fit: contain;
+}
+
+/** Miniatura num dropdown de logo — larga, ao contrário da insígnia de time. */
+.picker__thumb {
+  flex: none;
+  height: 16px;
+  max-width: 34px;
+  object-fit: contain;
+}
+
+/* -------------------------------------------- animações de apresentação */
+
+/**
+ * A cena é sempre 1920x1080 e `scale` é só a lente: a caixa de fora tem o
+ * tamanho já escalado, e a de dentro desenha em px de cena. Assim toda medida
+ * daqui para baixo é a medida real da transmissão — nada de "pequeno no painel,
+ * grande no OBS".
+ */
+.anim-scene-box {
+  position: relative;
+  overflow: hidden;
+}
+.anim-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  /* Sem fundo: o navegador do OBS compõe sobre a cena, como no overlay. */
+  pointer-events: none;
+}
+
+.anim-side {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  animation-duration: var(--dur);
+  animation-fill-mode: both;
+  /* Avisa a camada antes de ela ser necessária: promovida no meio da animação, a
+     figura era rasterizada de novo com a transformação já aplicada. */
+  will-change: transform, opacity;
+}
+.anim-side.is-left {
+  left: 0;
+  animation-name: anim-enter-left;
+}
+.anim-side.is-right {
+  left: 50%;
+  animation-name: anim-enter-right;
+}
+
+/* Os dois se encaram: a arte da direita entra espelhada. O espelho fica na
+   imagem e não no lado inteiro, senão o nome sairia invertido junto. */
+.anim-side__art {
+  position: absolute;
+  /*
+   * Sem `filter` aqui, de propósito.
+   *
+   * Havia um drop-shadow, e ele deformava a figura no fim da animação. `filter`
+   * obriga o navegador a rasterizar o elemento numa camada à parte; a camada é
+   * desenhada no espaço local e só depois recebe o `scale()` da cena inteira,
+   * que fica no ancestral. Parado ninguém nota — mas a saída anima transform e
+   * opacity ao mesmo tempo, a camada é reaproveitada em vez de redesenhada, e o
+   * resultado esticava.
+   *
+   * O brilho de `.anim-side__glow` já separa a figura do fundo, que era o que a
+   * sombra fazia.
+   */
+}
+.anim-side.is-right .anim-side__art {
+  transform: scaleX(-1);
+}
+
+/** Brilho atrás da figura, na cor do lado. */
+.anim-side__glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 900px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--side-accent) 0%, transparent 68%);
+  opacity: 0;
+  animation: anim-glow var(--dur) both;
+}
+
+.anim-side__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 96px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  text-align: center;
+  animation: anim-label var(--dur) both;
+}
+.anim-side__label strong {
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.7),
+    0 0 28px var(--side-accent);
+}
+.anim-side__label span {
+  font-size: 34px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.anim-vs {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  font-size: 132px;
+  font-weight: 900;
+  font-style: italic;
+  color: #fff;
+  text-shadow:
+    0 0 12px var(--accent),
+    0 0 48px var(--accent),
+    0 4px 0 rgba(0, 0, 0, 0.6);
+  animation: anim-vs var(--dur) both;
+}
+
+/**
+ * Cada elemento roda uma animação só, com a duração inteira e as fases escritas
+ * como porcentagem.
+ *
+ * A alternativa seria uma animação curta por fase, com `animation-delay`
+ * calculado sobre `--dur`. Já tentei: cada mudança de duração exigia refazer as
+ * contas em cinco lugares, e bastava uma errar para a coreografia descolar. Do
+ * jeito de baixo, esticar `--dur` estica tudo junto por construção.
+ */
+@keyframes anim-enter-left {
+  0% {
+    transform: translateX(-60%);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  18%,
+  82% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-16%);
+    opacity: 0;
+  }
+}
+@keyframes anim-enter-right {
+  0% {
+    transform: translateX(60%);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  18%,
+  82% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(16%);
+    opacity: 0;
+  }
+}
+@keyframes anim-label {
+  0%,
+  14% {
+    transform: translateY(36px);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  30%,
+  80% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+}
+@keyframes anim-glow {
+  0%,
+  10% {
+    opacity: 0;
+  }
+  30%,
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes anim-vs {
+  0%,
+  16% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  27%,
+  80% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0;
+  }
+}
+
+/* --- as três coreografias --- */
+
+.anim-fx {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/**
+ * Abertura: o clarão que os encontra no meio, no instante em que os dois
+ * terminam de entrar (por isso começa em 15% — a entrada fecha em 18%).
+ */
+.anim-fx--flash .anim-flash__core,
+.anim-fx--flash .anim-flash__ring {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  border-radius: 50%;
+  opacity: 0;
+}
+.anim-fx--flash .anim-flash__core {
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, #fff 0%, var(--accent) 40%, transparent 70%);
+  animation: anim-flash-core var(--dur) both;
+}
+.anim-fx--flash .anim-flash__ring {
+  width: 520px;
+  height: 520px;
+  border: 6px solid var(--accent);
+  animation: anim-flash-ring var(--dur) both;
+}
+@keyframes anim-flash-core {
+  0%,
+  15% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  36% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+@keyframes anim-flash-ring {
+  0%,
+  17% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.9;
+  }
+  42% {
+    transform: translate(-50%, -50%) scale(2.6);
+    opacity: 0;
+  }
+}
+
+/**
+ * Cena parada na pose de sustentação, em vez de tocando.
+ *
+ * O truque é atraso negativo com a animação pausada: cada elemento salta para o
+ * ponto do meio da própria linha do tempo e fica ali. Entre 18% e 82% todas as
+ * coreografias estão em regime, então 45% pega tudo em cena — figuras dentro,
+ * nomes de pé, efeito aceso.
+ *
+ * Serve a dois casos que pedem a mesma coisa: a prévia do editor entre um teste
+ * e outro, e quem configurou o sistema para menos movimento. Parar em 100% não
+ * serviria a nenhum dos dois — o último keyframe é a saída, e a tela ficaria
+ * vazia.
+ */
+.anim-scene.is-held *,
+.anim-scene.is-held {
+  animation-play-state: paused !important;
+  animation-delay: calc(var(--dur) * -0.45) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim-scene *,
+  .anim-scene {
+    animation-play-state: paused !important;
+    animation-delay: calc(var(--dur) * -0.45) !important;
+  }
+}
+
+/* --- prévia da animação e a camada dela no ao vivo --- */
+
+/**
+ * A caixa da prévia reserva a proporção da cena antes de a animação entrar.
+ *
+ * `aspect-ratio` e não altura medida: a cena tem 16/9 por definição, e sem a
+ * reserva os controles saltavam para baixo no primeiro quadro — justo quando se
+ * está olhando o efeito começar.
+ */
+.anim-preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background-color: #14141c;
+  background-image:
+    linear-gradient(45deg, #1c1c26 25%, transparent 25%),
+    linear-gradient(-45deg, #1c1c26 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1c1c26 75%),
+    linear-gradient(-45deg, transparent 75%, #1c1c26 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* Na fonte do OBS a apresentação ocupa o quadro inteiro e passa por cima das
+   barras — quando elas ainda estiverem em cena. */
+.overlay-live__anim {
+  position: fixed;
+  inset: 0;
+}
+
+/* --- fundo da cena --- */
+
+/**
+ * O fundo fica em elementos separados da imagem porque `filter` borra tudo que
+ * estiver dentro do elemento: aplicado no contêiner, o desfoque do cenário
+ * levaria os personagens junto.
+ */
+.anim-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.anim-bg__fill,
+.anim-bg__photo,
+.anim-bg__dim {
+  position: absolute;
+  inset: 0;
+}
+.anim-bg__photo {
+  background-position: center;
+  background-size: cover;
+}
+.anim-bg__dim {
+  background: #05050a;
+}
+
+.anim-fx > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/** A faixa horizontal que rasga o quadro junto com o clarão da abertura. */
+.anim-fx--flash .anim-flash__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 46%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, #fff 18%, var(--accent) 50%, #fff 82%, transparent);
+  box-shadow: 0 0 40px var(--accent);
+  transform-origin: center;
+  animation: anim-flash-bar var(--dur) both;
+}
+@keyframes anim-flash-bar {
+  0%, 14% { transform: scaleX(0); opacity: 0; }
+  19% { transform: scaleX(1); opacity: 1; }
+  30%, 78% { transform: scaleX(1); opacity: 0.35; }
+  100% { transform: scaleX(0); opacity: 0; }
+}
+
+/**
+ * Correntes: elos de verdade, não tracejado.
+ *
+ * A primeira versão eram dois traços pontilhados sobrepostos fingindo elo. Lia
+ * como corrente em movimento e como tracejado duplo parado — e a cena passa
+ * metade do tempo parada, na sustentação. Agora cada elo é uma elipse repetida
+ * ao longo da diagonal, com os ímpares achatados: é o que faz uma corrente
+ * parecer corrente em vez de uma fila de argolas.
+ */
+.anim-chain {
+  animation: anim-chain-sweep var(--dur) both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+/* Balanço depois de assentar: corrente pendurada não fica imóvel. */
+.anim-chain__swing {
+  animation: anim-chain-swing 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.7s);
+}
+.anim-fx--chains use {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 9;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.6));
+}
+/* O elo deitado é outro desenho no <defs>, não este achatado por CSS — ver a
+   nota em AnimStage sobre a propriedade `scale` e a versão do CEF. */
+/* Os dois elos usam a mesma espessura: o entrelaçamento vem da forma de cada
+   desenho, não do traço. */
+@keyframes anim-chain-sweep {
+  0% { transform: translateX(-2400px); opacity: 0; }
+  8% { opacity: 1; }
+  22%, 78% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(2400px); opacity: 0; }
+}
+@keyframes anim-chain-swing {
+  0%, 100% { transform: rotate(-0.7deg); }
+  50% { transform: rotate(0.7deg); }
+}
+
+/**
+ * Chamas: línguas de fogo, não uma faixa.
+ *
+ * Uma faixa só com degradê sobe como bloco e lê como degradê. Sete línguas de
+ * larguras e atrasos diferentes, cada uma ondulando no próprio ritmo, é o mínimo
+ * que lê como fogo.
+ *
+ * Nada de `color-mix` nem `oklab` aqui, por mais que encurtassem os degradês: o
+ * navegador embutido do OBS costuma estar algumas versões atrás do Chrome de
+ * mesa, e uma cor que ele não entende não degrada — some.
+ */
+.anim-fx--flame .anim-flame__base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background: linear-gradient(to top, var(--accent) 0%, rgba(255, 62, 0, 0.55) 45%, transparent 100%);
+  filter: blur(22px);
+  animation: anim-flame var(--dur) both;
+}
+.anim-fx--flame .anim-flame__tongue {
+  position: absolute;
+  bottom: -4%;
+  left: var(--x);
+  width: var(--w);
+  height: 62%;
+  border-radius: 50% 50% 22% 22% / 62% 62% 18% 18%;
+  background: linear-gradient(
+    to top,
+    #fff2c0 0%,
+    var(--accent) 22%,
+    rgba(255, 62, 0, 0.72) 55%,
+    rgba(255, 120, 20, 0.12) 85%,
+    transparent 100%
+  );
+  filter: blur(9px);
+  transform-origin: bottom center;
+  /* Uma animação só, com a ondulação embutida: subida e lambida são as duas
+     `transform`, e duas animações disputando a mesma propriedade só deixam
+     valer a última. */
+  animation: anim-flame-tongue var(--dur) var(--delay) both;
+}
+.anim-ember {
+  position: absolute;
+  bottom: -30px;
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent);
+  animation: anim-ember var(--dur) var(--delay) both;
+}
+@keyframes anim-flame {
+  0% { transform: translateY(70%); opacity: 0; }
+  20%, 78% { transform: translateY(0); opacity: 0.92; }
+  100% { transform: translateY(45%); opacity: 0; }
+}
+@keyframes anim-flame-tongue {
+  0% { transform: translateY(70%) scale(1, 1); opacity: 0; }
+  20% { transform: translateY(0) scale(1, 1); opacity: 0.92; }
+  32% { transform: translateY(0) scale(0.9, 1.22); }
+  44% { transform: translateY(0) scale(1.08, 0.9); }
+  56% { transform: translateY(0) scale(0.94, 1.16); }
+  68% { transform: translateY(0) scale(1.05, 0.94); }
+  78% { transform: translateY(0) scale(1, 1); opacity: 0.92; }
+  100% { transform: translateY(45%) scale(1, 1); opacity: 0; }
+}
+@keyframes anim-ember {
+  0% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  14% { opacity: 1; }
+  72% { opacity: 0.75; }
+  100% { transform: translate(var(--drift), -980px) scale(1); opacity: 0; }
+}
+
+/** Relâmpago: os raios se desenham de cima para baixo e o quadro pisca junto. */
+.anim-fx--bolt .anim-bolt {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 7;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 18px var(--accent)) drop-shadow(0 0 46px var(--accent));
+  /* Tracejado maior que qualquer um destes caminhos: é o que permite desenhar
+     o raio com um único deslocamento, sem medir o comprimento de cada um. */
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: anim-bolt-draw var(--dur) both;
+  animation-delay: calc(var(--i) * 90ms);
+}
+.anim-fx--bolt .anim-bolt__flash {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0;
+  animation: anim-bolt-flash var(--dur) both;
+}
+@keyframes anim-bolt-draw {
+  0%, 10% { stroke-dashoffset: 2400; opacity: 0; }
+  13% { opacity: 1; }
+  22% { stroke-dashoffset: 0; opacity: 1; }
+  30% { opacity: 0.25; }
+  34%, 74% { opacity: 0.5; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes anim-bolt-flash {
+  0%, 11% { opacity: 0; }
+  13% { opacity: 0.5; }
+  16% { opacity: 0.05; }
+  19% { opacity: 0.35; }
+  26%, 100% { opacity: 0; }
+}
+
+/** Estilhaço: o vidro trinca no meio e os cacos abrem em leque. */
+.anim-fx--shatter .anim-shard {
+  fill: rgba(255, 255, 255, 0.055);
+  stroke: var(--accent);
+  stroke-width: 3;
+  transform-origin: 960px 540px;
+  animation: anim-shard var(--dur) both;
+  animation-delay: calc(var(--i) * 26ms);
+}
+@keyframes anim-shard {
+  0% { transform: scale(1) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  18% { transform: scale(1) rotate(0deg); }
+  46% { transform: scale(1.55) rotate(calc(var(--dir) * 7deg)); opacity: 0.5; }
+  70%, 100% { transform: scale(2.4) rotate(calc(var(--dir) * 12deg)); opacity: 0; }
+}
+
+/** Neon: grade em fuga, sol na linha do horizonte e uma faixa atravessando. */
+.anim-fx--neon .anim-neon__grid {
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  height: 52%;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 78px, var(--accent) 78px 81px),
+    repeating-linear-gradient(0deg, transparent 0 54px, var(--accent) 54px 57px);
+  opacity: 0;
+  transform: perspective(520px) rotateX(74deg);
+  transform-origin: bottom center;
+  animation:
+    anim-neon-grid var(--dur) both,
+    anim-neon-scroll 1.6s linear infinite;
+}
+.anim-fx--neon .anim-neon__sun {
+  position: absolute;
+  left: 50%;
+  bottom: 44%;
+  width: 520px;
+  height: 520px;
+  margin-left: -260px;
+  border-radius: 50%;
+  background: linear-gradient(to top, var(--accent), #ffb43f);
+  opacity: 0;
+  animation: anim-neon-sun var(--dur) both;
+}
+.anim-fx--neon .anim-neon__sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  animation: anim-neon-sweep var(--dur) both;
+}
+@keyframes anim-neon-grid {
+  0% { opacity: 0; }
+  20%, 80% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+@keyframes anim-neon-scroll {
+  to { background-position: 0 54px, 0 54px; }
+}
+@keyframes anim-neon-sun {
+  0% { opacity: 0; transform: translateY(60%); }
+  22%, 78% { opacity: 0.55; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(30%); }
+}
+@keyframes anim-neon-sweep {
+  0%, 8% { left: -45%; opacity: 0; }
+  14% { opacity: 1; }
+  30%, 100% { left: 105%; opacity: 0; }
+}
+
+/** Pétalas: caem em profundidades diferentes, com vento e giro. */
+.anim-petal {
+  position: absolute;
+  top: -8%;
+  left: var(--x);
+  width: var(--size);
+  height: calc(var(--size) * 1.35);
+  border-radius: 62% 38% 58% 42% / 46% 54% 46% 54%;
+  background: var(--accent);
+  opacity: 0;
+  animation: anim-petal var(--dur) var(--delay) both;
+}
+@keyframes anim-petal {
+  0% { transform: translate(0, -120px) rotate(0deg); opacity: 0; }
+  12% { opacity: 0.95; }
+  76% { opacity: 0.9; }
+  100% { transform: translate(var(--drift), 1240px) rotate(var(--spin)); opacity: 0; }
+}
+
+/** Glitch: varredura e cortes de sinal. */
+.anim-fx--glitch .anim-glitch__scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07) 0 2px, transparent 2px 5px);
+  animation: anim-glitch-scan var(--dur) both;
+}
+.anim-fx--glitch .anim-glitch__tear {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(26px + var(--i) * 22px);
+  top: calc(14% + var(--i) * 21%);
+  background: var(--accent);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: anim-glitch-tear var(--dur) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+@keyframes anim-glitch-scan {
+  0% { opacity: 0; }
+  14%, 80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes anim-glitch-tear {
+  0%, 12% { transform: translateX(0); opacity: 0; }
+  15% { transform: translateX(-58px); opacity: 0.75; }
+  18% { transform: translateX(42px); opacity: 0.2; }
+  21% { transform: translateX(-16px); opacity: 0.6; }
+  26%, 72% { transform: translateX(0); opacity: 0; }
+  77% { transform: translateX(34px); opacity: 0.55; }
+  82%, 100% { transform: translateX(0); opacity: 0; }
+}
+
+/** Vórtice: anéis girando em torno do encontro. */
+.anim-fx--vortex .anim-vortex__ring {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: calc(420px + var(--i) * 260px);
+  height: calc(420px + var(--i) * 260px);
+  margin: calc(-210px - var(--i) * 130px);
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  opacity: 0;
+  animation: anim-vortex var(--dur) both;
+  animation-delay: calc(var(--i) * 80ms);
+}
+/* Giro e escala no mesmo `transform`, e não em duas animações: anéis vizinhos
+   giram sentidos opostos porque o de dentro fecha meia volta a menos. */
+@keyframes anim-vortex {
+  0% { transform: rotate(0deg) scale(0.2); opacity: 0; }
+  22% { opacity: 0.7; }
+  76% { transform: rotate(430deg) scale(1); opacity: 0.7; }
+  100% { transform: rotate(560deg) scale(1.6); opacity: 0; }
+}
+
+/** Cortina: lâminas diagonais varrendo o quadro, ao estilo esports. */
+.anim-fx--curtain .anim-curtain__blade {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: calc(var(--i) * 17.4%);
+  width: 18%;
+  background: var(--accent);
+  opacity: 0;
+  animation: anim-curtain var(--dur) both;
+  animation-delay: calc(var(--i) * 55ms);
+}
+@keyframes anim-curtain {
+  0% { transform: skewX(-14deg) translateX(-160%); opacity: 0; }
+  8% { opacity: 0.85; }
+  20% { transform: skewX(-14deg) translateX(0); opacity: 0.85; }
+  34%, 72% { transform: skewX(-14deg) translateX(160%); opacity: 0; }
+  84% { transform: skewX(-14deg) translateX(0); opacity: 0.7; }
+  100% { transform: skewX(-14deg) translateX(-160%); opacity: 0; }
+}
+
+/** Faíscas: estouro radial a partir do ponto do encontro. */
+.anim-fx--sparks .anim-spark {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px var(--accent);
+  opacity: 0;
+  /* A rotação vem antes da translação: o eixo X de cada faísca já aponta para o
+     ângulo dela, e o alcance vira uma distância nesse eixo. */
+  animation: anim-spark var(--dur) var(--delay) both;
+}
+.anim-fx--sparks .anim-spark__burst {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 340px;
+  height: 340px;
+  margin: -170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--accent) 45%, transparent 72%);
+  opacity: 0;
+  animation: anim-spark-burst var(--dur) both;
+}
+@keyframes anim-spark {
+  0%, 14% { transform: rotate(var(--ang)) translateX(0) scale(0.4); opacity: 0; }
+  18% { opacity: 1; }
+  46% { transform: rotate(var(--ang)) translateX(var(--far)) scale(1); opacity: 0.85; }
+  62%, 100% { transform: rotate(var(--ang)) translateX(calc(var(--far) * 1.35)) scale(0.2); opacity: 0; }
+}
+@keyframes anim-spark-burst {
+  0%, 14% { transform: scale(0.2); opacity: 0; }
+  19% { transform: scale(1); opacity: 1; }
+  36%, 100% { transform: scale(1.9); opacity: 0; }
+}
+
+/** Ondas: anéis de choque concêntricos abrindo do centro. */
+.anim-fx--waves .anim-wave {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 320px;
+  height: 320px;
+  margin: -160px;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  opacity: 0;
+  animation: anim-wave var(--dur) both;
+  animation-delay: calc(var(--i) * 150ms);
+}
+@keyframes anim-wave {
+  0%, 12% { transform: scale(0.2); opacity: 0; }
+  18% { opacity: 0.9; }
+  52%, 100% { transform: scale(5.2); opacity: 0; }
+}
+
+/**
+ * Fade da cena inteira, em duas camadas aninhadas.
+ *
+ * Entrada e saída têm durações independentes, e keyframe de CSS não aceita
+ * porcentagem vinda de variável — não dá para escrever "escurece a partir de
+ * (dur - fadeOut)". Aninhando, a opacidade de uma multiplica a da outra: a de
+ * fora abre com a própria duração, a de dentro fecha com atraso próprio, e
+ * nenhuma das duas disputa a mesma propriedade.
+ *
+ * Com fade em zero a animação dura zero e `both` mantém o quadro final —
+ * opacidade 1 nas duas. Desligado é o padrão e não custa nada.
+ */
+.anim-fade {
+  position: absolute;
+  inset: 0;
+}
+.anim-fade--in {
+  animation: anim-fade-in var(--fade) linear both;
+}
+.anim-fade--out {
+  animation: anim-fade-out var(--fade) var(--fade-at) linear both;
+}
+@keyframes anim-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes anim-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------- chave de torneio */
+
+/**
+ * A chave é uma grade de colunas, uma por rodada.
+ *
+ * Não há uma única linha de ligação desenhada: o espaço entre confrontos dobra a
+ * cada rodada, e isso basta para cada par apontar para o meio do confronto
+ * seguinte. Linhas exigiriam medir posições depois do layout — e a chave muda de
+ * forma a cada resultado.
+ */
+.bracket {
+  display: flex;
+  align-items: flex-start;
+}
+.bracket__round {
+  display: flex;
+  flex-direction: column;
+}
+.bracket__round-name {
+  margin: 0 0 6px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+/**
+ * O vão entre confrontos é o mesmo vão entre as duas vagas de um confronto.
+ *
+ * Não é escolha de estilo: a altura de um confronto da rodada seguinte é
+ * calculada como "dois confrontos da anterior mais o vão entre eles" (ver
+ * MatchBox). Com a coluna sem vão nenhum, a conta sobrava um vão por rodada e as
+ * colunas iam descolando — na terceira rodada o confronto já não apontava para o
+ * meio do par que o alimenta.
+ */
+.bracket__column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--slot-gap);
+}
+/* Cada confronto ocupa a altura do seu ramo e centra o par dentro dela. */
+.bracket__match {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--slot-gap);
+}
+
+.bracket__slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid;
+}
+/**
+ * O brilho da vaga sai da cor do personagem, num pseudo-elemento com opacidade
+ * própria.
+ *
+ * Nada de `rgb(from ...)` para misturar alfa na cor: a sintaxe de cor relativa
+ * só existe a partir do Chrome 119, e o navegador embutido do OBS costuma estar
+ * atrás disso — cor que ele não entende não degrada, some. Opacidade num
+ * elemento à parte faz o mesmo e funciona em qualquer versão.
+ */
+.bracket__slot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px var(--cor);
+  opacity: calc(var(--brilho) * 0.55);
+}
+/* A barra de cor na borda esquerda é o que identifica o personagem de relance,
+   mesmo com a chave reduzida ao ponto de não dar para ler o nome. */
+.bracket__bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--cor);
+  opacity: calc(0.25 + var(--brilho) * 0.75);
+}
+.bracket__slot.is-winner {
+  border-color: var(--cor);
+}
+.bracket__slot.is-winner::after {
+  opacity: calc(0.35 + var(--brilho) * 0.65);
+}
+/**
+ * Perdedor sai de cor, e a força vem do template.
+ *
+ * `filter` em vez de trocar as cores uma a uma: a vaga tem arte, bandeira, nome
+ * e placar, cada um com a sua origem de cor, e apagar no elemento inteiro trata
+ * todos de uma vez — inclusive os que vierem depois.
+ */
+.bracket__slot.is-loser {
+  filter: grayscale(var(--apagar)) brightness(calc(1 - var(--apagar) * 0.35));
+  opacity: calc(1 - var(--apagar) * 0.25);
+}
+.bracket__slot.is-empty {
+  opacity: 0.35;
+}
+
+/**
+ * Cada peça da vaga carrega o próprio respiro **à esquerda**, e o respiro da
+ * direita é da vaga inteira.
+ *
+ * Era o contrário — cada uma empurrava a seguinte —, e aí desligar o boneco no
+ * template colava a bandeira na borda: o espaço que a separava dela era o que o
+ * boneco carregava. Com o respiro à esquerda, tirar qualquer peça não muda o
+ * lugar de nenhuma outra.
+ *
+ * A medida escala junto com a vaga (--pad), porque um respiro fixo de 6px numa
+ * prévia a 40% fica proporcionalmente enorme.
+ */
+.bracket__slot {
+  padding-right: var(--pad);
+}
+.bracket__art {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  margin-left: var(--pad);
+}
+.bracket__art img {
+  position: absolute;
+  max-width: none;
+}
+.bracket__flag {
+  flex: none;
+  display: flex;
+  align-items: center;
+  margin-left: var(--pad);
+}
+.bracket__name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-left: var(--pad);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+.bracket__name em {
+  flex: none;
+  color: var(--cor);
+  font-style: normal;
+  letter-spacing: 0.06em;
+}
+.bracket__score {
+  flex: none;
+  padding-left: var(--pad);
+  /* No meio da faixa que o Slot reserva, e com dígitos de largura igual: é o que
+     mantém unidades e dezenas na mesma coluna em toda a chave. */
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/**
+ * A tela da chave: a cena inteira, e não uma caixa dentro dela.
+ *
+ * Recorta o que passa da borda porque é uma tela: a entrada em barra é um
+ * `clip-path` correndo por aqui, e uma chave grande demais para o quadro para no
+ * limite dele em vez de vazar por cima do resto da cena.
+ */
+.bracket-scene {
+  position: relative;
+  overflow: hidden;
+}
+/* Tudo que entra e sai junto. A barra corre por fora, senão o recorte a comeria. */
+.bracket-scene__layer {
+  position: absolute;
+  inset: 0;
+}
+.bracket-scene__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+/**
+ * A chave no meio do que o título deixou — e só ali.
+ *
+ * `overflow: hidden` fecha a área: uma chave mais alta que a tela transbordava
+ * para cima e passava por cima do nome do evento. O deslocamento vertical mora
+ * na camada de dentro, senão ele levaria o recorte junto e o problema voltaria.
+ */
+.bracket-scene__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.bracket-scene__fit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* O cabeçalho toma a largura da tela e o alinhamento vem do template. */
+.bracket-head {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  margin-bottom: 0.5em;
+  line-height: 1.1;
+}
+.bracket-head strong {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.bracket-head span {
+  opacity: 0.75;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/**
+ * Entrada e saída da tela.
+ *
+ * `--troca` é a duração, e vem do template: o mesmo número que o painel usa para
+ * segurar o último quadro no ar enquanto a saída toca (ver BracketStage).
+ */
+.bracket-scene.is-fade.is-in .bracket-scene__layer {
+  animation: bracket-entra var(--troca) ease both;
+}
+.bracket-scene.is-fade.is-out .bracket-scene__layer {
+  animation: bracket-sai var(--troca) ease both;
+}
+@keyframes bracket-entra {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes bracket-sai {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/**
+ * A barra: uma faixa que entra pela direita trazendo a tela atrás de si, e sai
+ * do mesmo jeito levando-a embora.
+ *
+ * O recorte e a faixa correm com a mesma curva e no mesmo sentido — da direita
+ * para a esquerda, nas duas pontas —, e é isso que gruda uma coisa na outra. Na
+ * entrada o recorte abre atrás da faixa; na saída, fecha na frente dela.
+ */
+.bracket-scene.is-barra.is-in .bracket-scene__layer {
+  animation: bracket-abre var(--troca) cubic-bezier(0.65, 0, 0.2, 1) both;
+}
+.bracket-scene.is-barra.is-out .bracket-scene__layer {
+  animation: bracket-fecha var(--troca) cubic-bezier(0.65, 0, 0.2, 1) both;
+}
+/**
+ * O corte é um polígono, e não um `inset`, porque a borda pode ser diagonal: o
+ * topo em `p + incl` e a base em `p - incl`, com `p` andando da direita para a
+ * esquerda. Com inclinação zero os dois pontos coincidem e a borda sai reta,
+ * que é o caso comum — o polígono cobre os dois sem um segundo par de keyframes.
+ *
+ * Os cantos em 200% e -100% existem só para o polígono cobrir o quadro inteiro
+ * do lado que fica visível.
+ */
+@keyframes bracket-abre {
+  from {
+    clip-path: polygon(
+      calc(100% + var(--folga) + var(--incl)) 0%,
+      200% 0%,
+      200% 100%,
+      calc(100% + var(--folga) - var(--incl)) 100%
+    );
+  }
+  to {
+    clip-path: polygon(
+      calc(0% - var(--folga) + var(--incl)) 0%,
+      200% 0%,
+      200% 100%,
+      calc(0% - var(--folga) - var(--incl)) 100%
+    );
+  }
+}
+@keyframes bracket-fecha {
+  from {
+    clip-path: polygon(
+      -100% 0%,
+      calc(100% + var(--folga) + var(--incl)) 0%,
+      calc(100% + var(--folga) - var(--incl)) 100%,
+      -100% 100%
+    );
+  }
+  to {
+    clip-path: polygon(
+      -100% 0%,
+      calc(0% - var(--folga) + var(--incl)) 0%,
+      calc(0% - var(--folga) - var(--incl)) 100%,
+      -100% 100%
+    );
+  }
+}
+.bracket-wipe {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 100%;
+  width: 2.4%;
+  /*
+   * Recuada meia largura: `left` põe a **borda** da faixa na linha do corte, e o
+   * que tem de coincidir com ela é o meio do feixe. Sem isso a faixa corria meia
+   * largura adiantada em relação ao que ela revela — e, inclinada, o desencontro
+   * aparecia ainda mais, porque a torção é medida a partir do centro dela.
+   */
+  margin-left: -1.2%;
+  /* Núcleo claro entre duas bordas na cor do template: uma faixa chapada lê como
+     retângulo parado, e o que se quer é a impressão de velocidade. */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--barra) 40%,
+    #ffffff 55%,
+    var(--barra) 70%,
+    transparent
+  );
+  box-shadow: 0 0 3vw var(--barra);
+  /* A mesma inclinação do corte. Sobra em cima e embaixo (-20%) porque a faixa
+     torta precisa passar da borda para cobrir os cantos. */
+  transform: skewX(var(--torcao));
+  animation: bracket-barra var(--troca) cubic-bezier(0.65, 0, 0.2, 1) both;
+}
+/* A faixa anda o mesmo caminho do corte, nas duas pontas — a entrada revela
+   atrás dela, a saída apaga na frente. */
+@keyframes bracket-barra {
+  from {
+    left: calc(100% + var(--folga));
+  }
+  to {
+    left: calc(0% - var(--folga));
+  }
+}
+}
+
+/* O fundo recorta no raio da tela; a foto e o véu ficam dentro dele. */
+.bracket-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.bracket-bg__photo,
+.bracket-bg__fill {
+  position: absolute;
+  inset: 0;
+}
+.bracket-bg__photo {
+  background-position: center;
+  background-size: cover;
+}
+.bracket-bg__dim {
+  position: absolute;
+  inset: 0;
+  background: #05050a;
+}
+
+/**
+ * A camada do efeito, sempre por cima do fundo e por baixo das vagas.
+ *
+ * A cor, a opacidade, a duração e a espessura chegam em variáveis pelo elemento
+ * — é o que permite o mesmo CSS servir a qualquer template sem uma classe por
+ * combinação.
+ */
+.bracket-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /*
+   * Tamanho explícito por causa do SVG: elemento substituído posicionado com
+   * `inset: 0` e largura automática não estica — cai no tamanho intrínseco, que
+   * num <svg> sem viewBox é 300x150. O contorno saía do tamanho de um cartão de
+   * visita no canto do quadro, e não em volta dele.
+   */
+  width: 100%;
+  height: 100%;
+  /* O brilho passa da borda de propósito; cortá-lo o achataria numa linha dura. */
+  overflow: visible;
+}
+
+/**
+ * Os dois contornos em SVG recuam meia espessura.
+ *
+ * O traço é centrado na linha do retângulo, e a tela recorta o que passa da
+ * borda: sem o recuo, metade da espessura escolhida caía fora e o contorno saía
+ * com metade do peso pedido.
+ */
+.bracket-fx--corrida,
+.bracket-fx--tracejado {
+  inset: calc(var(--fx-w) / 2);
+  width: calc(100% - var(--fx-w));
+  height: calc(100% - var(--fx-w));
+}
+
+/* Halo respirando: a borda acende e apaga junto com o brilho de fora. */
+.bracket-fx--pulso {
+  border: var(--fx-w) solid var(--fx);
+  animation: bracket-pulso var(--fx-dur) ease-in-out infinite;
+}
+@keyframes bracket-pulso {
+  0%,
+  100% {
+    opacity: calc(var(--fx-op) * 0.45);
+    box-shadow: 0 0 calc(var(--fx-w) * 3) var(--fx);
+  }
+  50% {
+    opacity: var(--fx-op);
+    box-shadow: 0 0 calc(var(--fx-w) * 9) var(--fx);
+  }
+}
+
+/* Luz correndo pelo contorno, sobre uma linha fraca que fica sempre acesa. */
+.bracket-fx--corrida .bracket-fx__base,
+.bracket-fx--tracejado .bracket-fx__base {
+  stroke: var(--fx);
+  opacity: calc(var(--fx-op) * 0.22);
+}
+.bracket-fx--corrida .bracket-fx__run {
+  stroke: var(--fx);
+  opacity: var(--fx-op);
+  stroke-dasharray: 18 82;
+  filter: drop-shadow(0 0 calc(var(--fx-w) * 2.5) var(--fx));
+  animation: bracket-corrida var(--fx-dur) linear infinite;
+}
+@keyframes bracket-corrida {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Tracejado andando: o mesmo traço, curto e repetido, sem brilho. */
+.bracket-fx--tracejado .bracket-fx__run {
+  stroke: var(--fx);
+  opacity: var(--fx-op);
+  stroke-dasharray: 1.6 2.4;
+  animation: bracket-corrida var(--fx-dur) linear infinite;
+}
+
+/* Faíscas soltando da borda para fora, cada uma no seu tempo. */
+.bracket-fx--faiscas {
+  border: max(1px, calc(var(--fx-w) * 0.5)) solid var(--fx);
+  opacity: calc(var(--fx-op) * 0.5);
+}
+.bracket-spark {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2);
+  border-radius: 50%;
+  background: var(--fx);
+  box-shadow: 0 0 calc(var(--size) * 2) var(--fx);
+  opacity: 0;
+  animation: bracket-spark 2.6s ease-out infinite;
+  animation-delay: var(--delay);
+}
+@keyframes bracket-spark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+  }
+}
+
+/**
+ * Varredura: um brilho atravessa o quadro na diagonal.
+ *
+ * É a única que precisa recortar, porque o brilho é maior que o quadro — daí o
+ * `overflow: hidden` aqui e não na camada inteira.
+ */
+.bracket-fx--varredura {
+  border: max(1px, calc(var(--fx-w) * 0.5)) solid var(--fx);
+  overflow: hidden;
+}
+.bracket-fx__shine {
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  width: 22%;
+  background: linear-gradient(90deg, transparent, var(--fx), transparent);
+  opacity: var(--fx-op);
+  transform: rotate(18deg);
+  animation: bracket-varredura var(--fx-dur) ease-in-out infinite;
+}
+@keyframes bracket-varredura {
+  0% {
+    left: -30%;
+  }
+  60%,
+  100% {
+    left: 115%;
+  }
+}
+
+/**
+ * Selo de quem passou. Ocupa o lugar mesmo apagado: fosse ele aparecer e sumir,
+ * a largura útil da vaga mudaria e o placar dançaria conforme os resultados
+ * saíssem.
+ */
+.bracket__pass {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--pad);
+  color: var(--cor);
+  opacity: 0;
+}
+.bracket__pass.is-on {
+  opacity: 1;
+}
+.bracket__pass svg {
+  width: 100%;
+  height: 100%;
+}
+
+/**
+ * Modo de duplas: os dois bonecos lado a lado e os dois nomes empilhados.
+ *
+ * Empilhados, e não na mesma linha: numa vaga de 300px com dois retratos sobram
+ * 180px, e dois nomes lado a lado ficariam com 90px cada — o que não se lê numa
+ * transmissão. Meia altura cada um preserva a largura inteira do nome.
+ */
+/*
+ * Em duplas o anel da vaga já é uma borda em degradê, montada no Slot: o brilho
+ * de cor chapada por dentro dela embaralharia as duas pontas do degradê, que é
+ * justamente o que ele existe para mostrar.
+ */
+.bracket__slot.is-duo::after {
+  box-shadow: none;
+}
+.bracket__duo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: var(--pad);
+  overflow: hidden;
+}
+.bracket__duo-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.bracket__duo-line span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* A sigla do time na linha da dupla: encolhe por último, como no confronto. */
+.bracket__duo-line em {
+  flex: none;
+  color: var(--cor);
+  font-style: normal;
+  letter-spacing: 0.06em;
+}
+
+/**
+ * Modo de times: duas torres lado a lado.
+ *
+ * O cabeçalho usa a mesma caixa da vaga — mesma largura, mesma altura, mesma
+ * borda —, porque é a mesma coluna: um cabeçalho com desenho próprio faria a
+ * escalação parecer pendurada nele em vez de fazer parte dele.
+ */
+.towers {
+  display: flex;
+  align-items: flex-start;
+}
+.tower {
+  display: flex;
+  flex-direction: column;
+}
+.tower__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid;
+}
+/*
+ * O nome do time recua bem mais que as outras peças: ele começa na borda da
+ * coluna, enquanto as vagas abaixo dele começam depois do boneco. O cabeçalho
+ * não é uma vaga — é o título da coluna, e título pede margem.
+ */
+.tower__name {
+  flex: 1;
+  min-width: 0;
+  padding-left: calc(var(--pad) * 3.5);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tower__list {
+  display: flex;
+  flex-direction: column;
+}
+
+/**
+ * Os gestos da prévia, ancorados na vaga.
+ *
+ * Em px fixos: a prévia desenha a cena a 40%, e um botão a 40% teria 9px. Como o
+ * desenho não usa `transform: scale`, um filho de tamanho fixo não encolhe junto
+ * — e é o que permite operar a chave no tamanho em que ela cabe na tela.
+ *
+ * Aparece no hover. Sempre visível, a prévia viraria um painel de botões em vez
+ * do que vai ao ar.
+ */
+.bracket__slot.is-editable {
+  cursor: grab;
+}
+.bracket__slot.is-drop {
+  outline: 2px dashed var(--cor);
+  outline-offset: 1px;
+}
+.bracket-edit {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  gap: 2px;
+  z-index: 2;
+}
+.bracket__slot.is-editable:hover .bracket-edit {
+  display: flex;
+}
+.bracket-edit button {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #14141ce6;
+  color: #e8e8f0;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+.bracket-edit button:hover {
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.bracket-edit button.is-on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/** Nome apagado na lista de escalação do painel. */
+.entry-list__name.is-dim {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.icon-btn.is-on {
+  color: var(--accent);
+}
+/* A dupla ocupa a linha inteira, abaixo do nome do titular. */
+.entry-list--duo li {
+  flex-wrap: wrap;
+}
+.entry-list__partner {
+  flex: 1 0 100%;
+  padding: 2px 0 6px 22px;
+}
+.tower-form {
+  margin-bottom: 10px;
+}
+
+/**
+ * Prévia do template: a cena inteira, no formato em que ela vai ao ar.
+ *
+ * Era uma faixa com rolagem horizontal, de quando a chave era uma caixa solta
+ * sobre a transmissão. Agora ela ocupa o quadro todo, e uma prévia que não tenha
+ * a forma do quadro esconde justamente o que o editor precisa mostrar: o que
+ * sobra de margem e o que não cabe.
+ */
+.bracket-preview {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background-color: #14141c;
+  background-image:
+    linear-gradient(45deg, #1c1c26 25%, transparent 25%),
+    linear-gradient(-45deg, #1c1c26 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1c1c26 75%),
+    linear-gradient(-45deg, transparent 75%, #1c1c26 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/**
+ * Cartão de estilo de chave: o desenho inteiro, reduzido.
+ *
+ * A caixa toma a largura da coluna e reserva a altura pela proporção da cena; a
+ * escala do desenho sai dessa mesma largura, medida (ver BracketThumb). É o que
+ * mantém os dois do mesmo tamanho — antes a caixa era a coluna inteira e o
+ * desenho tinha largura fixa, sobrando fundo à direita dele.
+ */
+.bracket-card__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #101018;
+}
+/* A etiqueta do modo não encosta no nome do estilo. */
+.topbar-card header h3 .count {
+  margin-left: 2px;
+}
+.bracket-card__stage .bracket-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.grid--brackets {
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+}
+
+/**
+ * Cartão de animação: não toca nada.
+ *
+ * Cinco cenas em laço na mesma tela competem por atenção e nenhuma se vê; o que
+ * o cartão mostra é o que basta para escolher — coreografia, cor e tempo.
+ */
+.anim-card,
+.overlay-card {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.anim-card header,
+.overlay-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.anim-card h3,
+.overlay-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.anim-card__stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 96px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+}
+.anim-card__stage strong {
+  font-size: 15px;
+  text-shadow: 0 1px 4px #000;
+}
+.anim-card__stage span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.anim-card__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+.anim-card .muted,
+.overlay-card .muted {
+  margin-top: 8px;
+}
+.overlay-card .btn {
+  margin-top: 10px;
+}
+.grid--anims {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.grid--overlays {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/** Lista de inscritos: número, nome e os botões de mexer na ordem. */
+.entry-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.entry-list li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 0;
+}
+.entry-list__n {
+  flex: none;
+  width: 22px;
+  color: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.entry-list__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+
+/**
+ * A chave na fonte do OBS: a cena inteira, ancorada no mesmo canto das barras.
+ *
+ * O ajuste vertical não vive mais aqui — a tela já é do tamanho do quadro, e
+ * quem se move dentro dela é a chave (ver `.bracket-scene__body`).
+ *
+ * A prévia do painel usa o mesmo arranjo — é a mesma cena, vista menor. Lá ela
+ * recebe gesto: ponto, cinza, tirar da casa e arrastar acontecem na própria
+ * vaga, e não numa lista ao lado (ver .bracket-edit).
+ */
+.overlay-live__bracket,
+.overlay-preview__bracket {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+

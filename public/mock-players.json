@@ -1,0 +1,35 @@
+{
+  "_comment": [
+    "Players de exemplo usados só para preencher as miniaturas da aba Topbar.",
+    "Não entram no cadastro de players — servem para ver cada template com gente",
+    "de verdade, e a lista é rotacionada para que dois templates seguidos não",
+    "mostrem o mesmo par.",
+    "Campos: name, characterSlug (slug em public/characters/data/), countryCode",
+    "(ISO 3166-1 alpha-2) e, opcionalmente, regionCode (ISO 3166-2) e teamTag."
+  ],
+  "players": [
+    { "name": "Yuko", "characterSlug": "yuzuriha", "countryCode": "BR" },
+    { "name": "MC POZE SEM O RODO", "characterSlug": "enkidu", "countryCode": "BR" },
+    { "name": "Misto West", "characterSlug": "kaguya", "countryCode": "BR" },
+    { "name": "Klasfer", "characterSlug": "seth", "countryCode": "BR" },
+    { "name": "Miidas", "characterSlug": "linne", "countryCode": "BR" },
+    { "name": "Danielbonitão", "characterSlug": "wagner", "countryCode": "BR" },
+    { "name": "HenriqueCZ", "characterSlug": "wagner", "countryCode": "BR" },
+    { "name": "Willyofruit", "characterSlug": "orie", "countryCode": "BR" },
+    { "name": "Nameless", "characterSlug": "seth", "countryCode": "BR" },
+    { "name": "Ayanokoji", "characterSlug": "yuzuriha", "countryCode": "BR" },
+    { "name": "Mordred", "characterSlug": "yuzuriha", "countryCode": "BR" },
+    { "name": "Abner", "characterSlug": "enkidu", "countryCode": "BR" },
+    { "name": "Guizin", "characterSlug": "gordeau", "countryCode": "BR" },
+    { "name": "Pietro", "characterSlug": "kaguya", "countryCode": "BR" },
+    { "name": "Vic", "characterSlug": "izumi", "countryCode": "BR" },
+    { "name": "OP", "characterSlug": "vatista", "countryCode": "BR" },
+    { "name": "Sethzin", "characterSlug": "orie", "countryCode": "BR" },
+    { "name": "Kaizys", "characterSlug": "eltnum", "countryCode": "BR" },
+    { "name": "Tatzoo", "characterSlug": "akatsuki", "countryCode": "BR" },
+    { "name": "Ferovsky", "characterSlug": "akatsuki", "countryCode": "BR" },
+    { "name": "JorginPagodss", "characterSlug": "londrekia", "countryCode": "BR" },
+    { "name": "Natchos", "characterSlug": "byakuya", "countryCode": "BR" },
+    { "name": "Lume", "characterSlug": "uzuki", "countryCode": "BR" }
+  ]
+}

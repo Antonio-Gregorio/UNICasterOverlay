@@ -1,0 +1,111 @@
+{
+  "slug": "tsurugi",
+  "name": "Tsurugi",
+  "voiceActor": "Haruki Ishiya",
+  "profile": {
+    "height": "186cm",
+    "weight": "70kg",
+    "birthday": "9/1",
+    "bloodType": "O",
+    "ability": "Fortress",
+    "weapon": "Bulwark"
+  },
+  "bio": [
+    "Tsurugi is a friend of Hyde's from school and a prominent member of a vigilante group called the EFG.",
+    "The EFG's main objective is to defend their fellow students from the evil influences of wielders, so they tend to avoid dealing with the Night.",
+    "However, the Final Night is a different story.",
+    "In order to protect his classmates--not to mention the rest of the world--Tsurugi decides to confront the root of all evil: the Re-Birth."
+  ],
+  "assets": {
+    "art": "/characters/images/tsurugi.png",
+    "artPortrait": "/characters/images/tsurugi_sp.png",
+    "catchphrase": "/characters/images/tsurugi_catch.svg",
+    "sd": "/characters/sd/tsurugi.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#673624",
+      "rgb": [
+        103,
+        54,
+        36
+      ],
+      "oklab": [
+        0.3907,
+        0.0574,
+        0.0486
+      ],
+      "coverage": 0.1614
+    },
+    {
+      "role": "secondary",
+      "hex": "#bb876c",
+      "rgb": [
+        187,
+        135,
+        108
+      ],
+      "oklab": [
+        0.6682,
+        0.0497,
+        0.0561
+      ],
+      "coverage": 0.1613
+    },
+    {
+      "role": "tertiary",
+      "hex": "#f2e4d2",
+      "rgb": [
+        242,
+        228,
+        210
+      ],
+      "oklab": [
+        0.9259,
+        0.0069,
+        0.0281
+      ],
+      "coverage": 0.0626
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/tsurugi.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 20,
+  "imageSize": {
+    "width": 1920,
+    "height": 2103
+  },
+  "face": {
+    "x": 0.5005,
+    "y": 0.1248,
+    "width": 0.153,
+    "height": 0.1397
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 212,
+    "height": 264
+  },
+  "anchor": {
+    "x": 0.577,
+    "y": 0.1946
+  },
+  "sdAnchor": {
+    "x": 0.237,
+    "y": 0.201
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.1903,
+    "below": 0.7987
+  },
+  "sdBody": {
+    "above": 0.1972,
+    "below": 0.7952
+  },
+  "animScale": 1.2,
+  "artSolid": 0.3547,
+  "sdSolid": 0.6373
+}

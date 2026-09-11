@@ -1,0 +1,114 @@
+{
+  "slug": "hilda",
+  "name": "Hilda",
+  "voiceActor": "Hatsumi Takada",
+  "profile": {
+    "height": "171cm",
+    "weight": "59kg",
+    "birthday": "11/11",
+    "bloodType": "AB",
+    "ability": "Paradox",
+    "weapon": "Masquerade"
+  },
+  "bio": [
+    "Hilda is an extraordinary wielder with enough power to aim to become a Re-Birth.",
+    "She founded the Amnesia organization and even once ruled the world--albeit for a short time.",
+    "What caused her defeat? Standing out too much and making too many enemies.",
+    "Though her ambitions were stifled, her rage was not.",
+    "The appearance of Kuon the Re-Birth--a title she'd wanted for herself--and his boasts of ending the world only served to make her angrier.",
+    "With renewed determination, Hilda swears from the bottom of her heart to become the strongest once more...",
+    "by defeating the Re-Birth and taking for herself the immense powers overflowing from the Abyss."
+  ],
+  "assets": {
+    "art": "/characters/images/hilda.png",
+    "artPortrait": "/characters/images/hilda_sp.png",
+    "catchphrase": "/characters/images/hilda_catch.svg",
+    "sd": "/characters/sd/hilda.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#57437f",
+      "rgb": [
+        87,
+        67,
+        127
+      ],
+      "oklab": [
+        0.4323,
+        0.045,
+        -0.0876
+      ],
+      "coverage": 0.116
+    },
+    {
+      "role": "secondary",
+      "hex": "#2a2339",
+      "rgb": [
+        42,
+        35,
+        57
+      ],
+      "oklab": [
+        0.273,
+        0.0196,
+        -0.037
+      ],
+      "coverage": 0.1328
+    },
+    {
+      "role": "tertiary",
+      "hex": "#7d726e",
+      "rgb": [
+        125,
+        114,
+        110
+      ],
+      "oklab": [
+        0.5602,
+        0.0115,
+        0.01
+      ],
+      "coverage": 0.0587
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/hilda.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 11,
+  "imageSize": {
+    "width": 1920,
+    "height": 1692
+  },
+  "face": {
+    "x": 0.575,
+    "y": 0.1427,
+    "width": 0.16,
+    "height": 0.1816
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 285,
+    "height": 487
+  },
+  "anchor": {
+    "x": 0.655,
+    "y": 0.2335
+  },
+  "sdAnchor": {
+    "x": 0.854,
+    "y": 0.491
+  },
+  "artScale": 1.15,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.23,
+    "below": 0.7387
+  },
+  "sdBody": {
+    "above": 0.491,
+    "below": 0.4987
+  },
+  "animScale": 1,
+  "artSolid": 0.5227,
+  "sdSolid": 0.6547
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "carmine",
+  "name": "Carmine",
+  "voiceActor": "Takashi Kondo",
+  "profile": {
+    "height": "175cm",
+    "weight": "61kg",
+    "birthday": "5/8",
+    "bloodType": "B",
+    "ability": "Blood Spike",
+    "weapon": "Rein Blood"
+  },
+  "bio": [
+    "Carmine is a brash young man who uses his EXS for his own amusement.",
+    "Thus far, no one has been able to defeat him; in Carmine's eyes, they're all hideous failures--including the so-called strongest In-Birth of all.",
+    "That changed one Night, however, when Carmine was utterly defeated by a Re-Birth who suddenly appeared before him.",
+    "For the first time ever, Carmine experienced fear... but it didn't last for long.",
+    "\"Someone out there's pissin' me off... I'll feel better once I crush 'im. That's for sure.\"",
+    "Carmine heads out into the final Night with nothing on his mind but the person he hates most."
+  ],
+  "assets": {
+    "art": "/characters/images/carmine.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/carmine_catch.svg",
+    "sd": "/characters/sd/carmine.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#c43348",
+      "rgb": [
+        196,
+        51,
+        72
+      ],
+      "oklab": [
+        0.5487,
+        0.1726,
+        0.0546
+      ],
+      "coverage": 0.1963
+    },
+    {
+      "role": "secondary",
+      "hex": "#6d1e28",
+      "rgb": [
+        109,
+        30,
+        40
+      ],
+      "oklab": [
+        0.3659,
+        0.1059,
+        0.0331
+      ],
+      "coverage": 0.261
+    },
+    {
+      "role": "tertiary",
+      "hex": "#cdb0b4",
+      "rgb": [
+        205,
+        176,
+        180
+      ],
+      "oklab": [
+        0.7839,
+        0.0328,
+        0.0047
+      ],
+      "coverage": 0.0132
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/carmine.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 4,
+  "imageSize": {
+    "width": 1920,
+    "height": 3616
+  },
+  "face": {
+    "x": 0.6274,
+    "y": 0.0632,
+    "width": 0.1952,
+    "height": 0.1036
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 170,
+    "height": 331
+  },
+  "anchor": {
+    "x": 0.725,
+    "y": 0.115
+  },
+  "sdAnchor": {
+    "x": 0.419,
+    "y": 0.362
+  },
+  "artScale": 0.82,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.1006,
+    "below": 0.8825
+  },
+  "sdBody": {
+    "above": 0.362,
+    "below": 0.635
+  },
+  "animScale": 1,
+  "artSolid": 0.3354,
+  "sdSolid": 0.5945
+}

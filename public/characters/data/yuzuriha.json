@@ -1,0 +1,117 @@
+{
+  "slug": "yuzuriha",
+  "name": "Yuzuriha",
+  "voiceActor": "Hitomi Nabatame",
+  "profile": {
+    "height": "169cm",
+    "weight": "53kg",
+    "birthday": "7/20",
+    "bloodType": "B",
+    "ability": "Ainsel Lost",
+    "weapon": "Iris Blade \"Kamizi-no-Homare\""
+  },
+  "bio": [
+    "Yuzuriha is a member of the Dual Moon clan--a group of warriors that split off from the Night Blade long ago.",
+    "She currently serves as the guardian of the shrine meant to protect her town from the forces of the Night.",
+    "Yuzuriha fought many battles during Amnesia's reign of terror, eventually succeeding in suppressing them.",
+    "One day, however, Kuon the Aeon--the former leader of the Night Blade--appeared before her.",
+    "His presence reminded her of a great incident in the distant past that forced the schism between the Night Blade and the Dual Moon clan.",
+    "Though Yuzuriha herself has no direct connection to this ancient scandal, she decides to confront Kuon to get payback for her clan and to clear all doubt within herself.",
+    "\"Somethin' just don't sit right with me...\""
+  ],
+  "assets": {
+    "art": "/characters/images/yuzuriha.png",
+    "artPortrait": "/characters/images/yuzuriha_sp.png",
+    "catchphrase": "/characters/images/yuzuriha_catch.svg",
+    "sd": "/characters/sd/yuzuriha.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#9b3154",
+      "rgb": [
+        155,
+        49,
+        84
+      ],
+      "oklab": [
+        0.4799,
+        0.142,
+        0.011
+      ],
+      "coverage": 0.2486
+    },
+    {
+      "role": "secondary",
+      "hex": "#dcaeba",
+      "rgb": [
+        220,
+        174,
+        186
+      ],
+      "oklab": [
+        0.7948,
+        0.0558,
+        -0.0001
+      ],
+      "coverage": 0.0697
+    },
+    {
+      "role": "tertiary",
+      "hex": "#251319",
+      "rgb": [
+        37,
+        19,
+        25
+      ],
+      "oklab": [
+        0.214,
+        0.0305,
+        -0.0001
+      ],
+      "coverage": 0.0446
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/yuzuriha.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 10,
+  "imageSize": {
+    "width": 1920,
+    "height": 1871
+  },
+  "face": {
+    "x": 0.1975,
+    "y": 0.3769,
+    "width": 0.15,
+    "height": 0.1539
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 331,
+    "height": 392
+  },
+  "anchor": {
+    "x": 0.2725,
+    "y": 0.4539
+  },
+  "sdAnchor": {
+    "x": 0.383,
+    "y": 0.461
+  },
+  "artScale": 1,
+  "bodyAnchor": {
+    "x": 0.295,
+    "y": 0.415
+  },
+  "artBody": {
+    "above": 0.4107,
+    "below": 0.5818
+  },
+  "sdBody": {
+    "above": 0.4584,
+    "below": 0.5364
+  },
+  "animScale": 1.35,
+  "artSolid": 0.2939,
+  "sdSolid": 0.4265
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "nanase",
+  "name": "Nanase",
+  "voiceActor": "Mayu Izuka",
+  "profile": {
+    "height": "159cm",
+    "weight": "44kg",
+    "birthday": "2/15",
+    "bloodType": "O",
+    "ability": "Windmill",
+    "weapon": "Zephyr"
+  },
+  "bio": [
+    "A mysterious girl who has stubbornly targeted Hyde, Nanase has finally succeeded in capturing her prey.",
+    "The two of them arrive at a temporary truce; however, this peace was not to last.",
+    "Rumors that the Re-Birth Kuon has appeared and promises to wreak havoc upon the world reach Nanase's ears.",
+    "And if Kuon destroys the world, all of Nanase's beloved sweets will be destroyed along with it!",
+    "As if that didn't give her reason enough to fight, she has an even deeper worry: What if the world is destroyed before she can vent the special feelings stirring inside her?",
+    "To settle all matters with \"the one,\" Nanase sets out into the final Hollow Night."
+  ],
+  "assets": {
+    "art": "/characters/images/nanase.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/nanase_catch.svg",
+    "sd": "/characters/sd/nanase.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#194137",
+      "rgb": [
+        25,
+        65,
+        55
+      ],
+      "oklab": [
+        0.3431,
+        -0.0479,
+        0.0038
+      ],
+      "coverage": 0.2148
+    },
+    {
+      "role": "secondary",
+      "hex": "#2fc8bf",
+      "rgb": [
+        47,
+        200,
+        191
+      ],
+      "oklab": [
+        0.7561,
+        -0.1208,
+        -0.0179
+      ],
+      "coverage": 0.0348
+    },
+    {
+      "role": "tertiary",
+      "hex": "#b4908f",
+      "rgb": [
+        180,
+        144,
+        143
+      ],
+      "oklab": [
+        0.6867,
+        0.0397,
+        0.0158
+      ],
+      "coverage": 0.1081
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/nanase.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 13,
+  "imageSize": {
+    "width": 1920,
+    "height": 3081
+  },
+  "face": {
+    "x": 0.2046,
+    "y": 0.1975,
+    "width": 0.1708,
+    "height": 0.1064
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 361,
+    "height": 349
+  },
+  "anchor": {
+    "x": 0.29,
+    "y": 0.2507
+  },
+  "sdAnchor": {
+    "x": 0.297,
+    "y": 0.385
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.2328,
+    "below": 0.7444
+  },
+  "sdBody": {
+    "above": 0.3735,
+    "below": 0.6035
+  },
+  "animScale": 0.78,
+  "artSolid": 0.2476,
+  "sdSolid": 0.3337
+}

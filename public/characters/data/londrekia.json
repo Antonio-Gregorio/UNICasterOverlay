@@ -1,0 +1,111 @@
+{
+  "slug": "londrekia",
+  "name": "Londrekia",
+  "voiceActor": "Soma Saito",
+  "profile": {
+    "height": "180cm",
+    "weight": "66kg",
+    "birthday": "1/23",
+    "bloodType": "B",
+    "ability": "Dare Glacial",
+    "weapon": "Riddle"
+  },
+  "bio": [
+    "A prodigy from Ritter Schild, Londrekia traveled to these lands to settle the score with his rival, Erika Wagner.",
+    "He accomplished this goal while on a mission to suppress Amnesia, but the biggest threat of all--Kuon the Aeon--soon appeared before him.",
+    "To Londrekia, though, even the appearance of this powerful Re-Birth is just another opportunity for him to put up results for Ritter Schild.",
+    "He hopes his efforts in defending the town from Kuon and demonstrating the power of Ritter Schild will reach Adelheid, who waits in a faraway land..."
+  ],
+  "assets": {
+    "art": "/characters/images/londrekia.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/londrekia_catch.svg",
+    "sd": "/characters/sd/londrekia.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#97b2d2",
+      "rgb": [
+        151,
+        178,
+        210
+      ],
+      "oklab": [
+        0.755,
+        -0.0164,
+        -0.0515
+      ],
+      "coverage": 0.1933
+    },
+    {
+      "role": "secondary",
+      "hex": "#4a5c97",
+      "rgb": [
+        74,
+        92,
+        151
+      ],
+      "oklab": [
+        0.4877,
+        -0.0005,
+        -0.0971
+      ],
+      "coverage": 0.0559
+    },
+    {
+      "role": "tertiary",
+      "hex": "#151821",
+      "rgb": [
+        21,
+        24,
+        33
+      ],
+      "oklab": [
+        0.2095,
+        0.0006,
+        -0.0192
+      ],
+      "coverage": 0.0363
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/londrekia.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 19,
+  "imageSize": {
+    "width": 1920,
+    "height": 2739
+  },
+  "face": {
+    "x": 0.295,
+    "y": 0.1234,
+    "width": 0.19,
+    "height": 0.1332
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 201,
+    "height": 337
+  },
+  "anchor": {
+    "x": 0.39,
+    "y": 0.19
+  },
+  "sdAnchor": {
+    "x": 0.402,
+    "y": 0.374
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.1732,
+    "below": 0.8071
+  },
+  "sdBody": {
+    "above": 0.374,
+    "below": 0.623
+  },
+  "animScale": 1,
+  "artSolid": 0.2716,
+  "sdSolid": 0.4493
+}

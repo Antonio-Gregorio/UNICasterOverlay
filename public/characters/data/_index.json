@@ -1,0 +1,142 @@
+[
+  {
+    "slug": "hyde",
+    "name": "Hyde",
+    "rosterOrder": 1
+  },
+  {
+    "slug": "linne",
+    "name": "Linne",
+    "rosterOrder": 2
+  },
+  {
+    "slug": "waldstein",
+    "name": "Waldstein",
+    "rosterOrder": 3
+  },
+  {
+    "slug": "carmine",
+    "name": "Carmine",
+    "rosterOrder": 4
+  },
+  {
+    "slug": "orie",
+    "name": "Orie",
+    "rosterOrder": 5
+  },
+  {
+    "slug": "gordeau",
+    "name": "Gordeau",
+    "rosterOrder": 6
+  },
+  {
+    "slug": "merkava",
+    "name": "Merkava",
+    "rosterOrder": 7
+  },
+  {
+    "slug": "vatista",
+    "name": "Vatista",
+    "rosterOrder": 8
+  },
+  {
+    "slug": "seth",
+    "name": "Seth",
+    "rosterOrder": 9
+  },
+  {
+    "slug": "yuzuriha",
+    "name": "Yuzuriha",
+    "rosterOrder": 10
+  },
+  {
+    "slug": "hilda",
+    "name": "Hilda",
+    "rosterOrder": 11
+  },
+  {
+    "slug": "chaos",
+    "name": "Chaos",
+    "rosterOrder": 12
+  },
+  {
+    "slug": "nanase",
+    "name": "Nanase",
+    "rosterOrder": 13
+  },
+  {
+    "slug": "byakuya",
+    "name": "Byakuya",
+    "rosterOrder": 14
+  },
+  {
+    "slug": "phonon",
+    "name": "Phonon",
+    "rosterOrder": 15
+  },
+  {
+    "slug": "mika",
+    "name": "Mika",
+    "rosterOrder": 16
+  },
+  {
+    "slug": "wagner",
+    "name": "Wagner",
+    "rosterOrder": 17
+  },
+  {
+    "slug": "enkidu",
+    "name": "Enkidu",
+    "rosterOrder": 18
+  },
+  {
+    "slug": "londrekia",
+    "name": "Londrekia",
+    "rosterOrder": 19
+  },
+  {
+    "slug": "tsurugi",
+    "name": "Tsurugi",
+    "rosterOrder": 20
+  },
+  {
+    "slug": "kaguya",
+    "name": "Kaguya",
+    "rosterOrder": 21
+  },
+  {
+    "slug": "kuon",
+    "name": "Kuon",
+    "rosterOrder": 22
+  },
+  {
+    "slug": "uzuki",
+    "name": "Uzuki",
+    "rosterOrder": 23
+  },
+  {
+    "slug": "ogre",
+    "name": "Ogre",
+    "rosterOrder": 24
+  },
+  {
+    "slug": "izumi",
+    "name": "Izumi",
+    "rosterOrder": 25
+  },
+  {
+    "slug": "zohar",
+    "name": "Zohar",
+    "rosterOrder": 26
+  },
+  {
+    "slug": "eltnum",
+    "name": "Eltnum",
+    "rosterOrder": 27
+  },
+  {
+    "slug": "akatsuki",
+    "name": "Akatsuki",
+    "rosterOrder": 28
+  }
+]

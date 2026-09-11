@@ -1,0 +1,115 @@
+{
+  "slug": "kuon",
+  "name": "Kuon",
+  "voiceActor": "Yuma Uchida",
+  "profile": {
+    "height": "159cm",
+    "weight": "47kg",
+    "birthday": "5/13",
+    "bloodType": "AB",
+    "ability": "Aeon",
+    "weapon": "Insulator:imitate"
+  },
+  "bio": [
+    "In the story of the Night, Kuon stands as the root of all evil.",
+    "He is a Re-Birth--said to be the strongest form of existence.",
+    "Kuon has lived for 500 years, wielding the inexhaustible power of the Night; now, he aims to bring an end to the world.",
+    "Long ago, Kuon and his sister Linne were charged with protecting the Power of Sealing.",
+    "However, the immense power eventually consumed Kuon, and he lost sight of himself.",
+    "Now he desires further power--which he can attain by seizing the other half of the Power of Sealing possessed by his sister.",
+    "Kuon's arch-nemesis fled beyond the Night. By taking Linne's power and breaking the wall of the Night, Kuon hopes to reach him.",
+    "The resulting destruction of the world is merely the means to that end."
+  ],
+  "assets": {
+    "art": "/characters/images/kuon.png",
+    "artPortrait": "/characters/images/kuon_sp.png",
+    "catchphrase": "/characters/images/kuon_catch.svg",
+    "sd": "/characters/sd/kuon.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#a21a45",
+      "rgb": [
+        162,
+        26,
+        69
+      ],
+      "oklab": [
+        0.4674,
+        0.1682,
+        0.0271
+      ],
+      "coverage": 0.1028
+    },
+    {
+      "role": "secondary",
+      "hex": "#30050a",
+      "rgb": [
+        48,
+        5,
+        10
+      ],
+      "oklab": [
+        0.2057,
+        0.0658,
+        0.0224
+      ],
+      "coverage": 0.1747
+    },
+    {
+      "role": "tertiary",
+      "hex": "#c39fb6",
+      "rgb": [
+        195,
+        159,
+        182
+      ],
+      "oklab": [
+        0.7414,
+        0.0488,
+        -0.018
+      ],
+      "coverage": 0.0447
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/kuon.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 22,
+  "imageSize": {
+    "width": 1681,
+    "height": 2452
+  },
+  "face": {
+    "x": 0.56,
+    "y": 0.4617,
+    "width": 0.17,
+    "height": 0.1165
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 439,
+    "height": 447
+  },
+  "anchor": {
+    "x": 0.645,
+    "y": 0.52
+  },
+  "sdAnchor": {
+    "x": 0.343,
+    "y": 0.625
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3866,
+    "below": 0.4776
+  },
+  "sdBody": {
+    "above": 0.6071,
+    "below": 0.3683
+  },
+  "animScale": 1.2,
+  "artSolid": 0.3152,
+  "sdSolid": 0.4393
+}

@@ -1,0 +1,112 @@
+{
+  "slug": "izumi",
+  "name": "Izumi",
+  "voiceActor": "Reina Kondo",
+  "profile": {
+    "height": "158cm",
+    "weight": "43kg(73/53/79)",
+    "birthday": "8/15",
+    "bloodType": "B",
+    "ability": "Transition",
+    "weapon": "Elefee"
+  },
+  "bio": [
+    "Izumi is the wielder of Initiator--the final key to unlock the door of the Night.",
+    "To be precise, it takes the form of a mysterious fish that follows her around.",
+    "Among the Weapons of Judgment, each deeply tied to the Night, Initiator plays the crucial role of \"\"the end.\"\" Up until now, Initiator has monitored the Night from a distance, but now, the time has come to settle the matter.",
+    "The mysterious fish never shares any details about what is afoot; Izumi knows next to nothing of the Night.",
+    "She longs for the day to come when she'll no longer be used by her fishy companion Elefee..."
+  ],
+  "assets": {
+    "art": "/characters/images/izumi.png",
+    "artPortrait": "/characters/images/izumi_sp.png",
+    "catchphrase": "/characters/images/izumi_catch.svg",
+    "sd": "/characters/sd/izumi.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#7d8ab0",
+      "rgb": [
+        125,
+        138,
+        176
+      ],
+      "oklab": [
+        0.6359,
+        -0.0001,
+        -0.0596
+      ],
+      "coverage": 0.1491
+    },
+    {
+      "role": "secondary",
+      "hex": "#353a4e",
+      "rgb": [
+        53,
+        58,
+        78
+      ],
+      "oklab": [
+        0.3517,
+        0.0029,
+        -0.0354
+      ],
+      "coverage": 0.0955
+    },
+    {
+      "role": "tertiary",
+      "hex": "#dfeaf4",
+      "rgb": [
+        223,
+        234,
+        244
+      ],
+      "oklab": [
+        0.9314,
+        -0.0069,
+        -0.0169
+      ],
+      "coverage": 0.3189
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/izumi.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 25,
+  "imageSize": {
+    "width": 1401,
+    "height": 1417
+  },
+  "face": {
+    "x": 0.55,
+    "y": 0.0808,
+    "width": 0.15,
+    "height": 0.1483
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 169,
+    "height": 292
+  },
+  "anchor": {
+    "x": 0.625,
+    "y": 0.155
+  },
+  "sdAnchor": {
+    "x": 0.527,
+    "y": 0.274
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.0668,
+    "below": 0.8408
+  },
+  "sdBody": {
+    "above": 0.274,
+    "below": 0.7192
+  },
+  "animScale": 1,
+  "artSolid": 0.2391,
+  "sdSolid": 0.5012
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "gordeau",
+  "name": "Gordeau",
+  "voiceActor": "Kohsuke Toriumi",
+  "profile": {
+    "height": "191cm",
+    "weight": "80kg",
+    "birthday": "6/23",
+    "bloodType": "O",
+    "ability": "Snatcher",
+    "weapon": "Devour"
+  },
+  "bio": [
+    "Gordeau is a member of Amnesia.",
+    "His combat prowess is said to be an even match for Paradox, considered the strongest of all.",
+    "After a close friend of Gordeau's fell into the Abyss at the center of the Night and turned into a Void, he decided to put an end to Hilda's reckless deeds.",
+    "His satisfaction with her defeat didn't last long before things took a drastic turn with the appearance of the Re-Birth Kuon.",
+    "The overwhelmingly powerful Kuon declared that he would destroy the world to fulfill his desires.",
+    "Gordeau, on the verge of giving up, decides to fight to save the world... if only so his friend would have a place to come back to someday."
+  ],
+  "assets": {
+    "art": "/characters/images/gordeau.png",
+    "artPortrait": "/characters/images/gordeau_sp.png",
+    "catchphrase": "/characters/images/gordeau_catch.svg",
+    "sd": "/characters/sd/gordeau.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#5c41a2",
+      "rgb": [
+        92,
+        65,
+        162
+      ],
+      "oklab": [
+        0.4572,
+        0.0576,
+        -0.1394
+      ],
+      "coverage": 0.1923
+    },
+    {
+      "role": "secondary",
+      "hex": "#171220",
+      "rgb": [
+        23,
+        18,
+        32
+      ],
+      "oklab": [
+        0.1945,
+        0.0146,
+        -0.0243
+      ],
+      "coverage": 0.0876
+    },
+    {
+      "role": "tertiary",
+      "hex": "#806972",
+      "rgb": [
+        128,
+        105,
+        114
+      ],
+      "oklab": [
+        0.5452,
+        0.0324,
+        -0.0039
+      ],
+      "coverage": 0.0309
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/gordeau.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 6,
+  "imageSize": {
+    "width": 1920,
+    "height": 2354
+  },
+  "face": {
+    "x": 0.449,
+    "y": 0.3079,
+    "width": 0.14,
+    "height": 0.1142
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 336,
+    "height": 355
+  },
+  "anchor": {
+    "x": 0.519,
+    "y": 0.365
+  },
+  "sdAnchor": {
+    "x": 0.685,
+    "y": 0.405
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3625,
+    "below": 0.6031
+  },
+  "sdBody": {
+    "above": 0.3881,
+    "below": 0.5922
+  },
+  "animScale": 1.35,
+  "artSolid": 0.3038,
+  "sdSolid": 0.3897
+}

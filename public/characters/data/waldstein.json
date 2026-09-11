@@ -1,0 +1,112 @@
+{
+  "slug": "waldstein",
+  "name": "Waldstein",
+  "voiceActor": "Koji Ishii",
+  "profile": {
+    "height": "256cm",
+    "weight": "298kg",
+    "birthday": "9/15",
+    "bloodType": "A",
+    "ability": "Hecatoncheir",
+    "weapon": "Destroyers"
+  },
+  "bio": [
+    "Waldstein is a warrior who has lived for centuries.",
+    "He guarded Linne along on her journey after Kuon, his best friend, entrusted her to him.",
+    "After long years, Kuon appeared before Waldstein again to tell him that his duty to protect Linne is over--and to ask him to fight alongside Kuon as he strives to go beyond the Night.",
+    "Kuon beseeches him to wield his claws for his own sake.",
+    "Moved by his friend's admirable words, Waldstein decides to leave Linne and fight for himself... playing his role in the impending conclusion of a 500-year-old conflict."
+  ],
+  "assets": {
+    "art": "/characters/images/waldstein.png",
+    "artPortrait": "/characters/images/waldstein_sp.png",
+    "catchphrase": "/characters/images/waldstein_catch.svg",
+    "sd": "/characters/sd/waldstein.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#3c3a38",
+      "rgb": [
+        60,
+        58,
+        56
+      ],
+      "oklab": [
+        0.3486,
+        0.0019,
+        0.0037
+      ],
+      "coverage": 0.2983
+    },
+    {
+      "role": "secondary",
+      "hex": "#6d6c6c",
+      "rgb": [
+        109,
+        108,
+        108
+      ],
+      "oklab": [
+        0.5318,
+        0.0009,
+        0.0006
+      ],
+      "coverage": 0.2487
+    },
+    {
+      "role": "tertiary",
+      "hex": "#aaa8a4",
+      "rgb": [
+        170,
+        168,
+        164
+      ],
+      "oklab": [
+        0.7313,
+        0.0007,
+        0.0053
+      ],
+      "coverage": 0.1403
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/waldstein.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 3,
+  "imageSize": {
+    "width": 1920,
+    "height": 1701
+  },
+  "face": {
+    "x": 0.285,
+    "y": 0.2402,
+    "width": 0.23,
+    "height": 0.2596
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 436,
+    "height": 445
+  },
+  "anchor": {
+    "x": 0.4,
+    "y": 0.39
+  },
+  "sdAnchor": {
+    "x": 0.327,
+    "y": 0.656
+  },
+  "artScale": 1.35,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3635,
+    "below": 0.6059
+  },
+  "sdBody": {
+    "above": 0.6515,
+    "below": 0.3418
+  },
+  "animScale": 1.45,
+  "artSolid": 0.4849,
+  "sdSolid": 0.6326
+}

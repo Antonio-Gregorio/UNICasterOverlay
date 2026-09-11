@@ -1,0 +1,112 @@
+{
+  "slug": "mika",
+  "name": "Mika",
+  "voiceActor": "Aya Suzaki",
+  "profile": {
+    "height": "142cm",
+    "weight": "35kg",
+    "birthday": "3/2",
+    "bloodType": "B",
+    "ability": "Diesel",
+    "weapon": "Bachelbel Cannon"
+  },
+  "bio": [
+    "Defying orders from her superiors, Mika struck out on her own to a certain far-eastern nation to help her friend Orie out of a tough battle--and satisfy her own curiosity while she was at it.",
+    "She had to overcome a myriad of challenges along the way, but at last, she arrived in the island nation of JAPAN! She got there just in time to help her friends, too.",
+    "But now a new challenge awaits: Kuon the Re-Birth's Immortalize.",
+    "\"\"Nuh-uh, mister! I can't let you do that!\"\"",
+    "Thus begins Mika's new fight."
+  ],
+  "assets": {
+    "art": "/characters/images/mika.png",
+    "artPortrait": "/characters/images/mika_sp.png",
+    "catchphrase": null,
+    "sd": "/characters/sd/mika.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#dac932",
+      "rgb": [
+        218,
+        201,
+        50
+      ],
+      "oklab": [
+        0.825,
+        -0.0339,
+        0.1559
+      ],
+      "coverage": 0.0122
+    },
+    {
+      "role": "secondary",
+      "hex": "#aea8af",
+      "rgb": [
+        174,
+        168,
+        175
+      ],
+      "oklab": [
+        0.7384,
+        0.0101,
+        -0.0075
+      ],
+      "coverage": 0.1896
+    },
+    {
+      "role": "tertiary",
+      "hex": "#695e56",
+      "rgb": [
+        105,
+        94,
+        86
+      ],
+      "oklab": [
+        0.4912,
+        0.0096,
+        0.0173
+      ],
+      "coverage": 0.0717
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/mika.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 16,
+  "imageSize": {
+    "width": 1920,
+    "height": 2584
+  },
+  "face": {
+    "x": 0.33,
+    "y": 0.4756,
+    "width": 0.16,
+    "height": 0.1189
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 312,
+    "height": 253
+  },
+  "anchor": {
+    "x": 0.41,
+    "y": 0.535
+  },
+  "sdAnchor": {
+    "x": 0.558,
+    "y": 0.41
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.5331,
+    "below": 0.4623
+  },
+  "sdBody": {
+    "above": 0.406,
+    "below": 0.5821
+  },
+  "animScale": 1,
+  "artSolid": 0.2782,
+  "sdSolid": 0.5876
+}

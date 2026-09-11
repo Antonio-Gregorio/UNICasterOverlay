@@ -1,0 +1,112 @@
+{
+  "slug": "chaos",
+  "name": "Chaos",
+  "voiceActor": "Yoshitsugu Matsuoka",
+  "profile": {
+    "height": "174cm",
+    "weight": "57kg",
+    "birthday": "12/5",
+    "bloodType": "A",
+    "ability": "Umbral",
+    "weapon": "Chaos Code"
+  },
+  "bio": [
+    "Chaos is a member of Amnesia who prefers fighting with brains rather than brawn.",
+    "He once conspired with Kuon the Aeon in the shadows in exchange for secret information regarding the Night.",
+    "This conspiracy ended when Kuon suddenly cut ties with him, and Chaos knew exactly why: The Aeon had all the pieces in place to enact his plan.",
+    "Kuon's actions could only mean one thing: A pit has opened in the Night, heralding the end of the world.",
+    "Unable to sit back and watch the world be destroyed, Chaos decides to confront Kuon and learn the truth from his flesh."
+  ],
+  "assets": {
+    "art": "/characters/images/chaos.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/chaos_catch.svg",
+    "sd": "/characters/sd/chaos.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#06f0bd",
+      "rgb": [
+        6,
+        240,
+        189
+      ],
+      "oklab": [
+        0.8492,
+        -0.1649,
+        0.0289
+      ],
+      "coverage": 0.0664
+    },
+    {
+      "role": "secondary",
+      "hex": "#2c3844",
+      "rgb": [
+        44,
+        56,
+        68
+      ],
+      "oklab": [
+        0.336,
+        -0.0107,
+        -0.0236
+      ],
+      "coverage": 0.2464
+    },
+    {
+      "role": "tertiary",
+      "hex": "#18aa8a",
+      "rgb": [
+        24,
+        170,
+        138
+      ],
+      "oklab": [
+        0.6602,
+        -0.1222,
+        0.0162
+      ],
+      "coverage": 0.0127
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/chaos.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 12,
+  "imageSize": {
+    "width": 1920,
+    "height": 4181
+  },
+  "face": {
+    "x": 0.3188,
+    "y": 0.0234,
+    "width": 0.2684,
+    "height": 0.1233
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 214,
+    "height": 336
+  },
+  "anchor": {
+    "x": 0.453,
+    "y": 0.085
+  },
+  "sdAnchor": {
+    "x": 0.475,
+    "y": 0.375
+  },
+  "artScale": 0.9,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.0824,
+    "below": 0.9124
+  },
+  "sdBody": {
+    "above": 0.375,
+    "below": 0.622
+  },
+  "animScale": 0.88,
+  "artSolid": 0.3061,
+  "sdSolid": 0.422
+}

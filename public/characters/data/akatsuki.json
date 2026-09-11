@@ -1,0 +1,114 @@
+{
+  "slug": "akatsuki",
+  "name": "Akatsuki",
+  "voiceActor": "Shinobu Matsumoto",
+  "profile": {
+    "height": "5 shaku 8 sun",
+    "weight": "18 kan",
+    "birthday": "Unknown",
+    "bloodType": "Unknown",
+    "ability": "Blitz Motor",
+    "weapon": "Taktischeblitzanzug"
+  },
+  "bio": [
+    "Akatsuki is a guest character who was summoned to this world by unfortunate coincidence.",
+    "He's apparently quite popular, as he finds himself summoned to even more worlds these days.",
+    "Akatsuki awoke after the previous battle and couldn't tell left from right.",
+    "Still, he managed to overcome challenges with his exceptional intellect and strength.",
+    "After escaping the mysterious Night, Akatsuki followed his orders to set out for the Aokigahara Sea of Trees.",
+    "All that awaited him there, however, was yet another Night--the final, powerful True Night, in fact.",
+    "Will Akatsuki finally find his way back to his home world?"
+  ],
+  "assets": {
+    "art": "/characters/images/akatsuki.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/akatsuki_catch.svg",
+    "sd": "/characters/sd/akatsuki.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#02e4fd",
+      "rgb": [
+        2,
+        228,
+        253
+      ],
+      "oklab": [
+        0.8414,
+        -0.1268,
+        -0.07
+      ],
+      "coverage": 0.0508
+    },
+    {
+      "role": "secondary",
+      "hex": "#b90423",
+      "rgb": [
+        185,
+        4,
+        35
+      ],
+      "oklab": [
+        0.496,
+        0.1821,
+        0.0793
+      ],
+      "coverage": 0.0117
+    },
+    {
+      "role": "tertiary",
+      "hex": "#495062",
+      "rgb": [
+        73,
+        80,
+        98
+      ],
+      "oklab": [
+        0.4317,
+        -0.0008,
+        -0.0312
+      ],
+      "coverage": 0.1413
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/akatsuki.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 28,
+  "imageSize": {
+    "width": 1920,
+    "height": 4958
+  },
+  "face": {
+    "x": 0.34,
+    "y": 0.0458,
+    "width": 0.28,
+    "height": 0.1084
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 189,
+    "height": 336
+  },
+  "anchor": {
+    "x": 0.48,
+    "y": 0.1
+  },
+  "sdAnchor": {
+    "x": 0.357,
+    "y": 0.374
+  },
+  "artScale": 0.82,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.0974,
+    "below": 0.8976
+  },
+  "sdBody": {
+    "above": 0.374,
+    "below": 0.623
+  },
+  "animScale": 1,
+  "artSolid": 0.4421,
+  "sdSolid": 0.4984
+}

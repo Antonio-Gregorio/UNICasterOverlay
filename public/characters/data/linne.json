@@ -1,0 +1,112 @@
+{
+  "slug": "linne",
+  "name": "Linne",
+  "voiceActor": "Ayane Sakura",
+  "profile": {
+    "height": "141cm",
+    "weight": "34kg",
+    "birthday": "3/18",
+    "bloodType": "AB",
+    "ability": "Speed Star",
+    "weapon": "No name/Nameless"
+  },
+  "bio": [
+    "Linne is our heroine, a young girl of indeterminate age.",
+    "Linne detected Hyde's true potential and successfully defeated Hilda.",
+    "That done, she tried to fulfill her original plan to destroy the ominous Power of Sealing engraved within her body...",
+    "Until her brother, Kuon, stepped out of hiding before her.",
+    "Refusing to die alone, she decides to confront Kuon alone--and take him with her as she falls into the Night."
+  ],
+  "assets": {
+    "art": "/characters/images/linne.png",
+    "artPortrait": "/characters/images/linne_sp.png",
+    "catchphrase": "/characters/images/linne_catch.svg",
+    "sd": "/characters/sd/linne.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#b77240",
+      "rgb": [
+        183,
+        114,
+        64
+      ],
+      "oklab": [
+        0.6163,
+        0.0636,
+        0.0892
+      ],
+      "coverage": 0.1947
+    },
+    {
+      "role": "secondary",
+      "hex": "#fbd46e",
+      "rgb": [
+        251,
+        212,
+        110
+      ],
+      "oklab": [
+        0.8835,
+        0.002,
+        0.1283
+      ],
+      "coverage": 0.0712
+    },
+    {
+      "role": "tertiary",
+      "hex": "#5a4746",
+      "rgb": [
+        90,
+        71,
+        70
+      ],
+      "oklab": [
+        0.418,
+        0.0237,
+        0.0106
+      ],
+      "coverage": 0.0931
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/linne.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 2,
+  "imageSize": {
+    "width": 1920,
+    "height": 1700
+  },
+  "face": {
+    "x": 0.35,
+    "y": -0.0279,
+    "width": 0.2,
+    "height": 0.2259
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 188,
+    "height": 387
+  },
+  "anchor": {
+    "x": 0.45,
+    "y": 0.085
+  },
+  "sdAnchor": {
+    "x": 0.442,
+    "y": 0.455
+  },
+  "artScale": 1.25,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.0721,
+    "below": 0.9079
+  },
+  "sdBody": {
+    "above": 0.455,
+    "below": 0.5424
+  },
+  "animScale": 0.85,
+  "artSolid": 0.1825,
+  "sdSolid": 0.4439
+}

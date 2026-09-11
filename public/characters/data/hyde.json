@@ -1,0 +1,113 @@
+{
+  "slug": "hyde",
+  "name": "Hyde",
+  "voiceActor": "Ryohei Kimura",
+  "profile": {
+    "height": "171cm",
+    "weight": "55kg",
+    "birthday": "4/14",
+    "bloodType": "0",
+    "ability": "Void Red",
+    "weapon": "Insulator"
+  },
+  "bio": [
+    "Hyde is our high schooler protagonist.",
+    "The power of EXS awakened within Hyde after an encounter with a mysterious young girl named Linne.",
+    "After a series of gruesome battles, Hyde defeated Paradox--considered to be the strongest wielder of all.",
+    "Afterwards, however, Hyde was defeated by an immensely powerful Re-Birth called Kuon the Aeon.",
+    "Kuon boasted of plans that involved destroying the world as a means to achieve his goal.",
+    "Hearing this, Linne disappeared. Hyde sets out on his own to confront Kuon and save the world..."
+  ],
+  "assets": {
+    "art": "/characters/images/hyde.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/hyde_catch.svg",
+    "sd": "/characters/sd/hyde.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#da1b5d",
+      "rgb": [
+        218,
+        27,
+        93
+      ],
+      "oklab": [
+        0.5765,
+        0.2155,
+        0.0359
+      ],
+      "coverage": 0.0788
+    },
+    {
+      "role": "secondary",
+      "hex": "#6d1230",
+      "rgb": [
+        109,
+        18,
+        48
+      ],
+      "oklab": [
+        0.3551,
+        0.1245,
+        0.0152
+      ],
+      "coverage": 0.0584
+    },
+    {
+      "role": "tertiary",
+      "hex": "#90767d",
+      "rgb": [
+        144,
+        118,
+        125
+      ],
+      "oklab": [
+        0.5931,
+        0.0338,
+        0.0007
+      ],
+      "coverage": 0.0574
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/hyde.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 1,
+  "imageSize": {
+    "width": 962,
+    "height": 1740
+  },
+  "face": {
+    "x": 0.53,
+    "y": 0.1284,
+    "width": 0.26,
+    "height": 0.1437
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 207,
+    "height": 322
+  },
+  "anchor": {
+    "x": 0.66,
+    "y": 0.2003
+  },
+  "sdAnchor": {
+    "x": 0.436,
+    "y": 0.344
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.1957,
+    "below": 0.7526
+  },
+  "sdBody": {
+    "above": 0.3378,
+    "below": 0.6529
+  },
+  "animScale": 1,
+  "artSolid": 0.2219,
+  "sdSolid": 0.4094
+}

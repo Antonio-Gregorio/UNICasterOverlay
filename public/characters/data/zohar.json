@@ -1,0 +1,106 @@
+{
+  "slug": "zohar",
+  "name": "Zohar",
+  "voiceActor": "Aiko Okubo",
+  "profile": {
+    "height": "158cm",
+    "weight": "47kg",
+    "birthday": "21/4",
+    "bloodType": "A",
+    "ability": "Doppelganger",
+    "weapon": "Nails/Envious"
+  },
+  "bio": [
+    "She was one of the leaders of Bankikai, along with Ogre and Strix.",
+    "During the battle with Amnesia, she was engulfed by the power overflowing from the Abyss.",
+    "She lost her sanity, leaving her close friend Strix heavily wounded.",
+    "She was at a loss, burdened by what she had done to her friend.",
+    "In her despair, she heard rumors that Strix was still alive.",
+    "She had changed her name and entered the Night, searching for \"her.\"",
+    "\"I must find her…\" \"I must apologize to her…\" \"I must kill her…\" The disparate thoughts raced through her head.",
+    "Were they Zohar’s own feelings, or did they belong to the “other” her? The answer she sought lurked within the Night."
+  ],
+  "assets": {
+    "art": "/characters/images/zohar.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/zohar_catch.svg",
+    "sd": null
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#d97993",
+      "rgb": [
+        217,
+        121,
+        147
+      ],
+      "oklab": [
+        0.6879,
+        0.1224,
+        0.0069
+      ],
+      "coverage": 0.0607
+    },
+    {
+      "role": "secondary",
+      "hex": "#382a3a",
+      "rgb": [
+        56,
+        42,
+        58
+      ],
+      "oklab": [
+        0.3088,
+        0.0266,
+        -0.0212
+      ],
+      "coverage": 0.3225
+    },
+    {
+      "role": "tertiary",
+      "hex": "#ecdbd9",
+      "rgb": [
+        236,
+        219,
+        217
+      ],
+      "oklab": [
+        0.904,
+        0.0178,
+        0.0077
+      ],
+      "coverage": 0.0673
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/zohar.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 26,
+  "imageSize": {
+    "width": 1379,
+    "height": 1740
+  },
+  "face": {
+    "x": 0.4,
+    "y": 0.2766,
+    "width": 0.16,
+    "height": 0.1268
+  },
+  "faceLocked": true,
+  "sdSize": null,
+  "anchor": {
+    "x": 0.48,
+    "y": 0.34
+  },
+  "sdAnchor": null,
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.3377,
+    "below": 0.6589
+  },
+  "sdBody": null,
+  "animScale": 1,
+  "artSolid": 0.2659,
+  "sdSolid": null
+}

@@ -1,0 +1,113 @@
+{
+  "slug": "uzuki",
+  "name": "Uzuki",
+  "voiceActor": "Satomi Akesaka",
+  "profile": {
+    "height": "144cm",
+    "weight": "34kg",
+    "birthday": "7/26",
+    "bloodType": "B (according to her)",
+    "ability": "Necromance",
+    "weapon": "Beloa"
+  },
+  "bio": [
+    "Uzuki is every bit as monstrous on the inside as she is elegant on the outside.",
+    "All she wants to do is play with her bizarre powers and see lots of people suffer.",
+    "This led her to join Amnesia, which she'd heard was full of interesting people.",
+    "But when it turned out that the leader of Amnesia was obsessed with gaining further power in order to become a Re-Birth, Uzuki lost interest.",
+    "The solution was simple: All she had to do was rip things apart until the fun came back.",
+    "Thus begins her story of rebellion."
+  ],
+  "assets": {
+    "art": "/characters/images/uzuki.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/uzuki_catch.svg",
+    "sd": "/characters/sd/uzuki.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#892e3c",
+      "rgb": [
+        137,
+        46,
+        60
+      ],
+      "oklab": [
+        0.4398,
+        0.1193,
+        0.0315
+      ],
+      "coverage": 0.1288
+    },
+    {
+      "role": "secondary",
+      "hex": "#e4a9b4",
+      "rgb": [
+        228,
+        169,
+        180
+      ],
+      "oklab": [
+        0.7921,
+        0.07,
+        0.0083
+      ],
+      "coverage": 0.1171
+    },
+    {
+      "role": "tertiary",
+      "hex": "#2d1d1f",
+      "rgb": [
+        45,
+        29,
+        31
+      ],
+      "oklab": [
+        0.252,
+        0.0257,
+        0.0048
+      ],
+      "coverage": 0.1962
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/uzuki.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 23,
+  "imageSize": {
+    "width": 1190,
+    "height": 1420
+  },
+  "face": {
+    "x": 0.387,
+    "y": 0.1895,
+    "width": 0.15,
+    "height": 0.1257
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 217,
+    "height": 285
+  },
+  "anchor": {
+    "x": 0.462,
+    "y": 0.2524
+  },
+  "sdAnchor": {
+    "x": 0.5,
+    "y": 0.26
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.2517,
+    "below": 0.7441
+  },
+  "sdBody": {
+    "above": 0.26,
+    "below": 0.7365
+  },
+  "animScale": 1,
+  "artSolid": 0.2663,
+  "sdSolid": 0.5746
+}

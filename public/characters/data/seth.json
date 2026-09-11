@@ -1,0 +1,113 @@
+{
+  "slug": "seth",
+  "name": "Seth",
+  "voiceActor": "Yuki Kaji",
+  "profile": {
+    "height": "169cm",
+    "weight": "49kg",
+    "birthday": "1/7",
+    "bloodType": "O",
+    "ability": "Kerykeion",
+    "weapon": "Eliminator"
+  },
+  "bio": [
+    "Seth is a young warrior of the Night Blade who has earned the title of Assassin.",
+    "In order to save Princess Linne, he defeated Hilda with his legendary weapon, the Blade of Judgment.",
+    "Some time later, Linne's older brother Kuon appears.",
+    "He and his sibling bear the Power of Sealing--a curse left behind by the Night Blade of ages past.",
+    "As a member of the modern-day Night Blade, Seth has had one purpose since childhood: to relieve the siblings of their duties as keepers of the curse.",
+    "Seth has already received Linne's Power of Sealing; in order to recover the remaining one from Kuon, Seth sets out into the Night..."
+  ],
+  "assets": {
+    "art": "/characters/images/seth.png",
+    "artPortrait": null,
+    "catchphrase": "/characters/images/seth_catch.svg",
+    "sd": "/characters/sd/seth.webp"
+  },
+  "colors": [
+    {
+      "role": "primary",
+      "hex": "#45567b",
+      "rgb": [
+        69,
+        86,
+        123
+      ],
+      "oklab": [
+        0.4553,
+        -0.0065,
+        -0.0636
+      ],
+      "coverage": 0.2172
+    },
+    {
+      "role": "secondary",
+      "hex": "#1c273b",
+      "rgb": [
+        28,
+        39,
+        59
+      ],
+      "oklab": [
+        0.2714,
+        -0.0049,
+        -0.0398
+      ],
+      "coverage": 0.3922
+    },
+    {
+      "role": "tertiary",
+      "hex": "#17a1f7",
+      "rgb": [
+        23,
+        161,
+        247
+      ],
+      "oklab": [
+        0.6841,
+        -0.0712,
+        -0.1482
+      ],
+      "coverage": 0.0352
+    }
+  ],
+  "source": "https://www.arcsystemworks.jp/uni2celes/en/character/seth.php",
+  "scrapedAt": "2026-09-07",
+  "rosterOrder": 9,
+  "imageSize": {
+    "width": 1920,
+    "height": 2389
+  },
+  "face": {
+    "x": 0.265,
+    "y": 0.0557,
+    "width": 0.16,
+    "height": 0.1286
+  },
+  "faceLocked": true,
+  "sdSize": {
+    "width": 198,
+    "height": 344
+  },
+  "anchor": {
+    "x": 0.345,
+    "y": 0.12
+  },
+  "sdAnchor": {
+    "x": 0.333,
+    "y": 0.386
+  },
+  "artScale": 1,
+  "bodyAnchor": null,
+  "artBody": {
+    "above": 0.0853,
+    "below": 0.8771
+  },
+  "sdBody": {
+    "above": 0.386,
+    "below": 0.6111
+  },
+  "animScale": 0.92,
+  "artSolid": 0.256,
+  "sdSolid": 0.4449
+}
