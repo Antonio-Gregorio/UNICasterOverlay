@@ -29,6 +29,10 @@ jobs:
       # O roteamento é client-side: um deep link (/winners/x) chega ao Pages
       # como arquivo inexistente. O 404 devolve o mesmo index e o router resolve.
       - run: cp dist/index.html dist/404.html
+      # /overlay/live é a fonte de navegador do OBS, colada à mão numa cena que
+      # recarrega sozinha. O fallback de 404 renderiza, mas devolvendo status
+      # 404; um arquivo de verdade faz essa rota responder 200.
+      - run: mkdir -p dist/overlay/live && cp dist/index.html dist/overlay/live/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

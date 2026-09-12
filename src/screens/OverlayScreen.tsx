@@ -69,6 +69,15 @@ import {
 import type { TopbarData } from '../topbar/types'
 import type { Player, Team } from '../types'
 
+/**
+ * Endereço da fonte de navegador do OBS.
+ *
+ * Não é `origin + '/overlay/live'`: no GitHub Pages o site mora em
+ * /UNICasterOverlay/, e a URL sem o prefixo cai fora do app. BASE_URL já vem
+ * com a barra no fim e vale '/' em dev.
+ */
+const LIVE_URL = `${window.location.origin}${import.meta.env.BASE_URL}overlay/live`
+
 const EMPTY: TopbarData = {
   name: '',
   teamTag: null,
@@ -382,7 +391,7 @@ export function OverlayScreen() {
    * preenchida mesmo antes de o painel mandar qualquer coisa — sem as imagens
    * pesadas, que estourariam o endereço.
    */
-  const url = `${window.location.origin}/overlay/live#${encodePayload(lighten(payload))}`
+  const url = `${LIVE_URL}#${encodePayload(lighten(payload))}`
 
   function patchSide(index: 0 | 1, value: Partial<Side>) {
     setSetup((s) => {
@@ -876,7 +885,7 @@ export function OverlayScreen() {
                   <h3>Fonte de navegador</h3>
                   <Field label="URL" hint="1920x1080, sem fundo">
                     <div className="overlay-url">
-                      <code>{`${window.location.origin}/overlay/live`}</code>
+                      <code>{LIVE_URL}</code>
                       <button
                         type="button"
                         className="icon-btn"
