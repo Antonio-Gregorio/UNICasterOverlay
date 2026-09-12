@@ -1460,11 +1460,25 @@ body.is-overlay {
   display: grid;
   gap: 6px;
 }
+/**
+ * A URL é longa e não tem onde quebrar sozinha — sem `min-width: 0` o `code`
+ * se recusa a encolher abaixo do conteúdo, estica a linha e empurra o botão de
+ * copiar para fora da coluna, atrás da prévia.
+ */
 .overlay-url {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
+}
+.overlay-url code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+/* O botão tem tamanho fixo: quem cede espaço é o endereço, nunca ele. */
+.overlay-url .icon-btn {
+  flex: none;
 }
 .score-row {
   display: flex;
@@ -2815,7 +2829,6 @@ body.is-overlay {
   to {
     left: calc(0% - var(--folga));
   }
-}
 }
 
 /* O fundo recorta no raio da tela; a foto e o véu ficam dentro dele. */
