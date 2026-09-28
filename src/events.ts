@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { upsert, type ImportResult } from './transfer'
 import { fileToImage } from './imageUpload'
 import type { EventLogo } from './types'
 
@@ -61,4 +62,11 @@ export function removeEvent(id: string) {
 
 export function fileToEventLogo(file: File) {
   return fileToImage(file, { maxSize: EVENT_LOGO_SIZE })
+}
+
+/** Grava o que veio de um JSON exportado — ver src/transfer.ts. */
+export function importEvents(items: EventLogo[]): ImportResult {
+  const { next, result } = upsert(events, items)
+  commit(next)
+  return result
 }

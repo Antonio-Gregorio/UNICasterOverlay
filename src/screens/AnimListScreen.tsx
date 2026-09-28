@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ScreenHeader } from './ScreenHeader'
 import { Toolbar } from '../components/Toolbar'
 import { CopyIcon } from '../components/icons'
-import { ANIM_STYLES, duplicateAnim, removeAnim, useAnims } from '../anim/store'
+import { TransferButtons } from '../components/TransferButtons'
+import { ANIM_STYLES, duplicateAnim, importAnims, removeAnim, useAnims } from '../anim/store'
 import type { ViewMode } from '../types'
 
 /**
@@ -41,7 +42,9 @@ export function AnimListScreen() {
         view={view}
         onView={setView}
         count={`${filtered.length} de ${anims.length}`}
-      />
+      >
+        <TransferButtons kind="anims" items={anims} onImport={importAnims} />
+      </Toolbar>
 
       {anims.length === 0 ? (
         <p className="empty">

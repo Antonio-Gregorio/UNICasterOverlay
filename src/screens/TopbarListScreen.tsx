@@ -4,7 +4,8 @@ import { ScreenHeader } from './ScreenHeader'
 import { Toolbar } from '../components/Toolbar'
 import { CopyIcon, DiceIcon } from '../components/icons'
 import { TopbarPreview } from '../topbar/TopbarPreview'
-import { duplicateTopbar, removeTopbar, useTopbars } from '../topbar/store'
+import { TransferButtons } from '../components/TransferButtons'
+import { duplicateTopbar, importTopbars, removeTopbar, useTopbars } from '../topbar/store'
 import { mockToTopbarData, sampleMocks, useShuffleSeed } from '../topbar/mockPlayers'
 import { useData } from '../data'
 import type { ViewMode } from '../types'
@@ -45,6 +46,7 @@ export function TopbarListScreen() {
         <button type="button" className="btn btn--small" onClick={reshuffle} title="Sortear outros">
           <DiceIcon /> Sortear
         </button>
+        <TransferButtons kind="topbars" items={templates} onImport={importTopbars} />
       </Toolbar>
 
       {templates.length === 0 ? (

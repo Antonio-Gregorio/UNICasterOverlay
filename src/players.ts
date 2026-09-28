@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { upsert, type ImportResult } from './transfer'
 import type { Player } from './types'
 
 /**
@@ -71,4 +72,11 @@ export function updatePlayer(id: string, input: Omit<Player, 'id' | 'createdAt'>
 
 export function removePlayer(id: string) {
   commit(players.filter((p) => p.id !== id))
+}
+
+/** Grava o que veio de um JSON exportado — ver src/transfer.ts. */
+export function importPlayers(items: Player[]): ImportResult {
+  const { next, result } = upsert(players, items)
+  commit(next)
+  return result
 }

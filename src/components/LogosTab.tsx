@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Toolbar } from './Toolbar'
 import { LogoForm } from './LogoForm'
-import { removeEvent, useEvents } from '../events'
+import { TransferButtons } from './TransferButtons'
+import { importEvents, removeEvent, useEvents } from '../events'
 import type { EventLogo, ViewMode } from '../types'
 
 export function LogosTab() {
@@ -35,6 +36,7 @@ export function LogosTab() {
         <button type="button" className="btn btn--primary btn--add" onClick={() => open(null)}>
           <span aria-hidden="true">+</span> Logo
         </button>
+        <TransferButtons kind="events" items={events} onImport={importEvents} />
       </Toolbar>
 
       {events.length === 0 ? (

@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { upsert, type ImportResult } from '../transfer'
 import type { LogoAlign } from './channel'
 
 /**
@@ -223,4 +224,27 @@ export function blankSetup(): OverlaySetup {
 export function setupOf(preset: OverlayPreset): OverlaySetup {
   const { id: _id, name: _name, createdAt: _createdAt, ...setup } = preset
   return structuredClone(setup)
+}
+
+/**
+ * Grava o que veio de um JSON exportado, completando campos de versões antigas.
+ *
+ * O acesso ao OBS de um overlay que já existe aqui fica o daqui: o JSON sai sem
+ * a senha (ver `exportablePreset`), e o OBS da outra máquina não é este.
+ */
+export function importPresets(items: OverlayPreset[]): ImportResult {
+  const { next, result } = upsert(
+    presets,
+    items.map((p) => {
+      const local = presets.find((x) => x.id === p.id)
+      return { ...blankSetup(), ...p, obs: local ? local.obs : { ...blankSetup().obs, ...p.obs } }
+    })
+  )
+  commit(next)
+  return result
+}
+
+/** O preset como ele sai no JSON: sem a senha do OBS desta máquina. */
+export function exportablePreset(p: OverlayPreset): OverlayPreset {
+  return { ...p, obs: { ...p.obs, password: '' } }
 }

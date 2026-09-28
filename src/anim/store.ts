@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import { DEFAULT_FONT } from '../topbar/store'
+import { upsert, type ImportResult } from '../transfer'
 import type { AnimBackground, AnimStyle, AnimTemplate } from './types'
 
 /**
@@ -66,17 +67,28 @@ function read(): AnimTemplate[] {
   try {
     // Campo novo não pode derrubar template antigo: os que já estavam salvos
     // antes do fundo e do enquadramento existirem voltam com o padrão deles.
-    return (JSON.parse(raw) as AnimTemplate[]).map((a) => ({
-      ...a,
-      background: { ...blankBackground(), ...(a.background ?? {}) },
-      figureZoom: a.figureZoom ?? 1,
-      figureOffsetY: a.figureOffsetY ?? 0,
-      fadeIn: a.fadeIn ?? 0,
-      fadeOut: a.fadeOut ?? 0,
-    }))
+    return (JSON.parse(raw) as AnimTemplate[]).map(migrate)
   } catch {
     return []
   }
+}
+
+function migrate(a: AnimTemplate): AnimTemplate {
+  return {
+    ...a,
+    background: { ...blankBackground(), ...(a.background ?? {}) },
+    figureZoom: a.figureZoom ?? 1,
+    figureOffsetY: a.figureOffsetY ?? 0,
+    fadeIn: a.fadeIn ?? 0,
+    fadeOut: a.fadeOut ?? 0,
+  }
+}
+
+/** Grava o que veio de um JSON exportado, completando campos de versões antigas. */
+export function importAnims(items: AnimTemplate[]): ImportResult {
+  const { next, result } = upsert(anims, items.map(migrate))
+  commit(next)
+  return result
 }
 
 function commit(next: AnimTemplate[]) {

@@ -6,7 +6,8 @@ import { CopyIcon, DiceIcon } from '../components/icons'
 import { useData } from '../data'
 import { BracketView } from '../bracket/BracketView'
 import { demoTournament, mockToPerson } from '../bracket/people'
-import { duplicateTemplate, removeTemplate, useBracketTemplates } from '../bracket/store'
+import { TransferButtons } from '../components/TransferButtons'
+import { duplicateTemplate, importTemplates, removeTemplate, useBracketTemplates } from '../bracket/store'
 import { sampleMocks, useShuffleSeed } from '../topbar/mockPlayers'
 import { SCENE } from '../overlay/channel'
 import type { BracketPlay } from '../bracket/types'
@@ -64,7 +65,9 @@ export function BracketListScreen() {
         view={view}
         onView={setView}
         count={`${filtered.length} de ${templates.length}`}
-      />
+      >
+        <TransferButtons kind="brackets" items={templates} onImport={importTemplates} />
+      </Toolbar>
 
       {templates.length === 0 ? (
         <p className="empty">

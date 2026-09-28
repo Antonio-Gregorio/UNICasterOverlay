@@ -6,7 +6,8 @@ import { CopyIcon, DiceIcon } from '../components/icons'
 import { competitorsFromMocks } from '../components/WinnersEditor'
 import { WinnersPreview } from '../winners/WinnersPreview'
 import { LAYOUTS } from '../winners/layouts'
-import { duplicateWinners, removeWinners, useWinners } from '../winners/store'
+import { TransferButtons } from '../components/TransferButtons'
+import { duplicateWinners, importWinners, removeWinners, useWinners } from '../winners/store'
 import { emptyContent, type GraphicLayout } from '../winners/types'
 import { useShuffleSeed } from '../topbar/mockPlayers'
 import { useData } from '../data'
@@ -45,6 +46,7 @@ export function WinnersListScreen() {
         <button type="button" className="btn btn--small" onClick={reshuffle} title="Sortear outros">
           <DiceIcon /> Sortear
         </button>
+        <TransferButtons kind="winners" items={templates} onImport={importWinners} />
       </Toolbar>
 
       {/* Os arranjos prontos são atalhos de criação: já abrem o editor montado. */}

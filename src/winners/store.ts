@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { upsert, type ImportResult } from '../transfer'
 import { DEFAULT_FONT } from '../topbar/store'
 import { LAYOUTS } from './layouts'
 import type { GraphicLayout, WinnersTemplate } from './types'
@@ -165,4 +166,11 @@ export function blankWinners(layout: GraphicLayout = 'top8'): Omit<WinnersTempla
     },
     flag: 'country',
   }
+}
+
+/** Grava o que veio de um JSON exportado, completando campos de versões antigas. */
+export function importWinners(items: WinnersTemplate[]): ImportResult {
+  const { next, result } = upsert(templates, items.map(migrate))
+  commit(next)
+  return result
 }

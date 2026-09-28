@@ -3,7 +3,8 @@ import { Toolbar } from './Toolbar'
 import { TeamForm } from './TeamForm'
 import { TeamLogo } from '../TeamLogo'
 import { BADGE_HEIGHT_LG } from '../Flag'
-import { removeTeam, useTeams } from '../teams'
+import { TransferButtons } from './TransferButtons'
+import { importTeams, removeTeam, useTeams } from '../teams'
 import { usePlayers } from '../players'
 import type { Team, ViewMode } from '../types'
 
@@ -51,6 +52,7 @@ export function TeamsTab() {
         >
           <span aria-hidden="true">+</span> Time
         </button>
+        <TransferButtons kind="teams" items={teams} onImport={importTeams} />
       </Toolbar>
 
       {teams.length === 0 ? (

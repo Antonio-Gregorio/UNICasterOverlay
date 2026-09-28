@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { upsert, type ImportResult } from './transfer'
 import { fileToImage } from './imageUpload'
 import type { Player, Team } from './types'
 
@@ -72,4 +73,11 @@ export function teamOf(player: Player, all: Team[]): { label: string; logo: stri
 /** Logo de time: quadrada, para caber na mesma caixa de uma bandeira. */
 export function fileToLogo(file: File, size = LOGO_SIZE): Promise<string> {
   return fileToImage(file, { maxSize: size, square: true }).then((img) => img.dataUrl)
+}
+
+/** Grava o que veio de um JSON exportado — ver src/transfer.ts. */
+export function importTeams(items: Team[]): ImportResult {
+  const { next, result } = upsert(teams, items)
+  commit(next)
+  return result
 }

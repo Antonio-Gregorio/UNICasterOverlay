@@ -5,8 +5,9 @@ import { Flag } from '../Flag'
 import { TeamLogo } from '../TeamLogo'
 import { FaceCrop } from '../FaceCrop'
 import { countryFlag, regionFlag } from '../flags'
-import { addPlayers, removePlayer, usePlayers } from '../players'
-import { teamOf, useTeams } from '../teams'
+import { TransferButtons } from './TransferButtons'
+import { addPlayers, importPlayers, removePlayer, usePlayers } from '../players'
+import { importTeams, teamOf, useTeams } from '../teams'
 import type { MockPlayer } from '../topbar/mockPlayers'
 import type { Character, FlagManifest, Player, Team, ViewMode } from '../types'
 
@@ -105,6 +106,22 @@ export function PlayersTab({
           <span aria-hidden="true">+</span> Exemplos
           {novosMocks.length > 0 && <span className="count">{novosMocks.length}</span>}
         </button>
+        {/* Os times dos players vão junto: sem eles, quem chega do outro lado
+            perde a logo e a sigla do time. */}
+        <TransferButtons
+          kind="players"
+          items={players}
+          related={(escolhidos) => ({
+            teams: teams.filter((t) => escolhidos.some((p) => p.teamId === t.id)),
+          })}
+          onImport={(items, related) => {
+            const vindos = (related.teams ?? []).filter(
+              (t): t is Team => typeof (t as Team)?.id === 'string' && typeof (t as Team)?.name === 'string'
+            )
+            if (vindos.length) importTeams(vindos)
+            return importPlayers(items)
+          }}
+        />
       </Toolbar>
 
       {players.length === 0 ? (

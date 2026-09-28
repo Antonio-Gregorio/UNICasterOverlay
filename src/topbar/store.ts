@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { upsert, type ImportResult } from '../transfer'
 import type { TopbarTemplate } from './types'
 
 /** Store dos templates de topbar: localStorage + subscribe, como players e times. */
@@ -199,3 +200,10 @@ export const FONT_STACKS = [
 
 /** Courier é a fonte padrão dos templates novos. */
 export const DEFAULT_FONT = '"Courier New", monospace'
+
+/** Grava o que veio de um JSON exportado, completando campos de versões antigas. */
+export function importTopbars(items: TopbarTemplate[]): ImportResult {
+  const { next, result } = upsert(templates, items.map(migrate))
+  commit(next)
+  return result
+}

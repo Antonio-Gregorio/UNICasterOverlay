@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import { DEFAULT_FONT } from '../topbar/store'
 import { buildBracket } from './seed'
+import { upsert, type ImportResult } from '../transfer'
 import { addToTower, autoSides, shouldAutoSplit, towersOf } from './towers'
 import type { BracketTemplate, Entry, Tournament, Towers } from './types'
 
@@ -54,6 +55,12 @@ function makeStore<T extends { id: string }>(key: string, migrate: (raw: T) => T
     },
     remove(id: string) {
       commit(items.filter((i) => i.id !== id))
+    },
+    /** O que veio de um JSON exportado — ver src/transfer.ts. */
+    importMany(incoming: T[]): ImportResult {
+      const { next, result } = upsert(items, incoming.map(migrate))
+      commit(next)
+      return result
     },
   }
 }
@@ -113,6 +120,7 @@ export function duplicateTemplate(id: string): string | null {
   })
 }
 export const removeTemplate = (id: string) => templates.remove(id)
+export const importTemplates = (items: BracketTemplate[]) => templates.importMany(items)
 
 export function addTournament(name: string): string {
   return tournaments.add({
@@ -191,6 +199,7 @@ export function setEntryCharacter(id: string, index: number, characterSlug: stri
 }
 
 export const removeTournament = (id: string) => tournaments.remove(id)
+export const importTournaments = (items: Tournament[]) => tournaments.importMany(items)
 
 /** Troca a lista de participantes e refaz a chave junto — as duas andam presas. */
 export function setEntries(id: string, entries: Entry[]) {
