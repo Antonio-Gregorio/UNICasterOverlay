@@ -3417,3 +3417,16 @@ body.is-overlay {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
 }
+
+/* Torres em duas linhas: os nomes dos times e, abaixo, as listas. A janela das
+   listas recorta o que passa da altura — é ela que rola, e os nomes não. */
+.towers {
+  flex-direction: column;
+}
+.towers__row {
+  display: flex;
+  align-items: flex-start;
+}
+.towers__window {
+  overflow: hidden;
+}
