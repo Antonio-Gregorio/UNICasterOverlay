@@ -24,12 +24,15 @@ import {
   removeTournament,
   setEntries,
   setEntryCharacter,
+  setTowersCount,
   updateTournament,
   updateTowers,
   useBracketTemplates,
   useTournaments,
 } from '../bracket/store'
 import {
+  MAX_TEAMS,
+  MIN_TEAMS,
   autoSides,
   dimInTower,
   moveInTower,
@@ -484,15 +487,13 @@ export function OverlayScreen() {
    * quem ainda não mexeu. A lista mostrava só a gravada, e aí a cena ia ao ar
    * com gente que o painel dizia não estar em time nenhum.
    */
-  const escalacao: [TowerSlot[], TowerSlot[]] =
+  const escalacao: TowerSlot[][] =
     torneio && torres
       ? shouldAutoSplit(torneio.towers)
-        ? autoSides(torneio.entries.length)
+        ? autoSides(torneio.entries.length, torres.names.length)
         : torres.sides
-      : [[], []]
-  const escalados = new Set(
-    [...escalacao[0], ...escalacao[1]].map((s) => torneio?.entries[s.entry]?.playerId)
-  )
+      : []
+  const escalados = new Set(escalacao.flat().map((s) => torneio?.entries[s.entry]?.playerId))
   /** Quem do cadastro ainda não está em time nenhum. */
   const foraDosTimes = players.filter((p) => !escalados.has(p.id))
   /** O boneco que a vaga vai mostrar: o trocado aqui, ou o do cadastro. */
@@ -1003,10 +1004,10 @@ export function OverlayScreen() {
                   : !bracketTpl
                     ? '⚠ Nenhum estilo escolhido: a chave não vai ao ar.'
                     : modo === 'times'
-                      ? `Em cena: ${torres?.names[0]} x ${torres?.names[1]}, ${
+                      ? `Em cena: ${torres?.names.join(' x ')}, ${
                           shouldAutoSplit(torneio.towers)
-                            ? `elenco dividido ao meio (${torneio.entries.length} inscritos)`
-                            : `${torres?.sides[0].length} e ${torres?.sides[1].length} escalados`
+                            ? `elenco dividido entre os times (${torneio.entries.length} inscritos)`
+                            : `${escalacao.map((l) => l.length).join(' / ')} escalados`
                         }.`
                       : torneio.entries.length < 2
                         ? 'Em cena: a tela, sem confronto — faltam participantes.'
@@ -1251,7 +1252,18 @@ export function OverlayScreen() {
                 <p className="overlay-note">Escolha ou crie um torneio para montar as torres.</p>
               ) : (
                 <>
-                  {([0, 1] as const).map((lado) => (
+                  <Field label="Quantos times">
+                    <Segmented
+                      value={String(torres.names.length)}
+                      onChange={(v) => setTowersCount(torneio.id, Number(v))}
+                      options={Array.from({ length: MAX_TEAMS - MIN_TEAMS + 1 }, (_, i) => ({
+                        value: String(MIN_TEAMS + i),
+                        label: String(MIN_TEAMS + i),
+                      }))}
+                      ariaLabel="Quantos times"
+                    />
+                  </Field>
+                  {torres.names.map((_, lado) => (
                     <div key={lado} className="tower-form">
                       <Field label={`Time ${lado + 1}`} htmlFor={`ov-time-${lado}`}>
                         <input
@@ -1352,7 +1364,7 @@ export function OverlayScreen() {
                     <button
                       type="button"
                       className="btn btn--small"
-                      onClick={() => updateTowers(torneio.id, (t) => ({ ...t, sides: [[], []] }))}
+                      onClick={() => updateTowers(torneio.id, (t) => ({ ...t, sides: t.sides.map(() => []) }))}
                     >
                       Limpar escalação
                     </button>

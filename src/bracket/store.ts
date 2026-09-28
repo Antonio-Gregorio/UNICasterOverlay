@@ -2,7 +2,7 @@ import { useSyncExternalStore } from 'react'
 import { DEFAULT_FONT } from '../topbar/store'
 import { buildBracket } from './seed'
 import { upsert, type ImportResult } from '../transfer'
-import { addToTower, autoSides, shouldAutoSplit, towersOf } from './towers'
+import { addToTower, autoSides, setTeamCount, shouldAutoSplit, towersOf } from './towers'
 import type { BracketTemplate, Entry, Tournament, Towers } from './types'
 
 /**
@@ -84,7 +84,9 @@ function migrateTemplate(t: BracketTemplate): BracketTemplate {
     frame: { ...base.frame, ...t.frame },
     transition: { ...base.transition, ...t.transition },
     info: { ...base.info, ...t.info },
-    teams: t.teams ?? base.teams,
+    // Seis cores sempre: um template de quando eram dois times ganha as outras
+    // quatro do padrão, e as duas dele continuam onde estavam.
+    teams: base.teams.map((padrao, i) => t.teams?.[i] ?? padrao),
     typography: { ...base.typography, ...t.typography },
     highlight: { ...base.highlight, ...t.highlight },
     slot: { ...base.slot, ...t.slot },
@@ -141,12 +143,33 @@ export const updateTournament = (id: string, patch: Partial<Tournament>) => tour
  * pontuar alguém que se está vendo na tela caía num array vazio: nada mudava, e
  * nada mudando, nada subia para o OBS.
  */
+/** As torres como a cena as desenha: a divisão automática, se ninguém mexeu. */
+function escalacaoAtual(torneio: Tournament): Towers {
+  const t = towersOf(torneio.towers)
+  return shouldAutoSplit(torneio.towers) ? { ...t, sides: autoSides(torneio.entries.length, t.names.length) } : t
+}
+
+/**
+ * Muda quantos times o torneio tem.
+ *
+ * Com a escalação ainda automática, só o número muda: a cena redivide o elenco
+ * entre os times novos. Passar por `updateTowers` congelaria a divisão antiga
+ * como se alguém a tivesse feito à mão, e o time novo entraria vazio.
+ */
+export function setTowersCount(id: string, count: number) {
+  const torneio = tournaments.all().find((t) => t.id === id)
+  if (!torneio) return
+  if (shouldAutoSplit(torneio.towers)) {
+    tournaments.update(id, { towers: setTeamCount(towersOf(torneio.towers), count) })
+    return
+  }
+  updateTowers(id, (t) => setTeamCount(t, count))
+}
+
 export function updateTowers(id: string, fn: (towers: Towers) => Towers) {
   const torneio = tournaments.all().find((t) => t.id === id)
   if (!torneio) return
-  const base = shouldAutoSplit(torneio.towers)
-    ? { ...towersOf(torneio.towers), sides: autoSides(torneio.entries.length) }
-    : towersOf(torneio.towers)
+  const base = escalacaoAtual(torneio)
   // Mexeu, virou decisão: daqui em diante a divisão automática não volta.
   tournaments.update(id, { towers: { ...fn(base), touched: true } })
 }
@@ -162,13 +185,11 @@ export function updateTowers(id: string, fn: (towers: Towers) => Towers) {
  * as duas, a divisão automática enxergaria a inscrição nova e a jogaria no lado
  * errado antes de ela ser escalada.
  */
-export function addToTeam(id: string, side: 0 | 1, entry: Entry) {
+export function addToTeam(id: string, side: number, entry: Entry) {
   const torneio = tournaments.all().find((t) => t.id === id)
   if (!torneio) return
-  const base = shouldAutoSplit(torneio.towers)
-    ? { ...towersOf(torneio.towers), sides: autoSides(torneio.entries.length) }
-    : towersOf(torneio.towers)
-  const escalado = (i: number) => base.sides[0].some((s) => s.entry === i) || base.sides[1].some((s) => s.entry === i)
+  const base = escalacaoAtual(torneio)
+  const escalado = (i: number) => base.sides.some((lista) => lista.some((s) => s.entry === i))
 
   let index = torneio.entries.findIndex((e, i) =>
     !escalado(i) &&
@@ -232,10 +253,14 @@ export function blankTemplate(): Omit<BracketTemplate, 'id' | 'createdAt'> {
     },
     frame: { style: 'none', color: '#e66d9f', intensity: 70, speed: 4000, thickness: 3 },
     transition: { style: 'fade', duration: 600, angle: 0 },
-    // Duas cores diferentes de saída: é o que separa os dois lados de relance.
+    // Uma cor por time, todas diferentes de saída: é o que separa as colunas de relance.
     teams: [
       { color: '#e66d9f', textColor: '#ffffff' },
       { color: '#4fa8e0', textColor: '#ffffff' },
+      { color: '#5fc27a', textColor: '#ffffff' },
+      { color: '#e6c44f', textColor: '#1b1b28' },
+      { color: '#9b6de6', textColor: '#ffffff' },
+      { color: '#e68a4f', textColor: '#ffffff' },
     ],
     info: {
       showTitle: true,

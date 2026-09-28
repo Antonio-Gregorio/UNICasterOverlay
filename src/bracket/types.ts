@@ -65,15 +65,16 @@ export interface TowerSlot {
 }
 
 /**
- * Os dois lados do modo de times.
+ * Os times do modo de times — de 2 a 6 (ver towers.ts). `names` e `sides` têm
+ * sempre o mesmo tamanho, que é quantos times há.
  *
  * O time não tem placar: quem pontua é cada jogador, na sua vaga. Um número no
  * cabeçalho competia com esses e dizia outra coisa — e numa guerra de times o
  * que se acompanha é quem ainda está de pé.
  */
 export interface Towers {
-  names: [string, string]
-  sides: [TowerSlot[], TowerSlot[]]
+  names: string[]
+  sides: TowerSlot[][]
   /**
    * Alguém já mexeu nas torres à mão?
    *
@@ -113,7 +114,7 @@ export type BracketMode = 'solo' | 'duo' | 'times'
 /** Onde um gesto da prévia acontece. */
 export type SlotRef =
   | { kind: 'match'; round: number; order: number; side: 0 | 1 }
-  | { kind: 'tower'; side: 0 | 1; index: number }
+  | { kind: 'tower'; side: number; index: number }
 
 /**
  * Os gestos que a prévia do painel aceita. Ausente = desenho parado.
@@ -274,8 +275,11 @@ export interface BracketTemplate {
   }
   /** Título, subtítulo e nomes de rodada. */
   info: BracketInfo
-  /** As cores dos dois lados, no modo de times. */
-  teams: [BracketTeamStyle, BracketTeamStyle]
+  /**
+   * As cores de cada time, no modo de times. Sempre seis — uma por posição —,
+   * e o torneio usa quantas tiver de times.
+   */
+  teams: BracketTeamStyle[]
 
   typography: {
     fontFamily: string

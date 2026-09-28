@@ -3410,3 +3410,10 @@ body.is-overlay {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* Cor da barra e do texto de um time, lado a lado: seis times em seis linhas. */
+.team-colors {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}

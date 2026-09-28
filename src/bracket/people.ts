@@ -1,6 +1,6 @@
 import { teamOf } from '../teams'
 import { addScore, buildBracket, setWinner } from './seed'
-import { blankTowers } from './towers'
+import { autoSides, blankTowers } from './towers'
 import type { MockPlayer } from '../topbar/mockPlayers'
 import type { Character, Player, Team } from '../types'
 import type { BracketMode, Entry, Person, Tournament } from './types'
@@ -72,10 +72,10 @@ export function mockToPerson(mock: MockPlayer, characters: Character[], partner?
  * vencedor para conferir o selo, um perdedor para conferir o cinza e uma vaga
  * vazia para ver como a rodada seguinte fica.
  *
- * No modo de times não há chave: o que a prévia precisa mostrar são as duas
- * torres com gente de pé, gente apagada e placar.
+ * No modo de times não há chave: o que a prévia precisa mostrar são as torres
+ * — `teams` delas — com gente de pé, gente apagada e placar.
  */
-export function demoTournament(nomes: string[], mode: BracketMode = 'solo'): Tournament {
+export function demoTournament(nomes: string[], mode: BracketMode = 'solo', teams = 2): Tournament {
   const entries: Entry[] = nomes.map((name) => ({ playerId: null, name }))
   const base = {
     id: 'demo',
@@ -85,13 +85,13 @@ export function demoTournament(nomes: string[], mode: BracketMode = 'solo'): Tou
   }
 
   if (mode === 'times') {
-    const towers = blankTowers()
-    const metade = Math.ceil(entries.length / 2)
-    towers.sides = [
-      entries.slice(0, metade).map((_, i) => ({ entry: i, score: i === 0 ? 2 : 0, dim: i > 1 })),
-      entries.slice(metade).map((_, i) => ({ entry: metade + i, score: i === 0 ? 1 : 0, dim: i > 2 })),
-    ]
-    return { ...base, matches: [], towers }
+    const towers = blankTowers(teams)
+    // Cada time com um placar e um ponto de corte do cinza diferentes: é o que
+    // deixa ver as duas coisas em todas as colunas.
+    towers.sides = autoSides(entries.length, teams).map((lista, lado) =>
+      lista.map((s, i) => ({ ...s, score: i === 0 ? 2 - (lado % 2) : 0, dim: i > 1 + (lado % 2) }))
+    )
+    return { ...base, matches: [], towers: { ...towers, touched: true } }
   }
 
   let matches = buildBracket(entries)

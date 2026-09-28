@@ -10,6 +10,7 @@ import { sampleMocks } from '../topbar/mockPlayers'
 import { SCENE } from '../overlay/channel'
 import { BracketStage } from '../bracket/BracketStage'
 import { demoTournament, mockToPerson } from '../bracket/people'
+import { MAX_TEAMS, MIN_TEAMS } from '../bracket/towers'
 import { addTemplate, blankTemplate, updateTemplate, useBracketTemplates } from '../bracket/store'
 import type {
   BracketAlign,
@@ -83,6 +84,8 @@ export function BracketEditorScreen() {
   const [draft, setDraft] = useState<Draft>(() => (salvo ? semMeta(salvo) : blankTemplate()))
   /** Trocar este número remonta a cena, e remontar é o que faz a entrada tocar. */
   const [run, setRun] = useState(0)
+  /** Quantos times a prévia mostra no modo de times. Não vai para o template. */
+  const [timesPrevia, setTimesPrevia] = useState(MIN_TEAMS)
 
   const bgInput = useRef<HTMLInputElement>(null)
   const fit = useFitScale()
@@ -124,13 +127,14 @@ export function BracketEditorScreen() {
       template,
       tournament: demoTournament(
         titulares.map((m) => m.name),
-        template.mode
+        template.mode,
+        timesPrevia
       ),
       people: titulares.map((m, i) =>
         mockToPerson(m, characters, template.mode === 'duo' ? parceiros[i] : undefined)
       ),
     }
-  }, [template, elenco, characters])
+  }, [template, elenco, characters, timesPrevia])
 
   function patch(input: Partial<Draft>) {
     setDraft((d) => ({ ...d, ...input }))
@@ -141,11 +145,8 @@ export function BracketEditorScreen() {
   const patchInfo = (input: Partial<Draft['info']>) => patch({ info: { ...draft.info, ...input } })
   const patchTransition = (input: Partial<Draft['transition']>) =>
     patch({ transition: { ...draft.transition, ...input } })
-  const patchTeam = (lado: 0 | 1, input: Partial<Draft['teams'][0]>) => {
-    const teams: Draft['teams'] = [{ ...draft.teams[0] }, { ...draft.teams[1] }]
-    teams[lado] = { ...teams[lado], ...input }
-    patch({ teams })
-  }
+  const patchTeam = (lado: number, input: Partial<Draft['teams'][0]>) =>
+    patch({ teams: draft.teams.map((t, i) => (i === lado ? { ...t, ...input } : { ...t })) })
 
   async function pickImage(file: File | undefined) {
     if (!file) return
@@ -189,7 +190,7 @@ export function BracketEditorScreen() {
               {draft.mode === 'duo'
                 ? 'Cada vaga leva dois: os dois bonecos lado a lado, os dois nomes e a bandeira de cada. O anel da vaga vai da cor de um à cor do outro.'
                 : draft.mode === 'times'
-                  ? 'Duas torres, uma por time. Quem já caiu fica em cinza e o placar sobe pela prévia do painel do Overlay.'
+                  ? 'Uma torre por time, de 2 a 6 — quantos, se escolhe no painel do Overlay. Quem já caiu fica em cinza e o placar sobe pela prévia de lá.'
                   : 'Um contra um, do jeito de sempre.'}
             </p>
           </section>
@@ -198,26 +199,41 @@ export function BracketEditorScreen() {
           {draft.mode === 'times' && (
             <section className="editor-section">
               <h3>Cores dos times</h3>
-              {([0, 1] as const).map((lado) => (
-                <div key={lado}>
+              {/* Só muda a prévia daqui: quantos times vão ao ar é do torneio. */}
+              <Field label="Times na prévia">
+                <Segmented
+                  value={String(timesPrevia)}
+                  onChange={(v) => setTimesPrevia(Number(v))}
+                  options={Array.from({ length: MAX_TEAMS - MIN_TEAMS + 1 }, (_, i) => ({
+                    value: String(MIN_TEAMS + i),
+                    label: String(MIN_TEAMS + i),
+                  }))}
+                  ariaLabel="Times na prévia"
+                />
+              </Field>
+              {/* As seis sempre à vista, uma linha por time: um torneio de seis
+                  usa todas, e escondê-las atrás da prévia faria o quinto time ir
+                  ao ar com uma cor que ninguém escolheu. */}
+              {draft.teams.map((time, lado) => (
+                <div key={lado} className="team-colors">
                   <Field label={`Time ${lado + 1} — barra`} htmlFor={`br-time-${lado}`}>
                     <ColorInput
                       id={`br-time-${lado}`}
-                      value={draft.teams[lado].color}
+                      value={time.color}
                       onChange={(color) => patchTeam(lado, { color })}
                     />
                   </Field>
-                  <Field label={`Time ${lado + 1} — texto`} htmlFor={`br-time-txt-${lado}`}>
+                  <Field label="Texto" htmlFor={`br-time-txt-${lado}`}>
                     <ColorInput
                       id={`br-time-txt-${lado}`}
-                      value={draft.teams[lado].textColor}
+                      value={time.textColor}
                       onChange={(textColor) => patchTeam(lado, { textColor })}
                     />
                   </Field>
                 </div>
               ))}
               <p className="overlay-note">
-                A barra identifica o lado de relance; o texto é o nome do time escrito
+                A barra identifica o time de relance; o texto é o nome dele escrito
                 sobre ela. Os nomes em si são do torneio, no painel do <strong>Overlay</strong>.
               </p>
             </section>
