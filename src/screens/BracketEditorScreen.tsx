@@ -145,7 +145,8 @@ export function BracketEditorScreen() {
   const patchInfo = (input: Partial<Draft['info']>) => patch({ info: { ...draft.info, ...input } })
   const patchTransition = (input: Partial<Draft['transition']>) =>
     patch({ transition: { ...draft.transition, ...input } })
-  const patchTeam = (lado: number, input: Partial<Draft['teams'][0]>) =>
+  const patchScroll = (input: Partial<Draft['scroll']>) => patch({ scroll: { ...draft.scroll, ...input } })
+  const patchTeam =(lado: number, input: Partial<Draft['teams'][0]>) =>
     patch({ teams: draft.teams.map((t, i) => (i === lado ? { ...t, ...input } : { ...t })) })
 
   async function pickImage(file: File | undefined) {
@@ -274,6 +275,42 @@ export function BracketEditorScreen() {
             <p className="overlay-note">
               A barra entra pela direita trazendo a tela atrás dela, e sai do mesmo jeito
               levando-a embora — com o feixe nas duas pontas. Zero na duração é corte seco.
+            </p>
+          </section>
+
+          <section className="editor-section">
+            <h3>Rolagem</h3>
+            <Checkbox checked={draft.scroll.enabled} onChange={(enabled) => patchScroll({ enabled })}>
+              Rolar quando a chave não couber
+            </Checkbox>
+            {draft.scroll.enabled && (
+              <>
+                <Field label="Passada completa" hint="de uma ponta à outra">
+                  <Range
+                    value={Math.round(draft.scroll.duration / 100) / 10}
+                    onChange={(v) => patchScroll({ duration: Math.round(v * 1000) })}
+                    min={1}
+                    max={60}
+                    step={0.5}
+                    suffix="s"
+                  />
+                </Field>
+                <Field label="Tempo parado" hint="em cada ponta">
+                  <Range
+                    value={Math.round(draft.scroll.pause / 100) / 10}
+                    onChange={(v) => patchScroll({ pause: Math.round(v * 1000) })}
+                    min={0}
+                    max={30}
+                    step={0.5}
+                    suffix="s"
+                  />
+                </Field>
+              </>
+            )}
+            <p className="overlay-note">
+              Parada no topo, desce até o fim, para, sobe e recomeça. Só anda quando a
+              chave passa da altura da tela — dá para ver no painel do Overlay, com o
+              torneio de verdade; no painel, o mouse sobre a chave pausa a rolagem.
             </p>
           </section>
 

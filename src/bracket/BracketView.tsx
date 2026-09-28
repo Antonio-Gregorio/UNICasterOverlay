@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef } from 'react'
 import { useData } from '../data'
 import { SCENE } from '../overlay/channel'
 import { Slot } from './Slot'
@@ -86,6 +87,8 @@ export function BracketView({
 
   const titulo = info.title.trim() || tournament.name
 
+  const rolagem = useAutoScroll(template.scroll)
+
   /*
    * A barra inclinada, em variáveis de CSS.
    *
@@ -148,10 +151,19 @@ export function BracketView({
            * onde o título começa, e quem precisa de mais rodada em cena usa o
            * tamanho ou o corte de rodadas.
            */}
-          <div className="bracket-scene__body">
+          <div className="bracket-scene__body" ref={rolagem.body}>
             <div
               className="bracket-scene__fit"
               style={{ transform: offsetY ? `translateY(${offsetY * scale}px)` : undefined }}
+            >
+            {/* A rolagem mora numa camada própria: o ajuste vertical fica na de
+                fora, e as duas se somam em vez de uma apagar a transformação da
+                outra. No painel, o mouse em cima pausa — mexer numa vaga que
+                está andando é errar o clique. */}
+            <div
+              ref={rolagem.content}
+              onMouseEnter={edit ? rolagem.pause : undefined}
+              onMouseLeave={edit ? rolagem.resume : undefined}
             >
             {times ? (
               <TowersView
@@ -211,6 +223,7 @@ export function BracketView({
                 ))}
               </div>
             )}
+            </div>
             </div>
           </div>
         </div>
@@ -427,4 +440,76 @@ function MatchBox({
       ))}
     </div>
   )
+}
+
+/**
+ * Rola a chave que não cabe: parada no topo, desce até o fim, para, sobe.
+ *
+ * Mede o que sobra — a altura do conteúdo menos a da área visível — e anda
+ * exatamente isso, nem um pixel além. Remede sozinho quando o tamanho muda
+ * (outra rodada em cena, outro zoom, mais gente), e para quando tudo passa a
+ * caber: uma chave pequena com a rolagem ligada fica quieta no centro, como
+ * sempre ficou.
+ *
+ * Pela Web Animations API e não por keyframes de CSS: as paradas são fatias do
+ * ciclo que dependem dos dois tempos escolhidos, e a distância depende da
+ * medida. Em CSS isso seria uma regra gerada a cada mudança.
+ */
+function useAutoScroll(config: BracketTemplate['scroll'] | undefined) {
+  const body = useRef<HTMLDivElement>(null)
+  const content = useRef<HTMLDivElement>(null)
+  const animacao = useRef<Animation | null>(null)
+
+  const ligado = config?.enabled ?? false
+  const duracao = Math.max(500, config?.duration ?? 8000)
+  const parada = Math.max(0, config?.pause ?? 0)
+
+  useEffect(() => {
+    const caixa = body.current
+    const el = content.current
+    if (!ligado || !caixa || !el || typeof el.animate !== 'function') return
+
+    let sobra = -1
+    const montar = () => {
+      // offsetHeight ignora transformações: mede o conteúdo, e não onde a
+      // própria animação o deixou.
+      const agora = Math.max(0, el.offsetHeight - caixa.clientHeight)
+      if (Math.abs(agora - sobra) < 1) return
+      sobra = agora
+      animacao.current?.cancel()
+      animacao.current = null
+      if (sobra < 2) return
+
+      // O conteúdo alto já nasce centrado, vazando metade para cada lado: o
+      // topo à mostra é meia sobra para baixo, o fim é meia sobra para cima.
+      const topo = `translateY(${sobra / 2}px)`
+      const fim = `translateY(${-sobra / 2}px)`
+      const ciclo = 2 * duracao + 2 * parada
+      animacao.current = el.animate(
+        [
+          { transform: topo, offset: 0 },
+          { transform: topo, offset: parada / ciclo, easing: 'ease-in-out' },
+          { transform: fim, offset: (parada + duracao) / ciclo },
+          { transform: fim, offset: (2 * parada + duracao) / ciclo, easing: 'ease-in-out' },
+          { transform: topo, offset: 1 },
+        ],
+        { duration: ciclo, iterations: Infinity }
+      )
+    }
+
+    montar()
+    const observer = new ResizeObserver(montar)
+    observer.observe(caixa)
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      animacao.current?.cancel()
+      animacao.current = null
+    }
+  }, [ligado, duracao, parada])
+
+  const pause = useCallback(() => animacao.current?.pause(), [])
+  const resume = useCallback(() => animacao.current?.play(), [])
+
+  return { body, content, pause, resume }
 }

@@ -273,6 +273,21 @@ export interface BracketTemplate {
      */
     angle: number
   }
+  /**
+   * Rolagem automática, para a chave que não cabe na tela.
+   *
+   * Uma chave de 40 passa da altura de 1080 mesmo cortando rodadas, e encolher
+   * até caber deixa o nome ilegível. Rolando, ela fica no tamanho em que se lê:
+   * parada no topo, desce até o fim, para, sobe, e recomeça. Só anda quando há o
+   * que rolar — uma chave que cabe fica quieta mesmo com isto ligado.
+   */
+  scroll: {
+    enabled: boolean
+    /** Tempo de uma passada inteira, de uma ponta à outra, em ms. */
+    duration: number
+    /** Tempo parado em cada ponta antes de voltar, em ms. */
+    pause: number
+  }
   /** Título, subtítulo e nomes de rodada. */
   info: BracketInfo
   /**

@@ -83,6 +83,7 @@ function migrateTemplate(t: BracketTemplate): BracketTemplate {
     background: { ...base.background, ...t.background },
     frame: { ...base.frame, ...t.frame },
     transition: { ...base.transition, ...t.transition },
+    scroll: { ...base.scroll, ...t.scroll },
     info: { ...base.info, ...t.info },
     // Seis cores sempre: um template de quando eram dois times ganha as outras
     // quatro do padrão, e as duas dele continuam onde estavam.
@@ -253,6 +254,8 @@ export function blankTemplate(): Omit<BracketTemplate, 'id' | 'createdAt'> {
     },
     frame: { style: 'none', color: '#e66d9f', intensity: 70, speed: 4000, thickness: 3 },
     transition: { style: 'fade', duration: 600, angle: 0 },
+    // Desligada: uma chave que cabe não precisa, e quem monta a que não cabe liga.
+    scroll: { enabled: false, duration: 8000, pause: 3000 },
     // Uma cor por time, todas diferentes de saída: é o que separa as colunas de relance.
     teams: [
       { color: '#e66d9f', textColor: '#ffffff' },
