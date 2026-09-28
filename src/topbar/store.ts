@@ -10,9 +10,33 @@ const listeners = new Set<() => void>()
 function read(): TopbarTemplate[] {
   try {
     const raw = localStorage.getItem(KEY)
-    return raw ? (JSON.parse(raw) as TopbarTemplate[]) : []
+    return raw ? (JSON.parse(raw) as TopbarTemplate[]).map(migrate) : []
   } catch {
     return []
+  }
+}
+
+/**
+ * Template gravado antes das cores por lado: o player 2 nasce igual ao 1, que é
+ * exatamente como ele era desenhado até então.
+ *
+ * Não parte de `blankTemplate()` de propósito: isto roda na carga do módulo,
+ * antes de `DEFAULT_FONT` existir, e o erro cairia no `catch` de `read` —
+ * apagando a lista inteira da memória.
+ */
+function migrate(t: TopbarTemplate): TopbarTemplate {
+  const fill = t.fill
+  return {
+    ...t,
+    fill: {
+      ...fill,
+      perSide: fill.perSide ?? false,
+      p2: fill.p2 ?? {
+        color: fill.color,
+        gradient: { angle: fill.gradient.angle, stops: [...fill.gradient.stops] },
+      },
+    },
+    highlight: { ...t.highlight, color2: t.highlight.color2 ?? t.highlight.color },
   }
 }
 
@@ -106,9 +130,18 @@ export function blankTemplate(): Omit<TopbarTemplate, 'id' | 'createdAt'> {
       type: 'gradient',
       color: '#1b1b28',
       gradient: { angle: 90, stops: ['#241b33', '#0f0f18'], mirror: true },
+      perSide: false,
+      p2: { color: '#1b1b28', gradient: { angle: 90, stops: ['#1b2433', '#0f0f18'] } },
     },
     border: { style: 'none', color: '#ffffff', width: 2 },
-    highlight: { enabled: true, color: '#e66d9f', useCharacterColor: true, intensity: 55, blur: 18 },
+    highlight: {
+      enabled: true,
+      color: '#e66d9f',
+      color2: '#4fa8e0',
+      useCharacterColor: true,
+      intensity: 55,
+      blur: 18,
+    },
     typography: {
       fontFamily: DEFAULT_FONT,
       nameColor: '#ffffff',

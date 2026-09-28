@@ -1661,6 +1661,12 @@ body.is-overlay {
   grid-template-columns: minmax(0, 1fr) 84px;
   gap: 8px;
 }
+/* Player e boneco lado a lado: a troca de personagem fica ao alcance do nome. */
+.player-pick {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
 
 /* O estado da conexão subiu para o cabeçalho, onde a margem de campo atrapalha. */
 .screen-head__actions .overlay-status {
@@ -2576,6 +2582,11 @@ body.is-overlay {
  * e placar, cada um com a sua origem de cor, e apagar no elemento inteiro trata
  * todos de uma vez — inclusive os que vierem depois.
  */
+/* Sem a cor na borda: o contorno fica só com a cor da vaga. A barra da
+   esquerda continua — é ela que identifica o boneco. */
+.bracket__slot.no-ring::after {
+  box-shadow: none;
+}
 .bracket__slot.is-loser {
   filter: grayscale(var(--apagar)) brightness(calc(1 - var(--apagar) * 0.35));
   opacity: calc(1 - var(--apagar) * 0.25);
@@ -3176,6 +3187,11 @@ body.is-overlay {
 }
 .tower-form {
   margin-bottom: 10px;
+}
+/* O boneco de cada escalado, na mesma linha do nome. */
+.entry-list__char {
+  flex: 0 1 130px;
+  min-width: 90px;
 }
 
 /**

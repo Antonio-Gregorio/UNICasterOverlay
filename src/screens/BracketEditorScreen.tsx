@@ -592,6 +592,12 @@ export function BracketEditorScreen() {
             >
               Usar a cor do personagem
             </Checkbox>
+            <Checkbox
+              checked={draft.highlight.border !== false}
+              onChange={(border) => patch({ highlight: { ...draft.highlight, border } })}
+            >
+              Cor na borda da vaga
+            </Checkbox>
             {!draft.highlight.useCharacterColor && (
               <Field label="Cor" htmlFor="br-hl">
                 <ColorInput

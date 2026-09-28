@@ -19,18 +19,20 @@ import {
   toggleDim as toggleMatchDim,
 } from '../bracket/seed'
 import {
+  addToTeam,
   addTournament,
   removeTournament,
   setEntries,
+  setEntryCharacter,
   updateTournament,
   updateTowers,
   useBracketTemplates,
   useTournaments,
 } from '../bracket/store'
 import {
-  addToTower,
   autoSides,
   dimInTower,
+  moveInTower,
   putInTower,
   removeFromTower,
   renameTeam,
@@ -40,7 +42,7 @@ import {
 } from '../bracket/towers'
 import { resolvePerson } from '../bracket/people'
 import { BracketStage } from '../bracket/BracketStage'
-import type { BracketEdit, BracketPlay, Entry, Match, SlotRef } from '../bracket/types'
+import type { BracketEdit, BracketPlay, Entry, Match, SlotRef, TowerSlot } from '../bracket/types'
 import type { AnimPlay, AnimSide } from '../anim/types'
 import { useEvents } from '../events'
 import { usePlayers } from '../players'
@@ -62,6 +64,7 @@ import {
   renamePreset,
   setupOf,
   updatePreset,
+  updatePresetObs,
   useOverlayPresets,
   type OverlaySetup,
   type Side,
@@ -336,7 +339,12 @@ export function OverlayScreen() {
   )
 
   const obs = setup.obs
-  const patchObs = (input: Partial<OverlaySetup['obs']>) => patch({ obs: { ...setup.obs, ...input } })
+  const patchObs = (input: Partial<OverlaySetup['obs']>) => {
+    const next = { ...setup.obs, ...input }
+    patch({ obs: next })
+    if (salvo) updatePresetObs(salvo.id, next)
+  }
+  const conectar = () => link.connect(obs.host, obs.port, obs.password)
 
   const send = useCallback(() => {
     // Vai pelos dois caminhos: o OBS pela fonte de navegador, e o
@@ -384,6 +392,11 @@ export function OverlayScreen() {
         keywords: characters.find((c) => c.slug === p.characterSlug)?.name ?? '',
       })),
     [players, teams, characters]
+  )
+
+  const characterChoices = useMemo(
+    () => characters.map((c) => ({ value: c.slug, label: c.name, keywords: c.slug })),
+    [characters]
   )
 
   /**
@@ -466,6 +479,25 @@ export function OverlayScreen() {
 
   const modo = bracketTpl?.mode ?? 'solo'
   const torres = torneio ? towersOf(torneio.towers) : null
+  /*
+   * A escalação que a cena está desenhando — inclusive a divisão automática de
+   * quem ainda não mexeu. A lista mostrava só a gravada, e aí a cena ia ao ar
+   * com gente que o painel dizia não estar em time nenhum.
+   */
+  const escalacao: [TowerSlot[], TowerSlot[]] =
+    torneio && torres
+      ? shouldAutoSplit(torneio.towers)
+        ? autoSides(torneio.entries.length)
+        : torres.sides
+      : [[], []]
+  const escalados = new Set(
+    [...escalacao[0], ...escalacao[1]].map((s) => torneio?.entries[s.entry]?.playerId)
+  )
+  /** Quem do cadastro ainda não está em time nenhum. */
+  const foraDosTimes = players.filter((p) => !escalados.has(p.id))
+  /** O boneco que a vaga vai mostrar: o trocado aqui, ou o do cadastro. */
+  const bonecoDe = (e: Entry | undefined): string | null =>
+    e?.characterSlug ?? players.find((p) => p.id === e?.playerId)?.characterSlug ?? null
 
   /** Onde está quem foi arrastado — em confronto ou em torre. */
   function entryDe(ref: SlotRef): number | null {
@@ -572,6 +604,20 @@ export function OverlayScreen() {
           <span className={`overlay-dot${conectado ? ' is-on' : ''}`} aria-hidden="true" />
           {conectado ? 'no ar' : (conn.detalhe ?? 'desconectado')}
         </p>
+        {/* No cabeçalho, e não só na aba Geral: abrir um overlay salvo cai na
+            aba da topbar, e o conectar ficava duas telas longe de quem só quer
+            pôr a cena no ar. */}
+        {!conectado && (
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={conectar}
+            disabled={conn.estado === 'conectando'}
+            title={`OBS em ${obs.host}:${obs.port}`}
+          >
+            {conn.estado === 'conectando' ? 'Conectando...' : 'Conectar ao OBS'}
+          </button>
+        )}
         <button
           type="button"
           className={`btn${showBars ? '' : ' btn--primary'}`}
@@ -617,18 +663,35 @@ export function OverlayScreen() {
           {([0, 1] as const).map((side) => (
             <section key={side} className="editor-section">
               <h3>{side === 0 ? 'Player 1' : 'Player 2'}</h3>
-              <Field label="Player" htmlFor={`ov-p${side}`}>
-                <Select
-                  id={`ov-p${side}`}
-                  options={playerChoices}
-                  value={setup.sides[side].playerId}
-                  onChange={(v) => patchSide(side, { playerId: v })}
-                  disabled={players.length === 0}
-                  placeholder="Selecione"
-                  emptyLabel="Vazio"
-                  searchPlaceholder="Buscar player..."
-                />
-              </Field>
+              <div className="player-pick">
+                <Field label="Player" htmlFor={`ov-p${side}`}>
+                  <Select
+                    id={`ov-p${side}`}
+                    options={playerChoices}
+                    value={setup.sides[side].playerId}
+                    // Outro player, outro boneco: a troca feita para o anterior
+                    // não vale para quem entrou.
+                    onChange={(v) => patchSide(side, { playerId: v, characterSlug: null })}
+                    disabled={players.length === 0}
+                    placeholder="Selecione"
+                    emptyLabel="Vazio"
+                    searchPlaceholder="Buscar player..."
+                  />
+                </Field>
+                {/* Ao lado do player, e não num cadastro: trocar de boneco é
+                    coisa do meio do set, e vale na hora. */}
+                <Field label="Personagem" htmlFor={`ov-c${side}`}>
+                  <Select
+                    id={`ov-c${side}`}
+                    options={characterChoices}
+                    value={payload.players[side].characterSlug}
+                    onChange={(v) => patchSide(side, { characterSlug: v })}
+                    placeholder="Do cadastro"
+                    emptyLabel="Do cadastro"
+                    searchPlaceholder="Buscar personagem..."
+                  />
+                </Field>
+              </div>
               <Field label="Pontos">
                 <div className="score-row">
                   <button type="button" className="btn btn--small" onClick={() => addScore(side, -1)}>
@@ -660,12 +723,15 @@ export function OverlayScreen() {
                 searchPlaceholder="Buscar template..."
               />
             </Field>
+            {/* Os limites passam 50px do quadro de propósito: encostar a barra na
+                borda às vezes pede que ela saia um pouco por ela. 1010 é meia cena
+                mais 50 — as duas juntas e sem vão escapam 50px de cada lado. */}
             <Field label="Largura de cada barra">
               <Range
                 value={setup.width}
                 onChange={(width) => patch({ width })}
                 min={360}
-                max={960}
+                max={1010}
                 suffix="px"
               />
             </Field>
@@ -688,8 +754,8 @@ export function OverlayScreen() {
               <Range
                 value={setup.offsetY}
                 onChange={(offsetY) => patch({ offsetY })}
-                min={0}
-                max={920}
+                min={-50}
+                max={970}
                 suffix="px"
               />
             </Field>
@@ -873,7 +939,7 @@ export function OverlayScreen() {
                     <button
                       type="button"
                       className="btn btn--small btn--primary"
-                      onClick={() => link.connect(obs.host, obs.port, obs.password)}
+                      onClick={conectar}
                       disabled={conn.estado === 'conectando'}
                     >
                       {conn.estado === 'conectando' ? 'Conectando...' : 'Conectar ao OBS'}
@@ -1039,19 +1105,24 @@ export function OverlayScreen() {
               >
                 + Torneio
               </button>
-              <button
-                type="button"
-                className="btn btn--small"
-                title="Sortear a ordem e refazer a chave"
-                disabled={!torneio || torneio.entries.length < 2}
-                onClick={() => {
-                  if (!torneio) return
-                  const t = shuffle(torneio)
-                  updateTournament(torneio.id, { entries: t.entries, matches: t.matches })
-                }}
-              >
-                <DiceIcon /> Sortear
-              </button>
+              {/* Nos times não há chave para sortear — e embaralhar a lista
+                  trocaria quem está em cada vaga das torres, que apontam para
+                  posições nela. */}
+              {modo !== 'times' && (
+                <button
+                  type="button"
+                  className="btn btn--small"
+                  title="Sortear a ordem e refazer a chave"
+                  disabled={!torneio || torneio.entries.length < 2}
+                  onClick={() => {
+                    if (!torneio) return
+                    const t = shuffle(torneio)
+                    updateTournament(torneio.id, { entries: t.entries, matches: t.matches })
+                  }}
+                >
+                  <DiceIcon /> Sortear
+                </button>
+              )}
               <button
                 type="button"
                 className="btn btn--small"
@@ -1067,6 +1138,9 @@ export function OverlayScreen() {
             </div>
           </section>
 
+          {/* Nos times quem joga é quem está escalado: os times se montam direto
+              na seção de baixo, sem uma lista de inscritos à parte. */}
+          {modo !== 'times' && (
           <section className="editor-section">
             <h3>
               Participantes{' '}
@@ -1168,9 +1242,10 @@ export function OverlayScreen() {
               </>
             )}
           </section>
+          )}
 
           <section className="editor-section">
-            <h3>{modo === 'times' ? 'Torres' : 'Confronto'}</h3>
+            <h3>{modo === 'times' ? 'Times' : 'Confronto'}</h3>
             {modo === 'times' ? (
               !torneio || !torres ? (
                 <p className="overlay-note">Escolha ou crie um torneio para montar as torres.</p>
@@ -1188,33 +1263,67 @@ export function OverlayScreen() {
                         />
                       </Field>
 
+                      {/* Direto do cadastro, ou pelo nome: numa guerra de times
+                          sempre entra alguém de última hora. Não há lista de
+                          inscritos à parte — quem está no time é quem foi
+                          escalado. */}
                       <Field label="Escalar" htmlFor={`ov-torre-${lado}`}>
                         <Select
                           id={`ov-torre-${lado}`}
-                          options={torneio.entries
-                            .map((e, i) => ({ e, i }))
-                            .filter(
-                              ({ i }) =>
-                                !torres.sides[0].some((x) => x.entry === i) &&
-                                !torres.sides[1].some((x) => x.entry === i)
-                            )
-                            .map(({ e, i }) => ({ value: String(i), label: nomeDe(e) }))}
+                          options={foraDosTimes.map((p) => ({
+                            value: p.id,
+                            label: p.name,
+                            hint: teamOf(p, teams)?.label,
+                            keywords: characters.find((c) => c.slug === p.characterSlug)?.name ?? '',
+                          }))}
                           value={null}
-                          onChange={(v) =>
-                            v !== null && updateTowers(torneio.id, (t) => addToTower(t, lado, Number(v)))
-                          }
-                          placeholder="Escolher participante"
-                          searchPlaceholder="Buscar..."
+                          onChange={(id) => {
+                            const p = players.find((x) => x.id === id)
+                            if (p) addToTeam(torneio.id, lado, { playerId: p.id, name: p.name })
+                          }}
+                          placeholder="Player ou nome"
+                          searchPlaceholder="Buscar ou digitar um nome..."
+                          onCustom={(texto) => addToTeam(torneio.id, lado, { playerId: null, name: texto })}
                         />
                       </Field>
                       <ol className="entry-list">
-                        {torres.sides[lado].map((slot, i) => (
+                        {escalacao[lado].map((slot, i) => (
                           <li key={i}>
                             <span className="entry-list__n">{i + 1}</span>
                             <span className={`entry-list__name${slot.dim ? ' is-dim' : ''}`}>
                               {nomeDe(torneio.entries[slot.entry])}
                             </span>
+                            {/* O boneco de cada um, trocável na hora — de quem
+                                entrou pelo nome e de quem veio do cadastro. */}
+                            <span className="entry-list__char">
+                              <Select
+                                options={characterChoices}
+                                value={bonecoDe(torneio.entries[slot.entry])}
+                                onChange={(v) => setEntryCharacter(torneio.id, slot.entry, v)}
+                                placeholder="Personagem"
+                                emptyLabel="Do cadastro"
+                                searchPlaceholder="Buscar personagem..."
+                              />
+                            </span>
                             <span className="entry-list__n">{slot.score}</span>
+                            <button
+                              type="button"
+                              className="icon-btn"
+                              title="Subir"
+                              disabled={i === 0}
+                              onClick={() => updateTowers(torneio.id, (t) => moveInTower(t, lado, i, -1))}
+                            >
+                              ↑
+                            </button>
+                            <button
+                              type="button"
+                              className="icon-btn"
+                              title="Descer"
+                              disabled={i === escalacao[lado].length - 1}
+                              onClick={() => updateTowers(torneio.id, (t) => moveInTower(t, lado, i, 1))}
+                            >
+                              ↓
+                            </button>
                             <button
                               type="button"
                               className={`icon-btn${slot.dim ? ' is-on' : ''}`}
@@ -1237,20 +1346,6 @@ export function OverlayScreen() {
                     </div>
                   ))}
                   <div className="btn-row">
-                    <button
-                      type="button"
-                      className="btn btn--small"
-                      disabled={torneio.entries.length === 0}
-                      title="Divide os inscritos entre os dois lados"
-                      onClick={() =>
-                        updateTowers(torneio.id, (t) => ({
-                          ...t,
-                          sides: autoSides(torneio.entries.length),
-                        }))
-                      }
-                    >
-                      Escalar todos
-                    </button>
                     {/* Sem `disabled`: limpar uma escalação que ainda é a
                         automática é justamente o gesto que diz "quero as torres
                         vazias" — e é ele que desliga a divisão automática. */}
@@ -1263,9 +1358,8 @@ export function OverlayScreen() {
                     </button>
                   </div>
                   <p className="overlay-note">
-                    Ponto e cinza também saem da própria prévia: passe o mouse na vaga e use os
-                    botões que aparecem nela. Sem escalação nenhuma, a cena divide os inscritos
-                    ao meio para não ir ao ar vazia.
+                    As setas mudam a ordem dentro do time. Ponto e cinza também saem da
+                    própria prévia: passe o mouse na vaga e use os botões que aparecem nela.
                   </p>
                 </>
               )
@@ -1352,7 +1446,7 @@ export function OverlayScreen() {
               horizontal, a `offsetY` px do topo. */}
           <div
             className="overlay-preview__scene"
-            style={{ paddingTop: setup.offsetY * fit.scale }}
+            style={{ top: setup.offsetY * fit.scale }}
           >
             <OverlayStage payload={payload} scale={fit.scale} />
           </div>
@@ -1416,13 +1510,13 @@ function animSide(data: TopbarData): AnimSide {
 /** Monta o TopbarData de um lado a partir do player escolhido. */
 function sideData(side: Side, players: Player[], teams: Team[]): TopbarData {
   const player = players.find((p) => p.id === side.playerId)
-  if (!player) return { ...EMPTY, score: side.score }
+  if (!player) return { ...EMPTY, characterSlug: side.characterSlug ?? null, score: side.score }
   const team = teamOf(player, teams)
   return {
     name: player.name,
     teamTag: team?.label ?? null,
     teamLogo: team?.logo ?? null,
-    characterSlug: player.characterSlug,
+    characterSlug: side.characterSlug ?? player.characterSlug,
     countryCode: player.countryCode,
     regionCode: player.regionCode,
     score: side.score,

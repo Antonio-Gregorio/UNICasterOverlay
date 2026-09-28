@@ -52,9 +52,11 @@ export function OverlayLiveScreen() {
        * superior esquerdo com uma folga fixa, e acertar o lugar exigia arrastar
        * a fonte dentro do OBS — o que muda a escala junto e desalinha o resto.
        */}
+      {/* `top` e não `paddingTop`: a posição aceita valor negativo, para a barra
+          sair um pouco pela borda de cima — e padding negativo não existe. */}
       <div
         className="overlay-live__bars"
-        style={{ paddingTop: (payload.offsetY ?? 0) * escala }}
+        style={{ top: (payload.offsetY ?? 0) * escala }}
       >
         <OverlayStage payload={payload} scale={escala} />
       </div>

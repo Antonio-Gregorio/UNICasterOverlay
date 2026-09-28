@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import { DEFAULT_FONT } from '../topbar/store'
 import { buildBracket } from './seed'
-import { autoSides, shouldAutoSplit, towersOf } from './towers'
+import { addToTower, autoSides, shouldAutoSplit, towersOf } from './towers'
 import type { BracketTemplate, Entry, Tournament, Towers } from './types'
 
 /**
@@ -142,6 +142,54 @@ export function updateTowers(id: string, fn: (towers: Towers) => Towers) {
   // Mexeu, virou decisão: daqui em diante a divisão automática não volta.
   tournaments.update(id, { towers: { ...fn(base), touched: true } })
 }
+/**
+ * Escala alguém direto num time — o modo de times não tem lista de inscritos à
+ * parte: quem está no time é quem foi escalado.
+ *
+ * A inscrição continua existindo por baixo, porque a torre guarda índice na
+ * lista (ver TowerSlot). Quem saiu de uma torre e volta reaproveita a inscrição
+ * que já tinha, em vez de empilhar cópias dela a cada ida e volta.
+ *
+ * Numa gravação só, e não `updateTournament` seguido de `updateTowers`: entre
+ * as duas, a divisão automática enxergaria a inscrição nova e a jogaria no lado
+ * errado antes de ela ser escalada.
+ */
+export function addToTeam(id: string, side: 0 | 1, entry: Entry) {
+  const torneio = tournaments.all().find((t) => t.id === id)
+  if (!torneio) return
+  const base = shouldAutoSplit(torneio.towers)
+    ? { ...towersOf(torneio.towers), sides: autoSides(torneio.entries.length) }
+    : towersOf(torneio.towers)
+  const escalado = (i: number) => base.sides[0].some((s) => s.entry === i) || base.sides[1].some((s) => s.entry === i)
+
+  let index = torneio.entries.findIndex((e, i) =>
+    !escalado(i) &&
+    (entry.playerId ? e.playerId === entry.playerId : !e.playerId && e.name === entry.name)
+  )
+  let entries = torneio.entries
+  if (index < 0) {
+    entries = [...entries, entry]
+    index = entries.length - 1
+  } else if (entry.characterSlug !== undefined) {
+    entries = entries.map((e, i) => (i === index ? { ...e, characterSlug: entry.characterSlug } : e))
+  }
+  // Já está num dos times: escalar de novo seria o mesmo engano de clique que
+  // `addToTower` recusa.
+  if (escalado(index)) return
+
+  const sides = addToTower(base, side, index).sides
+  tournaments.update(id, { entries, towers: { ...base, sides, touched: true } })
+}
+
+/** Troca o boneco de uma inscrição sem refazer confronto nenhum. */
+export function setEntryCharacter(id: string, index: number, characterSlug: string | null) {
+  const torneio = tournaments.all().find((t) => t.id === id)
+  if (!torneio) return
+  tournaments.update(id, {
+    entries: torneio.entries.map((e, i) => (i === index ? { ...e, characterSlug } : e)),
+  })
+}
+
 export const removeTournament = (id: string) => tournaments.remove(id)
 
 /** Troca a lista de participantes e refaz a chave junto — as duas andam presas. */
@@ -192,7 +240,7 @@ export function blankTemplate(): Omit<BracketTemplate, 'id' | 'createdAt'> {
       roundSize: 13,
     },
     typography: { fontFamily: DEFAULT_FONT, nameColor: '#ffffff', scoreColor: '#ffffff' },
-    highlight: { enabled: true, useCharacterColor: true, color: '#e66d9f', intensity: 60 },
+    highlight: { enabled: true, useCharacterColor: true, color: '#e66d9f', intensity: 60, border: true },
     dimLosers: true,
     dimAmount: 65,
     slot: {

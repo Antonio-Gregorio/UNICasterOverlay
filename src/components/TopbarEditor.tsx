@@ -254,75 +254,37 @@ export function TopbarEditor({
                     ]}
                   />
                 </Field>
-                {draft.fill.type === 'solid' ? (
-                  <Field label="Cor">
-                    <ColorInput value={draft.fill.color} onChange={(v) => patch('fill', { color: v })} />
-                  </Field>
-                ) : (
-                  <>
-                    <Field label="Direção">
-                      <Range
-                        value={draft.fill.gradient.angle}
-                        onChange={(v) => patch('fill', { gradient: { ...draft.fill.gradient, angle: v } })}
-                        min={0}
-                        max={360}
-                        suffix="°"
-                      />
-                    </Field>
-                    <Checkbox
-                      checked={draft.fill.gradient.mirror ?? false}
-                      onChange={(v) => patch('fill', { gradient: { ...draft.fill.gradient, mirror: v } })}
-                    >
-                      Espelhar no player 2
-                    </Checkbox>
-                    <Field label="Cores" hint={`${draft.fill.gradient.stops.length}`}>
-                      <div className="stops">
-                        {draft.fill.gradient.stops.map((stop, i) => (
-                          <div key={i} className="stops__row">
-                            <ColorInput
-                              value={stop}
-                              onChange={(v) => {
-                                const stops = [...draft.fill.gradient.stops]
-                                stops[i] = v
-                                patch('fill', { gradient: { ...draft.fill.gradient, stops } })
-                              }}
-                            />
-                            <button
-                              type="button"
-                              className="icon-btn icon-btn--danger"
-                              title="Remover cor"
-                              disabled={draft.fill.gradient.stops.length <= 2}
-                              onClick={() =>
-                                patch('fill', {
-                                  gradient: {
-                                    ...draft.fill.gradient,
-                                    stops: draft.fill.gradient.stops.filter((_, j) => j !== i),
-                                  },
-                                })
-                              }
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        ))}
-                        <button
-                          type="button"
-                          className="btn btn--small"
-                          disabled={draft.fill.gradient.stops.length >= 6}
-                          onClick={() =>
-                            patch('fill', {
-                              gradient: {
-                                ...draft.fill.gradient,
-                                stops: [...draft.fill.gradient.stops, '#ffffff'],
-                              },
-                            })
-                          }
-                        >
-                          + cor
-                        </button>
-                      </div>
-                    </Field>
-                  </>
+                <Checkbox
+                  checked={draft.fill.perSide}
+                  onChange={(v) => patch('fill', { perSide: v })}
+                >
+                  Um fundo para cada lado
+                </Checkbox>
+                {draft.fill.type === 'gradient' && (
+                  <Checkbox
+                    checked={draft.fill.gradient.mirror ?? false}
+                    onChange={(v) => patch('fill', { gradient: { ...draft.fill.gradient, mirror: v } })}
+                  >
+                    Espelhar no player 2
+                  </Checkbox>
+                )}
+                <FillFields
+                  title={draft.fill.perSide ? 'Player 1' : undefined}
+                  type={draft.fill.type}
+                  color={draft.fill.color}
+                  gradient={draft.fill.gradient}
+                  onColor={(color) => patch('fill', { color })}
+                  onGradient={(g) => patch('fill', { gradient: { ...draft.fill.gradient, ...g } })}
+                />
+                {draft.fill.perSide && (
+                  <FillFields
+                    title="Player 2"
+                    type={draft.fill.type}
+                    color={draft.fill.p2.color}
+                    gradient={draft.fill.p2.gradient}
+                    onColor={(color) => patch('fill', { p2: { ...draft.fill.p2, color } })}
+                    onGradient={(gradient) => patch('fill', { p2: { ...draft.fill.p2, gradient } })}
+                  />
                 )}
               </Section>
 
@@ -373,13 +335,24 @@ export function TopbarEditor({
                     >
                       Usar a cor do personagem
                     </Checkbox>
+                    {/* Com a cor do boneco ligada, estas viram a reserva de quem
+                        ainda não escolheu personagem. */}
                     <Field
-                      label="Cor"
-                      hint={draft.highlight.useCharacterColor ? 'ignorada' : undefined}
+                      label="Cor do player 1"
+                      hint={draft.highlight.useCharacterColor ? 'sem boneco' : undefined}
                     >
                       <ColorInput
                         value={draft.highlight.color}
                         onChange={(v) => patch('highlight', { color: v })}
+                      />
+                    </Field>
+                    <Field
+                      label="Cor do player 2"
+                      hint={draft.highlight.useCharacterColor ? 'sem boneco' : undefined}
+                    >
+                      <ColorInput
+                        value={draft.highlight.color2}
+                        onChange={(v) => patch('highlight', { color2: v })}
                       />
                     </Field>
                     <Field label="Intensidade">
@@ -567,6 +540,80 @@ export function TopbarEditor({
 
 
     </form>
+  )
+}
+
+/** Cor chapada ou degradê de um lado da barra — o mesmo par de campos nos dois. */
+function FillFields({
+  title,
+  type,
+  color,
+  gradient,
+  onColor,
+  onGradient,
+}: {
+  title?: string
+  type: TopbarTemplate['fill']['type']
+  color: string
+  gradient: { angle: number; stops: string[] }
+  onColor: (color: string) => void
+  onGradient: (gradient: { angle: number; stops: string[] }) => void
+}) {
+  const setStops = (stops: string[]) => onGradient({ angle: gradient.angle, stops })
+  const fields =
+    type === 'solid' ? (
+      <Field label="Cor">
+        <ColorInput value={color} onChange={onColor} />
+      </Field>
+    ) : (
+      <>
+        <Field label="Direção">
+          <Range
+            value={gradient.angle}
+            onChange={(angle) => onGradient({ angle, stops: gradient.stops })}
+            min={0}
+            max={360}
+            suffix="°"
+          />
+        </Field>
+        <Field label="Cores" hint={`${gradient.stops.length}`}>
+          <div className="stops">
+            {gradient.stops.map((stop, i) => (
+              <div key={i} className="stops__row">
+                <ColorInput
+                  value={stop}
+                  onChange={(v) => setStops(gradient.stops.map((s, j) => (j === i ? v : s)))}
+                />
+                <button
+                  type="button"
+                  className="icon-btn icon-btn--danger"
+                  title="Remover cor"
+                  disabled={gradient.stops.length <= 2}
+                  onClick={() => setStops(gradient.stops.filter((_, j) => j !== i))}
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              className="btn btn--small"
+              disabled={gradient.stops.length >= 6}
+              onClick={() => setStops([...gradient.stops, '#ffffff'])}
+            >
+              + cor
+            </button>
+          </div>
+        </Field>
+      </>
+    )
+
+  if (!title) return fields
+  return (
+    <fieldset className="side-fields">
+      <legend>{title}</legend>
+      {fields}
+    </fieldset>
   )
 }
 

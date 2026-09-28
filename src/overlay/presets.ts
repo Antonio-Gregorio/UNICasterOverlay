@@ -16,6 +16,14 @@ const KEY = 'unicompslide.overlay-presets.v1'
 export interface Side {
   playerId: string | null
   score: number
+  /**
+   * Boneco escolhido no painel, por cima do que o cadastro diz. Nulo = o do
+   * cadastro.
+   *
+   * Existe porque o player troca de personagem no meio do evento — às vezes no
+   * meio do set —, e mudar o cadastro para isso mexeria em toda tela que o usa.
+   */
+  characterSlug?: string | null
 }
 
 /**
@@ -162,6 +170,17 @@ export function duplicatePreset(id: string): string | null {
   }
   commit([...presets, copia])
   return copia.id
+}
+
+/**
+ * Grava só o acesso ao OBS, sem esperar o "Salvar overlay".
+ *
+ * Endereço e senha não são montagem de cena: são o que faz a cena chegar. Se
+ * ficassem esperando o salvar, a senha corrigida num overlay voltava à errada
+ * na próxima vez que ele fosse aberto — e conectar dali falhava de novo.
+ */
+export function updatePresetObs(id: string, obs: ObsSetup) {
+  commit(presets.map((p) => (p.id === id ? { ...p, obs: { ...obs } } : p)))
 }
 
 export function renamePreset(id: string, name: string) {

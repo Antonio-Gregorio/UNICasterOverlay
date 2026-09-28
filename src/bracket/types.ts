@@ -14,6 +14,14 @@ export interface Entry {
    * de posição.
    */
   partner?: { playerId: string | null; name: string } | null
+  /**
+   * Boneco escolhido para esta inscrição, por cima do cadastro. Nulo = o do
+   * cadastro (e nenhum, para quem entrou só com o nome).
+   *
+   * Mora na inscrição e não no player: numa guerra de times o mesmo jogador pode
+   * ir de outro personagem, e isso não é motivo para mexer no cadastro dele.
+   */
+  characterSlug?: string | null
 }
 
 /**
@@ -288,6 +296,15 @@ export interface BracketTemplate {
     color: string
     /** 0–100. */
     intensity: number
+    /**
+     * A cor também contorna a vaga.
+     *
+     * Desligado, o contorno fica só com a cor de borda da vaga — inclusive no
+     * anel das duplas — e a cor do personagem sobra na barra da esquerda. Numa
+     * chave cheia, quarenta contornos de cores diferentes viram ruído; a barrinha
+     * já identifica o boneco.
+     */
+    border: boolean
   }
 
   /** Quem perdeu sai de cor. Sem isto, uma chave cheia vira uma parede igual. */

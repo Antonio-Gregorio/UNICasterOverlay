@@ -7,7 +7,7 @@ import { useBracketTemplates, useTournaments } from '../bracket/store'
 import { useAnims } from '../anim/store'
 import { useTopbars } from '../topbar/store'
 import { duplicatePreset, removePreset, useOverlayPresets } from '../overlay/presets'
-import { useObsConnection } from '../overlay/obs'
+import { obsLink, useObsConnection } from '../overlay/obs'
 import type { ViewMode } from '../types'
 
 /**
@@ -118,13 +118,29 @@ export function OverlayListScreen() {
                   OBS em {preset.obs.host}:{preset.obs.port}
                   {preset.obs.password ? ' · com senha' : ''}
                 </p>
-                <button
-                  type="button"
-                  className="btn btn--small btn--primary"
-                  onClick={() => navigate(`/overlay/${preset.id}`)}
-                >
-                  Abrir painel
-                </button>
+                <div className="btn-row">
+                  <button
+                    type="button"
+                    className="btn btn--small btn--primary"
+                    onClick={() => navigate(`/overlay/${preset.id}`)}
+                  >
+                    Abrir painel
+                  </button>
+                  {/* Conecta com o acesso deste overlay e já abre o painel dele. */}
+                  {!conectado && (
+                    <button
+                      type="button"
+                      className="btn btn--small"
+                      disabled={conn.estado === 'conectando'}
+                      onClick={() => {
+                        obsLink().connect(preset.obs.host, preset.obs.port, preset.obs.password)
+                        navigate(`/overlay/${preset.id}`)
+                      }}
+                    >
+                      Conectar e abrir
+                    </button>
+                  )}
+                </div>
               </article>
             )
           })}

@@ -18,7 +18,7 @@ export function resolvePerson(
   teams: Team[],
   characters: Character[]
 ): Person {
-  const pessoa = umaPessoa(entry.playerId, entry.name, players, teams, characters)
+  const pessoa = umaPessoa(entry.playerId, entry.name, players, teams, characters, entry.characterSlug)
   // A dupla vai pendurada na primeira, e não como um segundo participante: ela
   // avança junta e ocupa uma vaga só — ver Entry.partner.
   const parceiro = entry.partner
@@ -32,15 +32,20 @@ function umaPessoa(
   nome: string,
   players: Player[],
   teams: Team[],
-  characters: Character[]
+  characters: Character[],
+  /** Boneco trocado no painel; ausente = o do cadastro. */
+  override?: string | null
 ): Person {
   const player = players.find((p) => p.id === playerId)
-  if (!player) return { name: nome, teamTag: null, characterSlug: null, countryCode: null, color: null }
-  const character = characters.find((c) => c.slug === player.characterSlug)
+  const slug = override ?? player?.characterSlug ?? null
+  const character = characters.find((c) => c.slug === slug)
+  if (!player) {
+    return { name: nome, teamTag: null, characterSlug: slug, countryCode: null, color: character?.colors?.[0]?.hex ?? null }
+  }
   return {
     name: player.name,
     teamTag: teamOf(player, teams)?.label ?? null,
-    characterSlug: player.characterSlug,
+    characterSlug: slug,
     countryCode: player.countryCode,
     color: character?.colors?.[0]?.hex ?? null,
   }

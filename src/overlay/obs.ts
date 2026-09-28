@@ -46,10 +46,30 @@ export class ObsLink {
     this.close()
     this.onChange({ estado: 'conectando', detalhe: null })
 
-    const socket = new WebSocket(`ws://${host}:${port}`)
+    let socket: WebSocket
+    try {
+      socket = new WebSocket(`ws://${host.trim()}:${port}`)
+    } catch {
+      // Endereço com espaço, porta vazia: o construtor recusa na hora, e sem
+      // isto o painel ficava em "conectando" para sempre.
+      this.onChange({ estado: 'erro', detalhe: 'endereço ou porta inválidos' })
+      return
+    }
     this.socket = socket
 
+    /**
+     * O socket que este `connect` abriu ainda é o da vez?
+     *
+     * Reconectar fecha o anterior, e o `onclose` dele chega depois — quando o
+     * novo já está conectando ou até conectado. Sem esta guarda, o aviso do
+     * velho derrubava o estado do novo para "parado": o painel dizia
+     * desconectado com o OBS recebendo tudo, e o botão de conectar voltava,
+     * pronto para fechar o socket bom na próxima tentativa.
+     */
+    const atual = () => this.socket === socket
+
     socket.onmessage = async (e) => {
+      if (!atual()) return
       const msg = JSON.parse(e.data as string) as { op: number; d: Record<string, unknown> }
 
       if (msg.op === 0) {
@@ -57,8 +77,11 @@ export class ObsLink {
         const identify: Record<string, unknown> = { rpcVersion: 1, eventSubscriptions: 0 }
         if (auth) {
           if (!password) {
-            this.onChange({ estado: 'erro', detalhe: 'o OBS está pedindo senha' })
+            // Solto antes de fechar: o `onclose` que vem depois não é mais
+            // deste socket, e não troca o aviso da senha por "desconectado".
+            this.socket = null
             socket.close()
+            this.onChange({ estado: 'erro', detalhe: 'o OBS está pedindo senha' })
             return
           }
           identify.authentication = await hash((await hash(password + auth.salt)) + auth.challenge)
@@ -77,18 +100,26 @@ export class ObsLink {
 
       if (msg.op === 7) {
         const status = (msg.d as { requestStatus?: { result: boolean; comment?: string } }).requestStatus
+        // Um comando recusado não é conexão caída: o socket segue aberto e o
+        // próximo envio pode passar. Marcar como erro escondia o "no ar",
+        // parava o reenvio automático e pedia para conectar de novo.
         if (status && !status.result) {
-          this.onChange({ estado: 'erro', detalhe: status.comment ?? 'o OBS recusou o comando' })
+          this.onChange({ estado: 'conectado', detalhe: status.comment ?? 'o OBS recusou o comando' })
         }
       }
     }
 
     socket.onerror = () => {
+      if (!atual()) return
       this.onChange({ estado: 'erro', detalhe: 'não achei o OBS nesse endereço' })
     }
-    socket.onclose = () => {
-      if (this.socket === socket) this.socket = null
-      this.onChange({ estado: 'parado', detalhe: null })
+    socket.onclose = (e) => {
+      if (!atual()) return
+      this.socket = null
+      // O OBS explica por que fechou no código; sem ele o painel só dizia
+      // "desconectado", e senha errada parecia a mesma coisa que OBS fechado.
+      const motivo = CLOSE_REASONS[e.code] ?? null
+      this.onChange(motivo ? { estado: 'erro', detalhe: motivo } : { estado: 'parado', detalhe: null })
     }
   }
 
@@ -131,10 +162,22 @@ export class ObsLink {
     return true
   }
 
+  /** Desligar por vontade própria: avisa na hora, sem esperar o `onclose`. */
   close() {
-    this.socket?.close()
+    const socket = this.socket
     this.socket = null
+    if (!socket) return
+    socket.close()
+    this.onChange({ estado: 'parado', detalhe: null })
   }
+}
+
+/** Códigos de fechamento do obs-websocket 5 que valem uma explicação. */
+const CLOSE_REASONS: Record<number, string> = {
+  1006: 'não achei o OBS nesse endereço',
+  4008: 'o OBS está pedindo senha',
+  4009: 'senha do OBS incorreta',
+  4010: 'versão do obs-websocket incompatível',
 }
 
 /**

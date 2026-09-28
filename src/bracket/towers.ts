@@ -98,6 +98,22 @@ export function putInTower(towers: Towers, side: 0 | 1, index: number, entry: nu
   return { ...towers, sides }
 }
 
+/**
+ * Sobe ou desce alguém dentro da própria torre.
+ *
+ * A casa inteira vai junto — placar e cinza incluídos —, ao contrário de
+ * `putInTower`: aqui não se está trocando quem ocupa a vaga, e sim a ordem de
+ * entrada de quem já foi escalado.
+ */
+export function moveInTower(towers: Towers, side: 0 | 1, index: number, delta: -1 | 1): Towers {
+  const alvo = index + delta
+  const lista = towers.sides[side]
+  if (alvo < 0 || alvo >= lista.length) return towers
+  const sides = clone(towers.sides)
+  ;[sides[side][index], sides[side][alvo]] = [sides[side][alvo], sides[side][index]]
+  return { ...towers, sides }
+}
+
 export function renameTeam(towers: Towers, side: 0 | 1, name: string): Towers {
   const names: [string, string] = [...towers.names]
   names[side] = name

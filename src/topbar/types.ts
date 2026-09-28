@@ -45,6 +45,16 @@ export interface TopbarTemplate {
        */
       mirror: boolean
     }
+    /**
+     * Cada lado com o próprio fundo. Desligado, o player 2 repete o do player 1
+     * (espelhado ou não, conforme `gradient.mirror`).
+     */
+    perSide: boolean
+    /** O fundo do player 2 quando `perSide` está ligado. Usa o mesmo `type`. */
+    p2: {
+      color: string
+      gradient: { angle: number; stops: string[] }
+    }
   }
 
   /** Contorno desenhado sobre a silhueta. */
@@ -57,9 +67,12 @@ export interface TopbarTemplate {
   /** Brilho colorido por trás da barra, escapando pelas bordas. */
   highlight: {
     enabled: boolean
+    /** Cor do player 1. */
     color: string
+    /** Cor do player 2: cada lado acende com a sua, sem depender do boneco. */
+    color2: string
     /**
-     * Ignora a cor acima e usa a cor primária do personagem em cena — cada
+     * Ignora as cores acima e usa a cor primária do personagem em cena — cada
      * player acende a barra com a própria identidade.
      */
     useCharacterColor: boolean

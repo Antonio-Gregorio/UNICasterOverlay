@@ -47,19 +47,24 @@ export function TopbarPreview({
   const viewH = geo.height + pad * 2
   const scale = width / viewW
 
-  const fillRef = template.fill.type === 'gradient' ? `url(#grad-${uid})` : template.fill.color
+  // A barra espelhada é a do player 2: com fundo por lado, ela pinta com o dela.
+  const own = mirrored && template.fill.perSide && template.fill.p2 ? template.fill.p2 : template.fill
+  const fillRef = template.fill.type === 'gradient' ? `url(#grad-${uid})` : own.color
   // Espelhar o degradê é refletir o vetor no eixo horizontal: as duas barras
   // passam a se olhar em vez de correrem as duas para o mesmo lado.
   const flipGradient = mirrored && template.fill.gradient.mirror
-  const vector = gradientVector(template.fill.gradient.angle)
+  const vector = gradientVector(own.gradient.angle)
   const { y1, y2 } = vector
   const x1 = flipGradient ? 1 - vector.x1 : vector.x1
   const x2 = flipGradient ? 1 - vector.x2 : vector.x2
-  const stops = template.fill.gradient.stops.length ? template.fill.gradient.stops : [template.fill.color]
+  const stops = own.gradient.stops.length ? own.gradient.stops : [own.color]
 
-  const glowColor = template.highlight.useCharacterColor
-    ? (character?.colors?.[0]?.hex ?? template.highlight.color)
+  const sideColor = mirrored
+    ? (template.highlight.color2 ?? template.highlight.color)
     : template.highlight.color
+  const glowColor = template.highlight.useCharacterColor
+    ? (character?.colors?.[0]?.hex ?? sideColor)
+    : sideColor
 
   const layout = contentLayout(template, geo, data, flags, mirrored)
   const anchor = mirrored ? 'end' : 'start'

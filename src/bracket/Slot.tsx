@@ -70,7 +70,9 @@ export function Slot({
    * valendo aqui.
    */
   const forca = highlight.enabled ? (won ? 0.35 + (highlight.intensity / 100) * 0.65 : (highlight.intensity / 100) * 0.55) : 0
-  const anel = duo
+  // Sem a cor na borda, a dupla volta ao contorno chapado das outras vagas.
+  const comBorda = highlight.border !== false
+  const anel = duo && comBorda
     ? `linear-gradient(${slot.background}, ${slot.background}) padding-box,` +
       ` linear-gradient(-45deg, ${mistura(slot.borderColor, corB, forca)}, ${mistura(slot.borderColor, cor, forca)}) border-box`
     : null
@@ -104,7 +106,7 @@ export function Slot({
       className={
         `bracket__slot${duo ? ' is-duo' : ''}` +
         `${won ? ' is-winner' : ''}${lost ? ' is-loser' : ''}${person ? '' : ' is-empty'}` +
-        `${edit ? ' is-editable' : ''}${alvo ? ' is-drop' : ''}`
+        `${edit ? ' is-editable' : ''}${alvo ? ' is-drop' : ''}${comBorda ? '' : ' no-ring'}`
       }
       style={{
         height: slot.height * scale,
