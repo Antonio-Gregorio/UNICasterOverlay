@@ -1372,7 +1372,10 @@ export function OverlayScreen() {
                           onCustom={(texto) => addToTeam(torneio.id, lado, { playerId: null, name: texto })}
                         />
                       </Field>
-                      <ol className="entry-list">
+                      {/* Duas linhas por jogador: nome e placar em cima, boneco e
+                          botões embaixo. Numa linha só, o seletor e os botões
+                          tomavam a largura do painel e o nome sumia. */}
+                      <ol className="entry-list entry-list--tower">
                         {escalacao[lado].map((slot, i) => (
                           <li key={i}>
                             <span className="entry-list__n">{i + 1}</span>
@@ -1399,6 +1402,7 @@ export function OverlayScreen() {
                               }
                               ariaLabel={`Pontos de ${nomeDe(torneio.entries[slot.entry])}`}
                             />
+                            <span className="entry-list__actions">
                             <button
                               type="button"
                               className="icon-btn"
@@ -1433,6 +1437,7 @@ export function OverlayScreen() {
                             >
                               ✕
                             </button>
+                            </span>
                           </li>
                         ))}
                       </ol>

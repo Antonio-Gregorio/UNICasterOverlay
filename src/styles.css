@@ -3444,3 +3444,35 @@ body.is-overlay {
   padding: 2px 4px;
   font-size: 13px;
 }
+
+/* Jogador de time no painel: nome e placar numa linha, boneco e botões na de
+   baixo. O nome fica com a largura inteira que sobra — é o que se procura. */
+.entry-list--tower li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  grid-template-areas:
+    'n name score'
+    '. char actions';
+  align-items: center;
+  gap: 2px 6px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.entry-list--tower .entry-list__n {
+  grid-area: n;
+}
+.entry-list--tower .entry-list__name {
+  grid-area: name;
+}
+.entry-list--tower .score-input {
+  grid-area: score;
+}
+.entry-list--tower .entry-list__char {
+  grid-area: char;
+  min-width: 0;
+}
+.entry-list__actions {
+  grid-area: actions;
+  display: flex;
+  gap: 2px;
+}
