@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from './ScreenHeader'
 import { Field } from '../components/Field'
 import { Select } from '../components/Select'
-import { Checkbox, HoldNudge, Range, Segmented } from '../components/controls'
+import { Checkbox, HoldNudge, Range, ScoreInput, Segmented } from '../components/controls'
 import { CopyIcon, DiceIcon } from '../components/icons'
 import { useData } from '../data'
 import { useAnims } from '../anim/store'
@@ -12,6 +12,7 @@ import {
   addScore as addMatchScore,
   roundName,
   roundCount,
+  setScore as setMatchScore,
   setSlot,
   setWinner,
   shuffle,
@@ -21,6 +22,7 @@ import {
 import {
   addToTeam,
   addTournament,
+  escalacaoAtual,
   removeTournament,
   setEntries,
   setEntryCharacter,
@@ -33,13 +35,13 @@ import {
 import {
   MAX_TEAMS,
   MIN_TEAMS,
-  autoSides,
   dimInTower,
   moveInTower,
   putInTower,
   removeFromTower,
   renameTeam,
   scoreInTower,
+  setScoreInTower,
   shouldAutoSplit,
   towersOf,
 } from '../bracket/towers'
@@ -254,6 +256,43 @@ export function OverlayScreen() {
   const torneio = tournaments.find((t) => t.id === torneioId) ?? tournaments[0] ?? null
   const bracketTpl = bracketTemplates.find((t) => t.id === bracketTplId) ?? bracketTemplates[0] ?? null
 
+  /*
+   * O placar da topbar e o da torre são **o mesmo número** quando a chave
+   * escolhida é de times e o player da barra está escalado nela.
+   *
+   * Uma fonte só, e não dois placares copiados um para o outro: somar na barra
+   * soma na vaga da torre, somar na vaga aparece na barra, e escolher o player
+   * na barra já traz o placar que ele tem na torre. Copiando, bastava um clique
+   * de um lado no instante errado para os dois divergirem no ar.
+   *
+   * A ligação é pelo cadastro: quem entrou na torre só pelo nome não tem como
+   * ser achado na barra.
+   */
+  const torresDoPlacar = useMemo(
+    () => (torneio && bracketTpl?.mode === 'times' ? escalacaoAtual(torneio) : null),
+    [torneio, bracketTpl?.mode]
+  )
+  const vagaDe = useCallback(
+    (playerId: string | null) => {
+      if (!playerId || !torneio || !torresDoPlacar) return null
+      for (let side = 0; side < torresDoPlacar.sides.length; side++) {
+        const index = torresDoPlacar.sides[side].findIndex(
+          (x) => torneio.entries[x.entry]?.playerId === playerId
+        )
+        if (index >= 0) {
+          return {
+            side,
+            index,
+            score: torresDoPlacar.sides[side][index].score,
+            team: torresDoPlacar.names[side],
+          }
+        }
+      }
+      return null
+    },
+    [torneio, torresDoPlacar]
+  )
+
   /**
    * A chave sai daqui já resolvida em pessoas — o OBS não tem o cadastro desta
    * máquina, do mesmo jeito que não tem o de logos nem o de fundos.
@@ -296,7 +335,11 @@ export function OverlayScreen() {
   const payload: OverlayPayload = useMemo(
     () => ({
       template,
-      players: [sideData(setup.sides[0], players, teams), sideData(setup.sides[1], players, teams)],
+      players: ([0, 1] as const).map((i) => {
+        const data = sideData(setup.sides[i], players, teams)
+        const vaga = vagaDe(setup.sides[i].playerId)
+        return vaga ? { ...data, score: vaga.score } : data
+      }) as [TopbarData, TopbarData],
       gap: setup.gap,
       width: setup.width,
       zoom: setup.zoom,
@@ -328,6 +371,7 @@ export function OverlayScreen() {
       setup,
       players,
       teams,
+      vagaDe,
       logoEvent,
       showBars,
       anim,
@@ -423,11 +467,28 @@ export function OverlayScreen() {
    * de fora três cliques viravam um ponto só.
    */
   function addScore(index: 0 | 1, delta: number) {
+    const vaga = vagaDe(setup.sides[index].playerId)
+    if (vaga && torneio) {
+      // Na torre também a soma parte do valor gravado, e não do que a tela via:
+      // updateTowers lê o torneio atual do store.
+      updateTowers(torneio.id, (t) => scoreInTower(t, vaga.side, vaga.index, delta))
+      return
+    }
     setSetup((s) => {
       const sides: [Side, Side] = [s.sides[0], s.sides[1]]
       sides[index] = { ...sides[index], score: Math.max(0, sides[index].score + delta) }
       return { ...s, sides }
     })
+  }
+
+  /** Placar digitado na barra — na torre, se o player estiver numa. */
+  function setScore(index: 0 | 1, value: number) {
+    const vaga = vagaDe(setup.sides[index].playerId)
+    if (vaga && torneio) {
+      updateTowers(torneio.id, (t) => setScoreInTower(t, vaga.side, vaga.index, value))
+      return
+    }
+    patchSide(index, { score: value })
   }
 
   /** Grava neste overlay; sem um aberto, cria e passa a editá-lo. */
@@ -487,12 +548,7 @@ export function OverlayScreen() {
    * quem ainda não mexeu. A lista mostrava só a gravada, e aí a cena ia ao ar
    * com gente que o painel dizia não estar em time nenhum.
    */
-  const escalacao: TowerSlot[][] =
-    torneio && torres
-      ? shouldAutoSplit(torneio.towers)
-        ? autoSides(torneio.entries.length, torres.names.length)
-        : torres.sides
-      : []
+  const escalacao: TowerSlot[][] = torneio ? escalacaoAtual(torneio).sides : []
   const escalados = new Set(escalacao.flat().map((s) => torneio?.entries[s.entry]?.playerId))
   /** Quem do cadastro ainda não está em time nenhum. */
   const foraDosTimes = players.filter((p) => !escalados.has(p.id))
@@ -672,7 +728,15 @@ export function OverlayScreen() {
                     value={setup.sides[side].playerId}
                     // Outro player, outro boneco: a troca feita para o anterior
                     // não vale para quem entrou.
-                    onChange={(v) => patchSide(side, { playerId: v, characterSlug: null })}
+                    // O placar vem junto da torre, se ele estiver numa: é o
+                    // valor que vale para ele agora, e não o do player anterior.
+                    onChange={(v) =>
+                      patchSide(side, {
+                        playerId: v,
+                        characterSlug: null,
+                        score: vagaDe(v)?.score ?? setup.sides[side].score,
+                      })
+                    }
                     disabled={players.length === 0}
                     placeholder="Selecione"
                     emptyLabel="Vazio"
@@ -693,12 +757,22 @@ export function OverlayScreen() {
                   />
                 </Field>
               </div>
-              <Field label="Pontos">
+              <Field
+                label="Pontos"
+                hint={(() => {
+                  const vaga = vagaDe(setup.sides[side].playerId)
+                  return vaga ? `o mesmo da torre ${vaga.team}` : undefined
+                })()}
+              >
                 <div className="score-row">
                   <button type="button" className="btn btn--small" onClick={() => addScore(side, -1)}>
                     −
                   </button>
-                  <strong className="score-row__value">{setup.sides[side].score}</strong>
+                  <ScoreInput
+                    value={payload.players[side].score}
+                    onChange={(v) => setScore(side, v)}
+                    ariaLabel={`Pontos do player ${side + 1}`}
+                  />
                   <button type="button" className="btn btn--small" onClick={() => addScore(side, 1)}>
                     +
                   </button>
@@ -1317,7 +1391,14 @@ export function OverlayScreen() {
                                 searchPlaceholder="Buscar personagem..."
                               />
                             </span>
-                            <span className="entry-list__n">{slot.score}</span>
+                            <ScoreInput
+                              compact
+                              value={slot.score}
+                              onChange={(v) =>
+                                updateTowers(torneio.id, (t) => setScoreInTower(t, lado, i, v))
+                              }
+                              ariaLabel={`Pontos de ${nomeDe(torneio.entries[slot.entry])}`}
+                            />
                             <button
                               type="button"
                               className="icon-btn"
@@ -1407,7 +1488,13 @@ export function OverlayScreen() {
                           >
                             −
                           </button>
-                          <strong className="score-row__value">{atual.score[lado]}</strong>
+                          <ScoreInput
+                            value={atual.score[lado]}
+                            onChange={(v) =>
+                              mexerNoConfronto((ms) => setMatchScore(ms, atual.round, atual.order, lado, v))
+                            }
+                            ariaLabel={`Pontos de ${nomeDoLado(atual, lado)}`}
+                          />
                           <button
                             type="button"
                             className="btn btn--small"

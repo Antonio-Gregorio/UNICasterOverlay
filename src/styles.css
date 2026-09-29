@@ -3430,3 +3430,17 @@ body.is-overlay {
 .towers__window {
   overflow: hidden;
 }
+
+/* Placar digitável: do tamanho de dois dígitos, no lugar do número parado. */
+.score-input {
+  width: 56px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.score-input--compact {
+  width: 44px;
+  padding: 2px 4px;
+  font-size: 13px;
+}

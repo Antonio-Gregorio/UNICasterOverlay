@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /** Controles de formulário reutilizados pelo editor de topbar. */
 
@@ -240,5 +240,48 @@ export function Section({ title, children }: { title: string; children: React.Re
       <h3>{title}</h3>
       {children}
     </section>
+  )
+}
+
+/**
+ * O placar digitado à mão, ao lado dos botões de um em um.
+ *
+ * Os botões servem ao ponto que acabou de sair; o campo serve para acertar um
+ * placar que chegou errado, ou começar o set num 2-1 sem clicar três vezes. O
+ * texto é local enquanto se digita — apagar para escrever outro número não pode
+ * virar zero no ar no meio do caminho —, e volta ao valor de verdade ao sair do
+ * campo.
+ */
+export function ScoreInput({
+  value,
+  onChange,
+  ariaLabel,
+  compact = false,
+}: {
+  value: number
+  onChange: (value: number) => void
+  ariaLabel: string
+  compact?: boolean
+}) {
+  const [texto, setTexto] = useState(String(value))
+  useEffect(() => setTexto(String(value)), [value])
+
+  return (
+    <input
+      type="number"
+      inputMode="numeric"
+      min={0}
+      max={999}
+      className={`score-input${compact ? ' score-input--compact' : ''}`}
+      value={texto}
+      aria-label={ariaLabel}
+      onFocus={(e) => e.target.select()}
+      onChange={(e) => {
+        setTexto(e.target.value)
+        const n = parseInt(e.target.value, 10)
+        if (!Number.isNaN(n) && n >= 0) onChange(Math.min(999, n))
+      }}
+      onBlur={() => setTexto(String(value))}
+    />
   )
 }

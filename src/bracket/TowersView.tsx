@@ -60,12 +60,13 @@ export function TowersView({
    * Os nomes dos times numa linha e as listas noutra, e não cada time numa
    * coluna com o nome em cima: é o que deixa só as listas rolarem. Com a
    * rolagem ligada, as listas moram numa janela da altura que sobra depois dos
-   * nomes, e é ela que rola — os nomes ficam parados no topo o tempo todo.
+   * nomes — uma por time, cada uma rolando sozinha. Os nomes ficam parados no
+   * topo o tempo todo, e o time que cabe inteiro não se mexe: rolar tudo junto
+   * levava para fora da tela quem estava sozinho num time curto.
    */
   const cabeca = slot.height * z
   const vao = slot.gap * z
   const janela = alturaUtil !== null && alturaUtil !== undefined ? Math.max(cabeca, alturaUtil - cabeca - vao) : null
-  const rolagem = useAutoScroll(template.scroll, { ativo: janela !== null, origem: 'topo' })
 
   return (
     <div className="towers">
@@ -103,39 +104,74 @@ export function TowersView({
         ))}
       </div>
 
-      <div
-        className="towers__window"
-        ref={rolagem.body}
-        style={{ marginTop: vao, maxHeight: janela ?? undefined }}
-        // No painel, o mouse em cima pausa: mexer numa vaga que está andando é
-        // errar o clique.
-        onMouseEnter={edit ? rolagem.pause : undefined}
-        onMouseLeave={edit ? rolagem.resume : undefined}
-      >
-        <div className="towers__row" ref={rolagem.content} style={{ gap: slot.columnGap * z }}>
-          {lados.map((lista, lado) => (
-            // Largura fixa, e não a das vagas: um time sem ninguém ainda ocupa a
-            // coluna dele, senão as listas desalinhavam dos nomes em cima.
-            <div key={lado} className="tower__list" style={{ gap: vao, width: slot.width * z }}>
-              {lista.map((s, i) => (
-                <Slot
-                  key={i}
-                  person={people[s.entry] ?? null}
-                  score={s.score}
-                  template={template}
-                  scale={z}
-                  lost={s.dim}
-                  won={false}
-                  edit={edit}
-                  slotRef={{ kind: 'tower', side: lado, index: i }}
-                  /* Aqui tirar não perde ninguém: a pessoa continua na lista de
-                     participantes, e volta para a torre por um clique. */
-                  canRemove
-                />
-              ))}
-            </div>
-          ))}
-        </div>
+      <div className="towers__row" style={{ gap: slot.columnGap * z, marginTop: vao }}>
+        {lados.map((lista, lado) => (
+          <TowerColumn
+            key={lado}
+            template={template}
+            width={slot.width * z}
+            gap={vao}
+            maxHeight={janela}
+            edit={edit}
+          >
+            {lista.map((s, i) => (
+              <Slot
+                key={i}
+                person={people[s.entry] ?? null}
+                score={s.score}
+                template={template}
+                scale={z}
+                lost={s.dim}
+                won={false}
+                edit={edit}
+                slotRef={{ kind: 'tower', side: lado, index: i }}
+                /* Aqui tirar não perde ninguém: a pessoa continua na lista de
+                   participantes, e volta para a torre por um clique. */
+                canRemove
+              />
+            ))}
+          </TowerColumn>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * A lista de um time, na própria janela e com a própria rolagem.
+ *
+ * Largura fixa, e não a das vagas: um time sem ninguém ainda ocupa a coluna
+ * dele, senão as listas desalinhavam dos nomes em cima.
+ */
+function TowerColumn({
+  template,
+  width,
+  gap,
+  maxHeight,
+  edit,
+  children,
+}: {
+  template: BracketTemplate
+  width: number
+  gap: number
+  /** Nulo = sem rolagem: a lista cresce o quanto precisar. */
+  maxHeight: number | null
+  edit?: BracketEdit
+  children: React.ReactNode
+}) {
+  const rolagem = useAutoScroll(template.scroll, { ativo: maxHeight !== null, origem: 'topo' })
+  return (
+    <div
+      className="towers__window"
+      ref={rolagem.body}
+      style={{ width, maxHeight: maxHeight ?? undefined }}
+      // No painel, o mouse em cima pausa: mexer numa vaga que está andando é
+      // errar o clique.
+      onMouseEnter={edit ? rolagem.pause : undefined}
+      onMouseLeave={edit ? rolagem.resume : undefined}
+    >
+      <div className="tower__list" ref={rolagem.content} style={{ gap }}>
+        {children}
       </div>
     </div>
   )

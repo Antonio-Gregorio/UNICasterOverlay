@@ -184,6 +184,16 @@ export function addScore(matches: Match[], round: number, order: number, lado: 0
   })
 }
 
+/** Placar digitado: o valor inteiro, e não um passo a partir do atual. */
+export function setScore(matches: Match[], round: number, order: number, lado: 0 | 1, value: number): Match[] {
+  return matches.map((m) => {
+    if (m.round !== round || m.order !== order) return m
+    const score: [number, number] = [...m.score]
+    score[lado] = Math.max(0, value)
+    return { ...m, score }
+  })
+}
+
 /**
  * Embaralha os participantes e refaz a chave.
  *

@@ -145,7 +145,7 @@ export const updateTournament = (id: string, patch: Partial<Tournament>) => tour
  * nada mudando, nada subia para o OBS.
  */
 /** As torres como a cena as desenha: a divisão automática, se ninguém mexeu. */
-function escalacaoAtual(torneio: Tournament): Towers {
+export function escalacaoAtual(torneio: Tournament): Towers {
   const t = towersOf(torneio.towers)
   return shouldAutoSplit(torneio.towers) ? { ...t, sides: autoSides(torneio.entries.length, t.names.length) } : t
 }

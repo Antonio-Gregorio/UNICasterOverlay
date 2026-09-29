@@ -123,6 +123,14 @@ export function scoreInTower(towers: Towers, side: number, index: number, delta:
   return { ...towers, sides }
 }
 
+/** Placar digitado: o valor inteiro, e não um passo a partir do atual. */
+export function setScoreInTower(towers: Towers, side: number, index: number, score: number): Towers {
+  const sides = clone(towers.sides)
+  if (!sides[side]?.[index]) return towers
+  sides[side] = sides[side].map((s, i) => (i === index ? { ...s, score: Math.max(0, score) } : s))
+  return { ...towers, sides }
+}
+
 export function dimInTower(towers: Towers, side: number, index: number): Towers {
   const sides = clone(towers.sides)
   if (!sides[side]) return towers
